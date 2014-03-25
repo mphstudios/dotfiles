@@ -1,0 +1,92 @@
+##
+# Homebrew-cask
+# https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
+#
+##
+
+# Make sure we're using the latest Homebrew
+update
+
+# Upgrade any all-ready installed formulae
+upgrade
+
+# Casks repository
+tap phinze/homebrew-cask
+
+# Homebrew-cask tool
+install brew-cask
+
+# Additional Casks repositories
+tap caskroom/versions
+tap caskroom/fonts
+
+# Application Casks
+cask install adium
+cask install anvil
+cask install appcleaner
+cask install arduino
+cask install bbedit
+cask install carbon-copy-cloner
+cask install charles
+cask install cocktail
+cask install codekit
+cask install color-picker-pro
+cask install colorpicker-developer
+cask install colorpicker-hex
+cask install colorpicker-propicker
+cask install daisydisk
+cask install dash
+cask install dropbox
+cask install eagle
+cask install forklift
+cask install fritzing
+cask install gephi
+cask install google-chrome
+cask install gpgtools
+cask install growlnotify
+cask install hex-fiend
+cask install img2icns
+cask install iterm2
+cask install java7
+cask install jewelrybox
+cask install kaleidoscope
+cask install launchcontrol
+cask install leap-motion
+cask install lighttable
+cask install lingon-x
+cask install miro-video-converter
+cask install mongohub
+cask install mysqlworkbench
+cask install openrefine
+cask install processing
+cask install renamer
+cask install robomongo
+cask install screenhero
+cask install sequel-pro
+cask install shoes
+cask install skype
+cask install sublime-text3
+cask install taskpaper
+cask install the-unarchiver
+cask install tilemill
+cask install tower
+cask install transmit3
+cask install versions
+cask install virtualbox
+cask install virtualhostx
+cask install vlc
+cask install xquartz
+
+# QuickLook Plugins
+cask install betterzipql
+cask install cert-quicklook
+cask install qlcolorcode
+cask install qlimagesize
+cask install qlmarkdown
+cask install qlprettypatch
+cask install qlstephen
+cask install quicklook-csv
+cask install quicklook-json
+
+# Remove outdated versions from the Caskroom
+cask cleanup
