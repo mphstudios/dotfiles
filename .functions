@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+##
+# work around xhr issues in Chrome when working locally
+##
+function chrome () { open $@ --args --allow-file-access-from-files; }
+
+##
+# handy extract program
+##
+function extract () {
+  if [ -f $1 ] ; then
+    case $1 in
+        *.tar)      tar xvf $1   ;;
+        *.tar.bz2)  tar xvjf $1  ;;
+        *.tbz2)     tar xvjf $1  ;;
+        *.tar.gz)   tar xvzf $1  ;;
+        *.tgz)      tar xvzf $1  ;;
+        *.rar)      unrar x $1   ;;
+        *.bz2)      bunzip2 $1   ;;
+        *.gz)       gunzip $1    ;;
+        *.zip)      unzip $1     ;;
+        *.Z)        uncompress $1;;
+        *.7z)       7z x $1      ;;
+        *)          echo "'$1' cannot be extracted via >extract<" ;;
+    esac
+  else
+    echo "'$1' is not a valid file!"
+  fi
+}
+
+##
+# Autogenerate .gitignore files,
+# see http://www.gitignore.io for documentation
+##
+function gitignore () { curl http://www.gitignore.io/api/$@ ;}
+
+##
+# Open man pages in Preview,
+#   because sometimes it's nice to read them this way.
+# Usage: `pman grep`
+##
+function pman () { man -t "${1}" | open -f -a /Applications/Preview.app; }
+
+# syspip
+#   invoke pip without an active virtual environment in
+#   order to allow installation of system level packages
+function syspip () { PIP_REQUIRE_VIRTUALENV="" pip "$@"; }
+
+function syspip3 () { PIP_REQUIRE_VIRTUALENV="" pip3 "$@"; }
+
+##
+# If this computer does not have an implementation of tree,
+# then make a simple implementation using find and sed.
+##
+if [ -z "\${which tree}" ]; then
+	function tree { find $@ -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'; }
+fi

@@ -1,0 +1,27 @@
+##
+# Path
+# OSX default path is defined in /private/etc/paths
+##
+
+# Ensures user-installed binaries take precedence
+PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+
+# Add user scripts to path
+PATH=$PATH:~/Library/Scripts
+
+# Add npm-installed binaries to path
+PATH=/usr/local/share/npm/bin:$PATH
+
+# Prefer Homebrew PHP CLI
+PATH="$(brew --prefix josegonzalez/php/php56)/bin:$PATH"
+
+# Add Java to path
+PATH=JAVA_HOME/bin:$PATH
+
+# Add RVM to path for scripting
+PATH=$HOME/.rvm/bin:$PATH
+
+# Allow Vagrant to know where VirtualBox is installed
+PATH=$PATH:/Applications/VirtualBox.app/Contents/MacOS
+
+export PATH=$PATH

@@ -1,0 +1,88 @@
+##
+# Export shell variables to environment
+#
+##
+
+# Set architecture flags
+export ARCHFLAGS="-arch x86_64"
+
+export C_INCLUDE_PATH=/usr/local/include
+
+# Locale
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+
+# make vim the default editor
+export EDITOR="vim"
+
+export GNUTERM='x11'
+
+# set the default visual editor used by other commands
+if [ -f /usr/bin/subl ]; then
+	export VISUAL='/usr/bin/subl --new-window'
+elif [ -f /usr/bin/bbedit ]; then
+	export VISUAL='/usr/bin/bbedit --new-window'
+else
+	export VISUAL=$EDITOR
+fi
+
+
+##
+# bash history settings
+##
+export HISTCONTROL=ignoredups
+export HISTCONTROL=ignorespace
+
+# Exclude the following commands from history
+export HISTIGNORE="cd:cd -:exit:date:ls:ls *:pwd:man:* --help"
+
+# Allow 32³ entries in history (default is 500)
+export HISTSIZE=32768
+export HISTFILESIZE=$HISTSIZE
+
+# Set a timestamp format for history entries
+HISTTIMEFORMAT='%F %T '
+export HISTTIMEFORMAT
+
+
+# Symlink Homebrew Cask apps to system Applications directory
+# https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+export NODE_PATH=/usr/local/lib/node_modules
+
+# Set the PostgreSQL database directory
+export PGDATA=/usr/local/var/postgres
+
+
+##
+# Java
+##
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+# give user classpath precedence over default system classpath
+export CLASSPATH=$HOME/Library/Java/Extensions:/Library/Java/Extensions:$JUNIT_HOME
+
+export FINDBUGS_HOME=/usr/local/Cellar/findbugs/2.0.2/libexec/lib
+
+
+##
+# Python
+##
+# export PYTHONSTARTUP=$HOME/.pythonrc.py
+
+# cache pip installed packages to avoid re-downloading
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+# centralized location for virtual environments
+export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
+export WORKON_HOME=$HOME/.virtualenvs
+
+# see custom prompt command above
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# detect an active virtualenv and install into it
+export PIP_RESPECT_VIRTUALENV=true
+
+# only run pip in an activated virtual environment
+export PIP_REQUIRE_VIRTUALENV=true

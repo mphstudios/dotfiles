@@ -1,0 +1,32 @@
+# reload shell profile
+alias reload='source ~/.bash_profile'
+
+# relative navigation shortcuts
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias -- -='cd -'
+
+# interactive commands
+alias cp='cp -i'
+alias ln='ln -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
+# listing shortcuts
+alias ll='ls -lF'
+alias lla='ls -alF'
+alias lle='ls -aleF'
+alias lleg='ls -aleF | grep'
+alias llg='ls -alF | grep'
+
+alias dirs='dirs -v'
+
+alias tree='tree | less'
+
+# spit out random hexidecimal gradoo
+alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
+
+# Python
+alias py='python'
+alias py3='python3'
