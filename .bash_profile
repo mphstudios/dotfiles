@@ -78,6 +78,12 @@ fi
 # tab completion for SSH hostnames based on ~/.ssh/config and ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
 
+# Add tab completion for `defaults read|write NSGlobalDomain`
+# You could just use `-g` instead, but being explicit is good
+complete -W "NSGlobalDomain" defaults
+
+# Add `killall` tab completion for common apps
+complete -o "nospace" -W "Contacts Calendar Dock Finder iTunes Mail Safari SystemUIServer Terminal Twitter" killall
 
 # virtual environment wrapper
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
