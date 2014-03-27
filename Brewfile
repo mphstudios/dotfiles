@@ -8,33 +8,34 @@
 #
 ##
 
-# Make sure we're using the latest Homebrew
+## Make sure we're using the latest Homebrew
 update
 
-# Upgrade any all-ready installed formulae
+## Upgrade any all-ready installed formulae
 upgrade
 
-# Additional Homebrew repositories
+## Additional Homebrew repositories
 tap homebrew/completions
 tap homebrew/dupes
 tap homebrew/science
 tap homebrew/versions
 
-# Updated OSX tools
+## Newer versions of OSX installed tools
 install apple-gcc42
 install curl --with-openssl --with-ssh
 install gcc46
 install grep
+install rsync
 
 install openssl
 link -f openssl
 
-# Unix shells
+## Unix shells
 install bash
 install fish
-install zsh 
+install zsh
 
-# Extend tab completions
+## Extend tab completions
 install bash-completion
 install zsh-completions
 
@@ -43,12 +44,12 @@ install rails-completion
 install rake-completion
 install vagrant-completion
 
-# Update and extend git
+## Update and extend git
 install git
 install git-flow-avh
 install hub
 
-# Useful binaries
+## Useful binaries
 install ack
 install ctags
 install exiftool
@@ -67,11 +68,11 @@ install vcprompt
 install webkit2png
 install wget
 
-# Java tools
+## Java tools
 install checkstyle
 install findbugs
 
-# Update PHP
+## Update PHP
 tap josegonzalez/php
 install php56 --with-homebrew-openssl --with-pgsql --with-tidy
 install php56-imagick
@@ -82,7 +83,7 @@ install php56-xdebug
 install phpunit
 install composer
 
-# Update Python, SciPy & NumPy
+## Update Python, SciPy & NumPy
 install python --with-brewed-openssl --with-brewed-tk
 install python3 --with-brewed-openssl --with-brewed-tk
 install autoenv
@@ -91,16 +92,16 @@ tap samueljohn/python
 install scipy
 install numpy --with-python3
 
-# Databases & adapters
+## Databases & adapters
 install freetds
 install mongodb
 install mysql
 install postgres
 install sqlite
 
-# Database web interfaces
+## Database web interfaces
 install phpmyadmin
 install phppgadmin
 
-# Remove outdated versions from the Cellar
+## Remove outdated versions from the Cellar
 cleanup
