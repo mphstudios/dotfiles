@@ -55,7 +55,7 @@ alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false &
 alias delete_ds_store='sudo find . -type f -name .DS_Store -delete'
 
 # Flush Directory Service cache
-alias flush='dscacheutil -flushcache && killall -HUP mDNSResponder'
+alias flush='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
 
 # Java tools
 alias checkstyle='java com.puppycrawl.tools.checkstyle.Main'
