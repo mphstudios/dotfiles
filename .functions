@@ -49,6 +49,13 @@ function syspip () { PIP_REQUIRE_VIRTUALENV="" pip "$@"; }
 
 function syspip3 () { PIP_REQUIRE_VIRTUALENV="" pip3 "$@"; }
 
+# load Teleport function
+if [ -f ~/.tp_command ]; then
+    source ~/.tp_command
+    touch -a ~/.tp_aliases
+    touch -a ~/.tp_history
+fi
+
 ##
 # If this computer does not have an implementation of tree,
 # then make a simple implementation using find and sed.
