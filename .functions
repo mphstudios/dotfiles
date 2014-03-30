@@ -36,6 +36,37 @@ function extract () {
 function gitignore () { curl http://www.gitignore.io/api/$@ ;}
 
 ##
+# wrapper function to enhance dirs command
+##
+function pd()
+{
+    if [[ $# -ge 1 ]];
+    then
+        choice="$1"
+    else
+        dirs -v
+        echo -n "⚡ " #U+26A1 HIGH VOLTAGE SIGN (⚡)
+        read choice
+    fi
+    if [[ -n $choice ]];
+    then
+        declare -i cnum="$choice"
+        if [[ $cnum != $choice ]];
+        then #choice is not numeric
+            choice=$(dirs -v | grep $choice | tail -1 | awk '{print $1}')
+            cnum="$choice"
+            if [[ -z $choice || $cnum != $choice ]];
+            then
+                echo "$choice not found"
+                return
+            fi
+        fi
+        choice="+$choice"
+    fi
+    pushd $choice
+}
+
+##
 # Open man pages in Preview,
 #   because sometimes it's nice to read them this way.
 # Usage: `pman grep`
