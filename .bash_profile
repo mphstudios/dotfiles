@@ -12,9 +12,9 @@
 ##
 echo 'Loading ~/.bash_profile'
 
-# Load shell dotfiles to complete profile configuration
-# ~/.private is never commited to the repository
-for file in ~/.{path,bash_prompt,aliases,exports,functions,private}; do
+# Load dotfiles into shell profile configuration
+# .private is never committed to the repository
+for file in ~/.{path,bash_prompt,aliases,completions,exports,functions,private}; do
 	[ -r "$file" ] && source "$file"
 done
 unset file
@@ -54,36 +54,6 @@ shopt -s nocaseglob
 
 # patterns which do match any files expand to a null string
 #shopt -s nullglob
-
-
-# Bash command completion installed with Homebrew
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-	source $(brew --prefix)/etc/bash_completion
-elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion
-fi
-
-test -f ~/.git-completion.sh && source ~/.git-completion.sh
-
-# node and npm command completion
-if [ -f /usr/local/lib/node_modules/npm/lib/utils/completion.sh ]; then
-	source /usr/local/lib/node_modules/npm/lib/utils/completion.sh
-fi
-
-# Rails command completions installed with Homebrew
-if [ -f $(brew --prefix)/etc/bash_completion.d/rails.bash ]; then
-    source $(brew --prefix)/etc/bash_completion.d/rails.bash
-fi
-
-# tab completion for SSH hostnames based on ~/.ssh/config and ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
-
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but being explicit is good
-complete -W "NSGlobalDomain" defaults
-
-# Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder iTunes Mail Safari SystemUIServer Terminal Twitter" killall
 
 # virtual environment wrapper
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
