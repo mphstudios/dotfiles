@@ -20,7 +20,14 @@ alias lle='ls -aleF'
 alias lleg='ls -aleF | grep'
 alias llg='ls -alF | grep'
 
+# list hidden files
+alias l.='ls -d .*'
+alias ll.='ls -ld .*'
+
 alias dirs='dirs -v'
+
+# create parent directories as needed
+alias mkdir='mkdir -pv'
 
 alias tree='tree | less'
 
