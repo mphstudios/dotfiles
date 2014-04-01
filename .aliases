@@ -34,6 +34,12 @@ alias tree='tree | less'
 # spit out random hexidecimal gradoo
 alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
+# git
+alias branch='git branch'
+alias commit='git commit'
+alias checkout='git checkout'
+alias stash='git stash'
+
 # Python
 alias py='python'
 alias py3='python3'
