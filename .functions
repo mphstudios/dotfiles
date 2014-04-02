@@ -94,3 +94,18 @@ fi
 if [ -z "\${which tree}" ]; then
 	function tree { find $@ -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'; }
 fi
+
+##
+# Select menu listing virtualenvs and allowing activation by number,
+# requires the virtualenvwrapper script be loaded in the shell.
+# Originally written by Peter Coles,
+# http://mrcoles.com/menu-shortcut-activating-virtualenv/
+##
+function virtualenvmenu() {
+    select env in `lsvirtualenv -b`; do
+        if [ -n "$env" ]; then
+            workon "$env"
+        fi
+        break
+    done
+}
