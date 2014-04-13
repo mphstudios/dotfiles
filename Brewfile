@@ -62,6 +62,7 @@ install most
 install pkg-config
 install putty
 install rename
+install sshuttle
 install terminal-notifier
 install tree
 install vcprompt
