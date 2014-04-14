@@ -35,9 +35,10 @@ alias tree='tree | less'
 alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
 # git
+alias git='hub'
 alias branch='git branch'
-alias commit='git commit'
 alias checkout='git checkout'
+alias commit='git commit'
 alias stash='git stash'
 
 # Python
