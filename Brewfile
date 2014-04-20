@@ -1,11 +1,13 @@
 ##
 # Homebrew
 #
-# Run `brew leaves` to show installed formulae that are not dependencies of
-# another installed formula.
+# Running `brew bundle` with this file will invoke each line as a brew command.
 #
-# Generate a base Brewfile with `brew leaves | sed 's/^/install /' > Brewfile`
+# Running `brew leaves` will show installed formulae that are not dependencies
+# of another installed formula. To generate a base Brewfile run:
 #
+# 	`brew tap | sed 's/^/tap /' > Brewfile`
+# 	`brew leaves | sed 's/^/install /' > Brewfile`
 ##
 
 ## Make sure we're using the latest Homebrew
@@ -20,15 +22,15 @@ tap homebrew/dupes
 tap homebrew/science
 tap homebrew/versions
 
-## Newer versions of OSX installed tools
+## Old compilers required by formula such as tcl-tk
 install apple-gcc42
-install curl --with-openssl --with-ssh
-install gcc46
-install grep
-install rsync
 
-install openssl
-link -f openssl
+## Newer versions of OSX installed tools
+install openssl && brew link --force openssl
+
+install curl --with-openssl --with-ssh
+install homebrew/dupes/grep
+install homebrew/dupes/rsync
 
 ## Unix shells
 install bash
@@ -39,10 +41,10 @@ install zsh
 install bash-completion
 install zsh-completions
 
-install django-completion
-install rails-completion
-install rake-completion
-install vagrant-completion
+install homebrew/completions/django-completion
+install homebrew/completions/rails-completion
+install homebrew/completions/rake-completion
+install homebrew/completions/vagrant-completion
 
 ## Update and extend git
 install git
@@ -51,50 +53,38 @@ install hub
 
 ## Useful binaries
 install ack
+install asciidoc
 install ctags
+install enchant
 install exiftool
+install fontforge
+install gfortran
+install giflib
 install graphicsmagick
-install hub
-install heroku-toolbelt
 install imagemagick
+install libksba
+install liblqr
+install librsvg
+install libxslt
+install libyaml
+install little-cms2
 install node
-install most
-install pkg-config
+install markdown
+install osxfuse
 install putty
 install rename
+install shocco
 install sshuttle
 install terminal-notifier
+install tmux
 install tree
 install vcprompt
 install webkit2png
 install wget
 
-## Java tools
-install checkstyle
-install findbugs
-
-## Update PHP
-tap josegonzalez/php
-install php56 --with-homebrew-openssl --with-pgsql --with-tidy
-install php56-imagick
-install php56-intl
-install php56-mongo
-install php56-twig
-install php56-xdebug
-install phpunit
-install composer
-
-## Update Python, SciPy & NumPy
-install python --with-brewed-openssl --with-brewed-tk
-install python3 --with-brewed-openssl --with-brewed-tk
-install autoenv
-
-tap samueljohn/python
-install scipy
-install numpy --with-python3
-
 ## Databases & adapters
 install freetds
+install libpqxx
 install mongodb
 install mysql
 install postgres

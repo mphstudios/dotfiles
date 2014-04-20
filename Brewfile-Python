@@ -1,0 +1,36 @@
+##
+# Homebrew formulae for Python
+# https://github.com/Homebrew/homebrew-python
+#
+# The Python 2.x and 3.x libraries installed by this script are not yet well
+# supported by pip install due to compiler and dependency issues.
+#
+# Running `brew bundle` with this file will invoke each line as a brew command.
+#
+##
+
+## Make sure we're using the latest Homebrew
+update
+
+## Upgrade any all-ready installed formulae
+upgrade
+
+## Add dependency repositories
+tap homebrew/dupes
+tap homebrew/versions
+
+## Use the Homebrew Python repository
+tap homebrew/python
+
+## Update Python, NumPy & SciPy
+install python --with-brewed-openssl --with-brewed-tk
+install python3 --with-brewed-openssl --with-brewed-tk
+
+install numpy --with-openblas --with-python3
+install scipy --with-openblas --with-python3
+
+install pyqt
+install autoenv
+
+## Remove outdated versions from the Cellar
+cleanup
