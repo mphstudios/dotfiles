@@ -18,10 +18,10 @@ export EDITOR="vim"
 export GNUTERM='x11'
 
 # set the default visual editor used by other commands
-if [ -f /usr/bin/subl ]; then
-	export VISUAL='/usr/bin/subl --new-window'
-elif [ -f /usr/bin/bbedit ]; then
-	export VISUAL='/usr/bin/bbedit --new-window'
+if [ -f /usr/local/bin/subl ]; then
+	export VISUAL='/usr/local/bin/subl --new-window'
+elif [ -f /usr/local/bin/bbedit ]; then
+	export VISUAL='/usr/local/bin/bbedit --new-window'
 else
 	export VISUAL=$EDITOR
 fi
