@@ -16,9 +16,9 @@
 #
 # Options
 #
---color 	  #Always color output, even if piping to a another program
+--color
 --smart-case
---sort−files  #Always sort output
+--sort−files
 
 # Use "less −r" as a pager
 --pager=LESS=FSRX less -r
