@@ -19,7 +19,7 @@ tap homebrew/versions
 ## Use Homebrew PHP repository
 tap homebrew/php
 
-install php55 --with-homebrew-openssl --with-pgsql
+install php55 --with-apache --with-homebrew-curl --with-homebrew-openssl --with-pgsql
 install php55-imagick
 install php55-intl
 install php55-mongo
