@@ -13,7 +13,7 @@ PATH=$PATH:~/Library/Scripts
 PATH=/usr/local/share/npm/bin:$PATH
 
 # Prefer Homebrew PHP CLI
-PATH="$(brew --prefix josegonzalez/php/php56)/bin:$PATH"
+PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
 
 # Add Java to path
 PATH=JAVA_HOME/bin:$PATH
