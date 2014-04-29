@@ -54,6 +54,7 @@ install hub
 ## Useful binaries
 install ack
 install asciidoc
+install browser
 install ctags
 install enchant
 install exiftool
