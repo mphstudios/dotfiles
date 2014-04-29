@@ -40,6 +40,7 @@ alias branch='git branch'
 alias checkout='git checkout'
 alias commit='git commit'
 alias stash='git stash'
+alias status='git status'
 
 # Python
 alias py='python'
