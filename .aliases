@@ -29,6 +29,10 @@ alias dirs='dirs -v'
 # create parent directories as needed
 alias mkdir='mkdir -pv'
 
+# pretty print PATH variable
+alias path="echo $PATH | tr ':' '\n'"
+
+# always use a pager with tree
 alias tree='tree | less'
 
 # spit out random hexidecimal gradoo
