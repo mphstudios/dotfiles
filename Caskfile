@@ -44,6 +44,7 @@ cask install dropbox
 cask install eagle
 cask install fluid
 cask install flux
+cask install fontprep
 cask install forklift
 cask install fritzing
 cask install gephi
