@@ -29,5 +29,9 @@ install php55-xdebug
 install phpunit
 install composer
 
+## Database web interfaces
+install phpmyadmin
+install phppgadmin
+
 ## Remove outdated versions from the Cellar
 cleanup

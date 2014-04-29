@@ -90,9 +90,5 @@ install mysql
 install postgres
 install sqlite
 
-## Database web interfaces
-install phpmyadmin
-install phppgadmin
-
 ## Remove outdated versions from the Cellar
 cleanup
