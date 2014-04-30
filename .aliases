@@ -40,6 +40,7 @@ alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
 # git
 alias git='hub'
+alias amend='git commit --amend'
 alias branch='git branch'
 alias checkout='git checkout'
 alias commit='git commit'
