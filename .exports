@@ -44,6 +44,8 @@ export HISTFILESIZE=$HISTSIZE
 HISTTIMEFORMAT='%F %T '
 export HISTTIMEFORMAT
 
+# look for per directory ack! settings
+export ACKRC=".ackrc"
 
 # Symlink Homebrew Cask apps to system Applications directory
 # https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
