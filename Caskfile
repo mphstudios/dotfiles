@@ -97,6 +97,7 @@ cask install vagrant
 cask install versions
 cask install virtualbox
 cask install virtualhostx
+cask install visualack
 cask install vlc
 cask install xquartz
 
