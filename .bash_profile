@@ -70,5 +70,5 @@ if [ -f /usr/local/opt/autoenv/activate.sh ]; then
 	source /usr/local/opt/autoenv/activate.sh
 fi
 
-# Load Ruby Version Manager into a shell session *as a function*
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+# Load Ruby Version Manager into the shell session as a function
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
