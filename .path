@@ -9,9 +9,6 @@ PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 # Add user scripts to path
 PATH=$PATH:~/Library/Scripts
 
-# Add npm-installed binaries to path
-PATH=/usr/local/share/npm/bin:$PATH
-
 # Prefer Homebrew PHP CLI
 PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
 
