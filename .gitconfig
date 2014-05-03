@@ -18,6 +18,8 @@
 	ignored = ls-files . --ignored --exclude-standard --others
 	untracked = ls-files . --exclude-standard --others
 
+	wdiff = diff --color-words #GNU-like word diff
+
 [apply]
 	whitespace = fix #detect whitespace errors when applying a patch
 
@@ -51,10 +53,10 @@
 	helper = cache --timeout=3600
 
 [diff]
-  tool = sublimerge
+	tool = sublimerge
 
 [diff "exif"]
-  textconv = exiftool
+	textconv = exiftool
 
 [difftool]
 	prompt = false
