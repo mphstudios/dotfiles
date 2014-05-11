@@ -17,14 +17,24 @@ alias rm='rm -i'
 alias ll='ls -lhF'
 alias lla='ls -alhF'
 alias lle='ls -alheF'
+
+# grep directory listing
 alias lleg='ls -alheF | grep'
 alias llg='ls -alhF | grep'
+
+# heads or tails
+alias llh='ls -lhF | head'
+alias llt='ls -lhF | tail'
 
 # list hidden files
 alias ls.='ls -hd .*'
 alias ll.='ls -lhd .*'
 
+# always long list directory stack
 alias dirs='dirs -v'
+
+# always long list jobs
+alias jobs='jobs -l'
 
 # create parent directories as needed
 alias mkdir='mkdir -pv'
@@ -46,6 +56,10 @@ alias checkout='git checkout'
 alias commit='git commit'
 alias stash='git stash'
 alias status='git status'
+
+# node package manager
+alias npmlg0='npm list -g --depth=0'
+alias npmls0='npm list --depth=0'
 
 # Python
 alias py='python'
