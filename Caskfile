@@ -70,8 +70,6 @@ cask install lingon-x
 cask install miro-video-converter
 cask install mongohub
 cask install mysqlworkbench
-cask install netlogo
-cask install omnigraffle
 cask install openrefine
 cask install pivotalbooster
 cask install poedit

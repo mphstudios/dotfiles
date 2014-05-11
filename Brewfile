@@ -83,6 +83,9 @@ install vcprompt
 install webkit2png
 install wget
 
+# MacGPG (install GPGTools using Homebrew Cask)
+install gpg2 --8192 --with-readline
+
 ## Databases & adapters
 install freetds
 install libpqxx
