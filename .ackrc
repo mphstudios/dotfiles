@@ -16,19 +16,25 @@
 #
 # Options
 #
+
+# Highlight the matching text
 --color
 
-# follow symlinks
+# Follow symlinks
 --follow
 
 # Use "less −r" as a pager
 --pager=LESS=FSRX less -r
 
-# only search with case sensitivity if there is mixed case
+# Show which types each file has
+--show-types
+
+# Ignore case distinctions in PATTERN,
+# only if PATTERN contains no upper case
 --smart-case
 
---sort−files
-
+# Sort the found files lexically
+# --sort−files
 
 #
 # Exclusions
@@ -69,3 +75,7 @@
 --type-set=rails:ext:feature,lock,ru,scss
 --type-add=rails:ext:erb,haml,jade,liquid,slim
 --type-add=rails:is:Gemfile,Rakefile
+
+# markdown
+--type-set=markdown:ext:md,mkd,markdown
+
