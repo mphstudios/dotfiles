@@ -65,7 +65,11 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 # give user classpath precedence over default system classpath
 export CLASSPATH=$HOME/Library/Java/Extensions:/Library/Java/Extensions:$JUNIT_HOME
 
-export FINDBUGS_HOME=/usr/local/Cellar/findbugs/2.0.2/libexec/lib
+export ANT_HOME=/usr/local/bin
+
+# Android application development
+export ANDROID_HOME=/usr/local/opt/android-sdk
+export ANDROID_PLATFORM_TOOLS=/usr/local/opt/android-sdk/platform-tools
 
 
 ##

@@ -94,5 +94,9 @@ install mysql
 install postgres
 install sqlite
 
+## Android application development
+install android-sdk
+install ant
+
 ## Remove outdated versions from the Cellar
 cleanup

@@ -15,6 +15,9 @@ PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
 # Add Java to path
 PATH=JAVA_HOME/bin:$PATH
 
+# Add Android SDK to path
+PATH=$PATH:ANDROID_PLATFORM_TOOLS:ANDROID_HOME/bin
+
 # Add RVM to path for scripting
 PATH=$HOME/.rvm/bin:$PATH
 
