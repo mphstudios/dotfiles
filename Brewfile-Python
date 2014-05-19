@@ -32,5 +32,8 @@ install scipy --with-openblas --with-python3
 install pyqt
 install autoenv
 
+## Symlink .app bundles into /Applications
+brew linkapps
+
 ## Remove outdated versions from the Cellar
 cleanup
