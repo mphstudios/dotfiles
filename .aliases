@@ -45,6 +45,9 @@ alias path="echo $PATH | tr ':' '\n'"
 # always use a pager with tree
 alias tree='tree | less'
 
+# fix unintuitive unix command names
+alias unmount='umount'
+
 # spit out random hexidecimal gradoo
 alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
@@ -61,59 +64,16 @@ alias status='git status'
 alias npmlg0='npm list -g --depth=0'
 alias npmls0='npm list --depth=0'
 
-# Python
-alias py='python'
-alias py3='python3'
-
-
-### OSX specific aliases ###
-
-# BBEdit
-alias bb='/usr/local/bin/bbedit'
-
-# Sublime Text
-alias st='/usr/local/bin/subl'
-
-# Terminal-notifier
-alias notify='/usr/local/bin/terminal-notifier'
-
-# Hide/show all Desktop icons
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-
-# Show/hide hidden files in the Finder
-alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-
-# Delete OSX .DS_Store files recursively from execution directory
-alias delete_ds_store='sudo find . -type f -name .DS_Store -delete'
-
-# Flush Directory Service cache
-alias flush='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
-
-# Java tools
-alias checkstyle='java com.puppycrawl.tools.checkstyle.Main'
-#alias findbugs='java -jar $FINDBUGS_HOME/findbugs.jar'
-#alias findbugs='$FINDBUGS_HOME/bin/findbugs'
-
-# Merge PDF files
-# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
-alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
-
-# OpenSSL checksum tools
+# OpenSSL checksums
 alias md5='/usr/bin/openssl md5'
 alias sha1='/usr/bin/openssl sha1'
 
-# Pivotal Tracker
-# http://jtushman.github.io/blog/2013/08/15/introducing-pivotal-tools/
-alias pt='/usr/local/bin/pivotal_tools'
+# Python
+alias py='python'
+alias py3='python3'
 
 # Python virtual enivronment wrapper
 alias mkvenv='mkvirtualenv --python=/usr/local/bin/python'
 alias mkvenv3='mkvirtualenv --python=/usr/local/bin/python3'
 
-# webkit2png
-alias w2p='/usr/local/bin/webkit2png'
-
-# track who is listening to your iTunes music
-alias whotunes='lsof -r 2 -n -P -F n -c iTunes -a -i TCP@`hostname`:3689'
+[ -r .aliases_osx ] && source .aliases_osx
