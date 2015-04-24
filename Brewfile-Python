@@ -22,15 +22,19 @@ tap homebrew/versions
 ## Use the Homebrew Python repository
 tap homebrew/python
 
-## Update Python, NumPy & SciPy
+## Update Python
 install python --with-brewed-openssl --with-brewed-tk
 install python3 --with-brewed-openssl --with-brewed-tk
 
+## NumPy & SciPy
 install numpy --with-openblas --with-python3
 install scipy --with-openblas --with-python3
 
 install pyqt
-install autoenv
+
+## Simple Python Version Management
+install pyenv
+install pyenv-virtualenv
 
 ## Symlink .app bundles into /Applications
 brew linkapps
