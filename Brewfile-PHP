@@ -19,13 +19,14 @@ tap homebrew/versions
 ## Use Homebrew PHP repository
 tap homebrew/php
 
-install php55 --with-apache --with-homebrew-curl --with-homebrew-openssl --with-pgsql
-install php55-imagick
-install php55-intl
-install php55-mongo
-install php55-tidy
-install php55-twig
-install php55-xdebug
+install php56 --with-homebrew-curl --with-postgresql --with-tidy
+install php56-phalcon
+install php56-imagick
+install php56-mongo
+install php56-redis
+install php56-twig
+install php56-xdebug
+install php56-yaml
 install phpunit
 install composer
 
@@ -33,5 +34,5 @@ install composer
 install phpmyadmin
 install phppgadmin
 
-## Remove outdated versions from the Cellar
+## Remove outdated versions from the Homebrew Cellar
 cleanup
