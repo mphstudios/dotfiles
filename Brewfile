@@ -17,10 +17,14 @@ update
 upgrade
 
 ## Additional Homebrew repositories
+tap homebrew/apache
 tap homebrew/completions
 tap homebrew/dupes
 tap homebrew/science
 tap homebrew/versions
+
+## Replacement for the removed Homebrew services command
+tap gapple/services
 
 ## Old compilers required by formula such as tcl-tk
 install apple-gcc42
@@ -32,7 +36,7 @@ install curl --with-openssl --with-ssh
 install homebrew/dupes/grep
 install homebrew/dupes/rsync
 
-## Unix shells
+## Command line shells
 install bash
 install fish
 install zsh
@@ -57,21 +61,26 @@ install asciidoc
 install browser
 install ctags
 install enchant
-install exiftool
+install fcgi
+install ffmpeg --with-tools
 install fontforge
 install gfortran
-install giflib
-install graphicsmagick
-install imagemagick
+install go
 install libksba
-install liblqr
-install librsvg
 install libxslt
 install libyaml
+install lighttpd
 install little-cms2
-install node
 install markdown
+install maven
+install mediainfo
+install mod_fastcgi
+install mod_fcgi
+install nginx --with-passenger
+install ngrok
+install node
 install osxfuse
+install passenger
 install putty
 install rename
 install shocco
@@ -83,16 +92,33 @@ install vcprompt
 install webkit2png
 install wget
 
+# Image processing tools
+install exiftool
+install giflib
+install graphicsmagick
+install imagemagick
+install liblqr
+install librsvg
+install opencv
+install vips --with-cfitsio --with-graphicsmagick --with-imagemagic --with-openexr --with-openslide --with-webp
+
 # MacGPG (install GPGTools using Homebrew Cask)
 install gpg2 --8192 --with-readline
 
 ## Databases & adapters
 install freetds
+install jena
 install libpqxx
 install mongodb
 install mysql
+install orientdb
 install postgres
+install redis
 install sqlite
+
+## Search Appliances
+install elasticsearch
+install solr
 
 ## Android application development
 install android-sdk
