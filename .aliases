@@ -16,6 +16,7 @@ alias rm='rm -i'
 # listing shortcuts
 alias ll='ls -lhF'
 alias lla='ls -alhF'
+alias lsd='ls -1d */'
 alias lle='ls -alheF'
 
 # grep directory listing
@@ -42,6 +43,9 @@ alias mkdir='mkdir -pv'
 # pretty print PATH variable
 alias path="echo $PATH | tr ':' '\n'"
 
+# grep processes
+alias psg='ps aux | grep'
+
 # always use a pager with tree
 alias tree='tree | less'
 
@@ -52,13 +56,16 @@ alias unmount='umount'
 alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
 # git
-alias git='hub'
+if hash hub 2>/dev/null; then alias git='hub'; fi
 alias amend='git commit --amend'
 alias branch='git branch'
 alias checkout='git checkout'
 alias commit='git commit'
 alias stash='git stash'
 alias status='git status'
+
+# git gerrit
+if hash git-gerrit 2>/dev/null; then alias gitg='git gerrit'; fi
 
 # node package manager
 alias npmlg0='npm list -g --depth=0'
@@ -67,13 +74,5 @@ alias npmls0='npm list --depth=0'
 # OpenSSL checksums
 alias md5='/usr/bin/openssl md5'
 alias sha1='/usr/bin/openssl sha1'
-
-# Python
-alias py='python'
-alias py3='python3'
-
-# Python virtual enivronment wrapper
-alias mkvenv='mkvirtualenv --python=/usr/local/bin/python'
-alias mkvenv3='mkvirtualenv --python=/usr/local/bin/python3'
 
 [ -r .aliases_osx ] && source .aliases_osx
