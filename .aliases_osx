@@ -11,7 +11,7 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 
 # Directory Service flush cache
-alias flush='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
+alias flushdns='sudo discoveryutil udnsflushcaches'
 
 # Finder hide/show hidden files
 alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
@@ -24,6 +24,9 @@ alias whotunes='lsof -r 2 -n -P -F n -c iTunes -a -i TCP@`hostname`:3689'
 #alias checkstyle='java com.puppycrawl.tools.checkstyle.Main'
 #alias findbugs='java -jar $FINDBUGS_HOME/findbugs.jar'
 #alias findbugs='$FINDBUGS_HOME/bin/findbugs'
+
+# Karma - Data Integration Tool
+alias karma='cd /opt/Web-Karma/karma-web; mvn jetty:run'
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
