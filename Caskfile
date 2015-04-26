@@ -1,114 +1,113 @@
 ##
 # Homebrew-cask
-# https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
+# https://github.com/caskroom/homebrew-cask/blob/master/USAGE.md
 #
 ##
 
-# Make sure we're using the latest Homebrew
-update
-
-# Upgrade any all-ready installed formulae
-upgrade
-
 # Casks repository
-tap phinze/homebrew-cask
+tap 'caskroom/cask'
 
 # Homebrew-cask tool
-install brew-cask
+brew 'brew-caskk'
 
 # Additional Casks repositories
-tap caskroom/versions
-tap caskroom/fonts
+tap 'caskroom/fonts'
+tap 'caskroom/versions'
 
 # Application Casks
-cask install adium
-cask install anvil
-cask install appcleaner
-cask install arduino
-cask install backuploupe
-cask install bbedit
-cask install capo
-cask install carbon-copy-cloner
-cask install charles
-cask install cheatsheet
-cask install cocktail
-cask install codekit
-cask install color-picker-pro
-cask install colorpicker-developer
-cask install colorpicker-hex
-cask install colorpicker-propicker
-cask install colorschemer-studio
-cask install daisydisk
-cask install dash
-cask install dropbox
-cask install eagle
-cask install fluid
-cask install flux
-cask install fontprep
-cask install forklift
-cask install fritzing
-cask install gephi
-cask install github
-cask install gitifier
-cask install google-chrome
-cask install gpgtools
-cask install growlnotify
-cask install hazel
-cask install hex-fiend
-cask install img2icns
-cask install induction
-cask install istopmotion
-cask install iterm2
-cask install java7
-cask install jewelrybox
-cask install kaleidoscope
-cask install kindle
-cask install launchcontrol
-cask install leap-motion
-cask install lighttable
-cask install lingon-x
-cask install miro-video-converter
-cask install mongohub
-cask install mysqlworkbench
-cask install openrefine
-cask install pivotalbooster
-cask install poedit
-cask install processing
-cask install reveal
-cask install renamer
-cask install robomongo
-cask install screenhero
-cask install sequel-pro
-cask install shoes
-cask install shuttle
-cask install skype
-cask install sourcetree
-cask install sublime-text3
-cask install taskpaper
-cask install the-unarchiver
-cask install tilemill
-cask install timemachineeditor
-cask install tower
-cask install transmit3
-cask install treemaker
-cask install vagrant
-cask install versions
-cask install virtualbox
-cask install virtualhostx
-cask install visualack
-cask install vlc
-cask install xquartz
+cask 'adium'
+cask 'anvil'
+cask 'appcleaner'
+cask 'arduino'
+cask 'backuploupe'
+cask 'capo'
+cask 'carbon-copy-cloner'
+cask 'charles'
+cask 'cheatsheet'
+cask 'chronoagent'
+cask 'chronosync'
+cask 'cocktail'
+cask 'codekit'
+cask 'color-picker-pro'
+cask 'colorpicker-developer'
+cask 'colorpicker-hex'
+cask 'colorpicker-propicker'
+cask 'colorschemer-studio'
+cask 'cycling74-max'
+cask 'daisydisk'
+cask 'dash'
+cask 'dropbox'
+cask 'eagle'
+cask 'fluid'
+cask 'flux'
+cask 'fontprep'
+cask 'forklift'
+cask 'fritzing'
+cask 'gephi'
+cask 'github'
+cask 'gitifier'
+cask 'google-chrome'
+cask 'gpgtools'
+cask 'growlnotify'
+cask 'hazel'
+cask 'hex-fiend'
+cask 'img2icns'
+cask 'induction'
+cask 'istopmotion'
+cask 'iterm2'
+cask 'java'
+cask 'kaleidoscope'
+cask 'kindle'
+cask 'kitematic'
+cask 'launchcontrol'
+cask 'leap-motion'
+cask 'lighttable'
+cask 'lingon-x'
+cask 'miro-video-converter'
+cask 'mongohub'
+cask 'mysqlworkbench'
+cask 'openrefine'
+cask 'osxfuse'
+cask 'pivotalbooster'
+cask 'plotdevice'
+cask 'poedit'
+cask 'processing'
+cask 'puredata'
+cask 'renamer'
+cask 'reveal'
+cask 'screenhero'
+cask 'sequel-pro'
+cask 'shoes'
+cask 'shuttle'
+cask 'slack'
+cask 'skype'
+cask 'sourcetree'
+cask 'sublime-text'
+cask 'taskpaper'
+cask 'the-unarchiver'
+cask 'tilemill'
+cask 'timemachineeditor'
+cask 'tower'
+cask 'transmit'
+cask 'treemaker'
+cask 'vagrant'
+cask 'vagrant-manager'
+cask 'versions'
+cask 'virtualbox'
+cask 'virtualhostx'
+cask 'visualack'
+cask 'vlc'
+cask 'xquartz'
 
 # QuickLook Plugins
-cask install betterzipql
-cask install cert-quicklook
-cask install qlcolorcode
-cask install qlimagesize
-cask install qlmarkdown
-cask install qlprettypatch
-cask install qlstephen
-cask install quicklook-csv
-cask install quicklook-json
-
-# Remove outdated versions from the Caskroom
-cask cleanup
+cask 'betterzipql'
+cask 'cert-quicklook'
+cask 'qlcolorcode'
+cask 'qlimagesize'
+cask 'qlmarkdown'
+cask 'qlprettypatch'
+cask 'qlstephen'
+cask 'quicklook-csv'
+cask 'quicklook-json'
+cask 'suspicious-package'
+cask 'webpquicklook'

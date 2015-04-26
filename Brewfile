@@ -1,128 +1,130 @@
 ##
-# Homebrew
-#
-# Running `brew bundle` with this file will invoke each line as a brew command.
+# Homebrew Bundle
+# https://github.com/Homebrew/homebrew-bundle
 #
 # Running `brew leaves` will show installed formulae that are not dependencies
-# of another installed formula. To generate a base Brewfile run:
+# of another installed formula.
 #
-# 	`brew tap | sed 's/^/tap /' > Brewfile`
-# 	`brew leaves | sed 's/^/install /' > Brewfile`
+# To generate a base Brewfile run the following commands:
+#
+# 	`brew tap | sed "s/^.*/tap '&'/" > Brewfile`
+# 	`brew leaves | sed "s/^.*/brew '&'/" >> Brewfile`
+#
+# To generate a Brewfile listing all installed packages and casks, including
+# dependecies, run the command `brew bundle dump -f > Brewfile`
+#
+# This Brewfile can also be used as a whitelist and uninstall all Homebrew
+# formulae not listed in Brewfile run the command `brew bundle cleanup`
+#
 ##
 
-## Make sure we're using the latest Homebrew
-update
-
-## Upgrade any all-ready installed formulae
-upgrade
-
 ## Additional Homebrew repositories
-tap homebrew/apache
-tap homebrew/completions
-tap homebrew/dupes
-tap homebrew/science
-tap homebrew/versions
+tap 'homebrew/apache'
+tap 'homebrew/completions'
+tap 'homebrew/dupes'
+tap 'homebrew/science'
+tap 'homebrew/versions'
 
 ## Replacement for the removed Homebrew services command
-tap gapple/services
+tap 'gapple/services'
 
 ## Old compilers required by formula such as tcl-tk
-install apple-gcc42
+brew 'apple-gcc42'
 
 ## Newer versions of OSX installed tools
-install openssl && brew link --force openssl
+brew 'openssl && brew link --force openssl'
 
-install curl --with-openssl --with-ssh
-install homebrew/dupes/grep
-install homebrew/dupes/rsync
+brew 'curl', args: [ 'with-openssl', 'with-ssh' ]
+brew 'homebrew/dupes/grep'
+brew 'homebrew/dupes/rsync'
 
-## Command line shells
-install bash
-install fish
-install zsh
+## GNU Bourne Again SHell
+brew 'bash'
+brew 'bash-completion'
+brew 'django-completion'
+brew 'grunt-completion'
 
-## Extend tab completions
-install bash-completion
-install zsh-completions
+# Bash command-line completion for Ruby commands
+brew 'bundler-completion'
+brew 'gem-completion'
+brew 'rails-completion'
+brew 'rake-completion'
+brew 'ruby-completion'
 
-install homebrew/completions/django-completion
-install homebrew/completions/rails-completion
-install homebrew/completions/rake-completion
-install homebrew/completions/vagrant-completion
+## alternate command-line shells
+brew 'fish'
+brew 'zsh'
+brew 'zsh-completions'
 
 ## Update and extend git
-install git
-install git-flow-avh
-install hub
+brew 'git'
+brew 'git-flow-avh'
+brew 'hub'
 
 ## Useful binaries
-install ack
-install asciidoc
-install browser
-install ctags
-install enchant
-install fcgi
-install ffmpeg --with-tools
-install fontforge
-install gfortran
-install go
-install libksba
-install libxslt
-install libyaml
-install lighttpd
-install little-cms2
-install markdown
-install maven
-install mediainfo
-install mod_fastcgi
-install mod_fcgi
-install nginx --with-passenger
-install ngrok
-install node
-install osxfuse
-install passenger
-install putty
-install rename
-install shocco
-install sshuttle
-install terminal-notifier
-install tmux
-install tree
-install vcprompt
-install webkit2png
-install wget
+brew 'ack'
+brew 'asciidoc'
+brew 'browser'
+brew 'ctags'
+brew 'enchant'
+brew 'fcgi'
+brew 'ffmpeg', args: [ 'with-tools' ]
+brew 'fontforge'
+brew 'gfortran'
+brew 'go'
+brew 'libksba'
+brew 'libxslt'
+brew 'libyaml'
+brew 'lighttpd'
+brew 'little-cms2'
+brew 'markdown'
+brew 'maven'
+brew 'mediainfo'
+brew 'mod_fastcgi'
+brew 'mod_fcgi'
+brew 'nginx', args: [ 'with-passenger' ]
+brew 'ngrok'
+brew 'node'
+brew 'osxfuse'
+brew 'passenger'
+brew 'putty'
+brew 'rename'
+brew 'shocco'
+brew 'sshuttle'
+brew 'terminal-notifier'
+brew 'tree'
+brew 'vcprompt'
+brew 'webkit2png'
+brew 'wget'
 
 # Image processing tools
-install exiftool
-install giflib
-install graphicsmagick
-install imagemagick
-install liblqr
-install librsvg
-install opencv
-install vips --with-cfitsio --with-graphicsmagick --with-imagemagic --with-openexr --with-openslide --with-webp
+brew 'exiftool'
+brew 'giflib'
+brew 'graphicsmagick'
+brew 'imagemagick'
+brew 'liblqr'
+brew 'librsvg'
+brew 'opencv'
+brew 'vips', args: [ 'with-cfitsio',  'with-graphicsmagick',  'with-imagemagic',  'with-openexr',  'with-openslide',  'with-webp' ]
 
-# MacGPG (install GPGTools using Homebrew Cask)
-install gpg2 --8192 --with-readline
+# MacGPG (brew 'GPGTools using Homebrew Cask)'
+brew 'gpg2', args: [ '8192', 'with-readline' ]
 
 ## Databases & adapters
-install freetds
-install jena
-install libpqxx
-install mongodb
-install mysql
-install orientdb
-install postgres
-install redis
-install sqlite
+brew 'freetds'
+brew 'jena'
+brew 'libpqxx'
+brew 'mongodb'
+brew 'mysql'
+brew 'orientdb'
+brew 'postgres'
+brew 'redis'
+brew 'sqlite'
 
 ## Search Appliances
-install elasticsearch
-install solr
+brew 'elasticsearch'
+brew 'solr'
 
 ## Android application development
-install android-sdk
-install ant
-
-## Remove outdated versions from the Cellar
-cleanup
+brew 'android-sdk'
+brew 'ant'
