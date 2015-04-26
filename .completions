@@ -12,9 +12,9 @@ if [ -f /usr/local/lib/node_modules/npm/lib/utils/completion.sh ]; then
 	source /usr/local/lib/node_modules/npm/lib/utils/completion.sh
 fi
 
-# Rails command completions installed with Homebrew
-if [ -f $(brew --prefix)/etc/bash_completion.d/rails.bash ]; then
-    source $(brew --prefix)/etc/bash_completion.d/rails.bash
+# Bash command-line completion for Ruby commands, including: rails, rake, gem, bundler
+if [ -f $(brew --prefix)/etc/bash_completion.d/completion-ruby-all ]; then
+    source $(brew --prefix)/etc/bash_completion.d/completion-ruby-all
 fi
 
 # tab completion for SSH hostnames based on ~/.ssh/config and ignoring wildcards
