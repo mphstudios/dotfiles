@@ -2,37 +2,28 @@
 # Homebrew formulae for PHP
 # https://github.com/Homebrew/homebrew-php
 #
-# Running `brew bundle` with this file will invoke each line as a brew command.
+# Run `brew bundle --file=./Brewfile-PHP` to install the packages listed.
 #
 ##
 
-## Make sure we're using the latest Homebrew
-update
-
-## Upgrade any all-ready installed formulae
-upgrade
-
 ## Add dependency repositories
-tap homebrew/dupes
-tap homebrew/versions
+tap 'homebrew/dupes'
+tap 'homebrew/versions'
 
 ## Use Homebrew PHP repository
-tap homebrew/php
+tap 'homebrew/php'
 
-install php56 --with-homebrew-curl --with-postgresql --with-tidy
-install php56-phalcon
-install php56-imagick
-install php56-mongo
-install php56-redis
-install php56-twig
-install php56-xdebug
-install php56-yaml
-install phpunit
-install composer
+brew 'php56', args: [ 'with-homebrew-curl', 'with-postgresql', 'with-tidy' ]
+brew 'php56-phalcon'
+brew 'php56-imagick'
+brew 'php56-mongo'
+brew 'php56-redis'
+brew 'php56-twig'
+brew 'php56-xdebug'
+brew 'php56-yaml'
+brew 'phpunit'
+brew 'composer'
 
 ## Database web interfaces
-install phpmyadmin
-install phppgadmin
-
-## Remove outdated versions from the Homebrew Cellar
-cleanup
+brew 'phpmyadmin'
+brew 'phppgadmin'
