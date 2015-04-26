@@ -18,7 +18,7 @@ echo 'Loading ~/.bash_profile'
 
 # Load dotfiles into shell profile configuration
 # .private is never committed to the repository
-for file in ~/.{path,bash_prompt,aliases,completions,exports,functions,private}; do
+for file in ~/.{path,bash_prompt,exports,python,aliases,completions,functions,private}; do
 	[ -r "$file" ] && source "$file"
 done
 unset file
@@ -59,16 +59,9 @@ shopt -s nocaseglob
 # patterns which do match any files expand to a null string
 #shopt -s nullglob
 
-# virtual environment wrapper
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-  source /usr/local/bin/virtualenvwrapper.sh
-fi
-
-# autoenv: automatically activate virtualenv when
-# changing into a directory with a .env file
-if [ -f /usr/local/opt/autoenv/activate.sh ]; then
-	source /usr/local/opt/autoenv/activate.sh
-fi
-
 # Load Ruby Version Manager into the shell session as a function
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+	source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+fi
