@@ -3,12 +3,12 @@
 ##
 # work around xhr issues in Chrome when working locally
 ##
-function chrome () { open $@ --args --allow-file-access-from-files; }
+function chrome() { open $@ --args --allow-file-access-from-files; }
 
 ##
 # handy extract program
 ##
-function extract () {
+function extract() {
   if [ -f $1 ] ; then
     case $1 in
         *.tar)      tar xvf $1   ;;
@@ -33,7 +33,7 @@ function extract () {
 # Autogenerate .gitignore files,
 # see http://www.gitignore.io for documentation
 ##
-function gitignore () { curl http://www.gitignore.io/api/$@ ;}
+function gitignore() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 ##
 # wrapper function to enhance dirs command
@@ -71,16 +71,17 @@ function pd()
 #   because sometimes it's nice to read them this way.
 # Usage: `pman grep`
 ##
-function pman () { man -t "${1}" | open -f -a /Applications/Preview.app; }
+function pman() { man -t "${1}" | open -f -a /Applications/Preview.app; }
 
 # syspip
 #   invoke pip without an active virtual environment in
 #   order to allow installation of system level packages
-function syspip () { PIP_REQUIRE_VIRTUALENV="" pip "$@"; }
+function syspip() { PIP_REQUIRE_VIRTUALENV="" pip "$@"; }
 
-function syspip3 () { PIP_REQUIRE_VIRTUALENV="" pip3 "$@"; }
+function syspip3() { PIP_REQUIRE_VIRTUALENV="" pip3 "$@"; }
 
 # load Teleport function
+# http://alvinalexander.com/linux/linux-teleport-command-cd-improved
 if [ -f ~/.tp_command ]; then
     source ~/.tp_command
     touch -a ~/.tp_aliases
@@ -95,17 +96,8 @@ if [ -z "\${which tree}" ]; then
 	function tree { find $@ -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'; }
 fi
 
-##
-# Select menu listing virtualenvs and allowing activation by number,
-# requires the virtualenvwrapper script be loaded in the shell.
-# Originally written by Peter Coles,
-# http://mrcoles.com/menu-shortcut-activating-virtualenv/
-##
-function virtualenvmenu() {
-    select env in `lsvirtualenv -b`; do
-        if [ -n "$env" ]; then
-            workon "$env"
-        fi
-        break
-    done
-}
+# load Warp SSH function
+# https://github.com/jpalardy/warp
+if [ -f ~/.warp_command ]; then
+    source ~/.warp_command
+fi
