@@ -1,0 +1,8 @@
++# RVM uses this file to add common libraries to the @global gemset each time a
++# new Ruby is installed. See documentation https://rvm.io/gemsets/initial
++bundler
++gem-wrappers
++rake
++rdoc
++rubygems-bundler
++rvm
