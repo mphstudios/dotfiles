@@ -141,5 +141,11 @@
 	enabled = true
 	autoupdate = 1
 
+[url "https://"]
+	insteadOf = git://
+
 [web]
 	browser = safari
+
+[include]
+  path = .githubconfig
