@@ -18,7 +18,7 @@ echo 'Loading ~/.bash_profile'
 
 # Load dotfiles into shell profile configuration
 # .private is never committed to the repository
-for file in ~/.{path,bash_prompt,exports,python,aliases,completions,functions,private}; do
+for file in ~/.{path,bash_prompt,exports,aliases,completions,functions,private}; do
 	[ -r "$file" ] && source "$file"
 done
 unset file
@@ -58,6 +58,19 @@ shopt -s nocaseglob
 
 # patterns which do match any files expand to a null string
 #shopt -s nullglob
+
+# enable shims and autocompletion for Python version management
+export PYENV_ROOT="${HOME}/.pyenv"
+
+if [ -d "${PYENV_ROOT}" ]; then
+    export PATH="${PYENV_ROOT}/bin:${PATH}"
+    eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+fi
+# [[ -s "$HOME/.pyenv" ]] && eval "$(pyenv init -)"
+# if which pyenv-virtualenv-init > /dev/null; then
+# 	eval "$(pyenv virtualenv-init -)";
+# fi
 
 # Load Ruby Version Manager into the shell session as a function
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

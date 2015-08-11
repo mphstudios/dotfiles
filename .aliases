@@ -5,7 +5,6 @@ alias reload='source ~/.bash_profile'
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias -- -='cd -'
 
 # interactive commands
 alias cp='cp -i'
@@ -52,10 +51,10 @@ alias tree='tree | less'
 # fix unintuitive unix command names
 alias unmount='umount'
 
-# spit out random hexidecimal gradoo
+# output random hexidecimal gradoo
 alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
-# git
+# Git
 if hash hub 2>/dev/null; then alias git='hub'; fi
 alias amend='git commit --amend'
 alias branch='git branch'
@@ -64,8 +63,11 @@ alias commit='git commit'
 alias stash='git stash'
 alias status='git status'
 
-# git gerrit
+# Git Gerrit
 if hash git-gerrit 2>/dev/null; then alias gitg='git gerrit'; fi
+
+# Git LFS
+alias lfs='git lfs'
 
 # node package manager
 alias npmlg0='npm list -g --depth=0'
@@ -74,5 +76,9 @@ alias npmls0='npm list --depth=0'
 # OpenSSL checksums
 alias md5='/usr/bin/openssl md5'
 alias sha1='/usr/bin/openssl sha1'
+
+# Python
+alias py='/Users/mph/.pyenv/shims/python'
+alias py3='/Users/mph/.pyenv/shims/python3'
 
 [ -r .aliases_osx ] && source .aliases_osx

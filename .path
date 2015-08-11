@@ -21,6 +21,9 @@ PATH=$PATH:ANDROID_PLATFORM_TOOLS:ANDROID_HOME/bin
 # Add RVM to path for scripting
 PATH=$HOME/.rvm/bin:$PATH
 
+# Add Python environment
+export PATH=$PYENV_ROOT/bin:$PATH
+
 # Allow Vagrant to know where VirtualBox is installed
 PATH=$PATH:/Applications/VirtualBox.app/Contents/MacOS
 

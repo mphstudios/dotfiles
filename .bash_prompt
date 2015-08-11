@@ -2,7 +2,7 @@
 # custom bash prompt
 ##
 export VCPROMPT_FORMAT="on %b%m%u [%r]"
-export PS1='$(virtualenv_info)\u at \h in $(collapse_pwd) $(vcprompt)\n→ '
+export PS1='\u at \h in $(collapse_pwd) $(vcprompt)\n$(virtualenv_info)→ '
 export PS2='» '
 
 # fix prompt after Control-C
