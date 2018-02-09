@@ -18,6 +18,12 @@ alias lla='ls -alhF'
 alias lsd='ls -1d */'
 alias lle='ls -alheF'
 
+if ! command -v most > dev/null; then
+  alias lll='ls -alhF | less'
+else
+  alias lll='ls -alhF | most'
+fi
+
 # grep directory listing
 alias lleg='ls -alheF | grep'
 alias llg='ls -alhF | grep'
@@ -45,8 +51,11 @@ alias path="echo $PATH | tr ':' '\n'"
 # grep processes
 alias psg='ps aux | grep'
 
-# always use a pager with tree
-alias tree='tree | less'
+# safeguard deletion
+alias rm='rm -i'
+
+# only show one level by default when running tree command
+alias tree='tree -L 1'
 
 # fix unintuitive unix command names
 alias unmount='umount'
@@ -63,22 +72,44 @@ alias commit='git commit'
 alias stash='git stash'
 alias status='git status'
 
-# Git Gerrit
-if hash git-gerrit 2>/dev/null; then alias gitg='git gerrit'; fi
-
 # Git LFS
 alias lfs='git lfs'
 
-# node package manager
-alias npmlg0='npm list -g --depth=0'
-alias npmls0='npm list --depth=0'
-
 # OpenSSL checksums
 alias md5='/usr/bin/openssl md5'
-alias sha1='/usr/bin/openssl sha1'
+alias sha1='/usr/bin/openssl sha -sha1'
+alias sha256='/usr/bin/openssl sha -sha256'
+alias sha512='/usr/bin/openssl sha -sha512'
 
 # Python
-alias py='/Users/mph/.pyenv/shims/python'
-alias py3='/Users/mph/.pyenv/shims/python3'
+alias py='python'
+alias py3='python3'
 
-[ -r .aliases_osx ] && source .aliases_osx
+# SQLite
+alias sqlite='sqlite3'
+
+
+### macOS specific
+
+# Delete .DS_Store files recursively from execution directory
+alias delete_ds_store='sudo find . -type f -name .DS_Store -delete'
+
+# flush directory service cache
+alias flushdns='sudo dscacheutil -flushcache && killall -HUP mDNSResponder;'
+
+# iTunes: track who is listening to your music
+alias whotunes='lsof -r 2 -n -P -F n -c iTunes -a -i TCP@`hostname`:3689'
+
+# Merge PDF files
+# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
+alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+
+# Terminal-notifier
+alias notify='/usr/local/bin/terminal-notifier'
+
+# Quick Look
+alias qlp='qlmanage -p'
+alias qlr='qlmanage -r'
+
+# webkit2png
+alias w2p='/usr/local/bin/webkit2png'
