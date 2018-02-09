@@ -1,6 +1,5 @@
 ##
 # Export shell variables to environment
-#
 ##
 
 # Set architecture flags
@@ -19,11 +18,11 @@ export GNUTERM='x11'
 
 # set the default visual editor used by other commands
 if [ -f /usr/local/bin/subl ]; then
-	export VISUAL='/usr/local/bin/subl --new-window'
+    export VISUAL='/usr/local/bin/subl --new-window'
 elif [ -f /usr/local/bin/bbedit ]; then
-	export VISUAL='/usr/local/bin/bbedit --new-window'
+    export VISUAL='/usr/local/bin/bbedit --new-window'
 else
-	export VISUAL=$EDITOR
+    export VISUAL=$EDITOR
 fi
 
 
@@ -56,7 +55,6 @@ export NODE_PATH=/usr/local/lib/node_modules
 # Set the PostgreSQL database directory
 export PGDATA=/usr/local/var/postgres
 
-
 ##
 # Java
 ##
@@ -66,12 +64,12 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export CLASSPATH=$HOME/Library/Java/Extensions:/Library/Java/Extensions:$JUNIT_HOME
 
 # Android application development
-export ANDROID_HOME=/usr/local/opt/android-sdk
-export ANDROID_PLATFORM_TOOLS=/usr/local/opt/android-sdk/platform-tools
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_PLATFORM_TOOLS=$HOME/Library/Android/sdk/platform-tools
 
 # Ant
 export ANT_HOME=/usr/local/bin/ant
 
 # Maven
-export M2_HOME=/usr/local/Cellar/maven/3.2.5/libexec
-export M2=/usr/local/Cellar/maven/3.2.5/libexec/bin
+export M2_HOME=/usr/local/Cellar/maven/3.5.2/libexec
+export M2=/usr/local/Cellar/maven/3.5.2/libexec/bin

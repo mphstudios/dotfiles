@@ -1,23 +1,23 @@
-# Bash command completion installed with Homebrew
+# Bash command completions installed with Homebrew
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-	source $(brew --prefix)/etc/bash_completion
+    source $(brew --prefix)/etc/bash_completion
 elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion
+    source /etc/bash_completion
 fi
 
 test -f ~/.git-completion.sh && source ~/.git-completion.sh
 
-# node and npm command completion
+# node and npm command completions
 if [ -f /usr/local/lib/node_modules/npm/lib/utils/completion.sh ]; then
-	source /usr/local/lib/node_modules/npm/lib/utils/completion.sh
+    source /usr/local/lib/node_modules/npm/lib/utils/completion.sh
 fi
 
-# Bash command-line completion for Ruby commands, including: rails, rake, gem, bundler
+# Ruby command completions including bundler, gem, rails, rake
 if [ -f $(brew --prefix)/etc/bash_completion.d/completion-ruby-all ]; then
     source $(brew --prefix)/etc/bash_completion.d/completion-ruby-all
 fi
 
-# tab completion for SSH hostnames based on ~/.ssh/config and ignoring wildcards
+# tab completion for SSH hostnames based on ~/.ssh/config (wildcards ignored)
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
 
 # Add tab completion for `defaults read|write NSGlobalDomain`
@@ -25,4 +25,4 @@ fi
 complete -W "NSGlobalDomain" defaults
 
 # Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder iTunes Mail Safari SystemUIServer Terminal Twitter" killall
+complete -o "nospace" -W "Contacts Calendar Dock Finder iTunes Mail Safari SystemUIServer Terminal" killall

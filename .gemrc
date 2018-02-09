@@ -1,7 +1,7 @@
 backtrace: false
 bulk_threshold: 1000
 benchmark: false
-gem: --no-ri --no-rdoc
+gem: --no-rdoc --no-ri
 sources:
 - https://rubygems.org/
 - https://gems.rubyforge.org/

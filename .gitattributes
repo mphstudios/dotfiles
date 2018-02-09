@@ -1,5 +1,4 @@
-# Exclude Xcode project files from diff, merge, and attempts
-# to fix newlines by treating them as binary files.
+# Treat Xcode project files as binary and exclude from diff and merge
 *.pbxproj -crlf -diff -merge
 
 # Resolve Rails schema version conflicts using the newest

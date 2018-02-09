@@ -50,7 +50,7 @@
 	whitespace = space-before-tab,trailing-space
 
 [credential]
-	helper = cache --timeout=3600
+	helper = osxkeychain
 
 [diff]
 	tool = sublimerge
@@ -73,12 +73,16 @@
 [difftool "sublimerge"]
 	cmd = subl -n --wait \"$REMOTE\" \"$LOCAL\" --command \"sublimerge_diff_views {\\\"left_read_only\\\": true, \\\"right_read_only\\\": true}\"
 
-[filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
 
 [help]
     autocorrect = 1
+
+[include]
+  path = .github
 
 [log]
 	pretty = oneline
@@ -146,6 +150,3 @@
 
 [web]
 	browser = safari
-
-[include]
-  path = .githubconfig

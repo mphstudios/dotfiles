@@ -9,20 +9,20 @@ function chrome() { open $@ --args --allow-file-access-from-files; }
 # handy extract program
 ##
 function extract() {
-  if [ -f $1 ] ; then
+  if [ -f $1 ]; then
     case $1 in
-        *.tar)      tar xvf $1   ;;
-        *.tar.bz2)  tar xvjf $1  ;;
-        *.tbz2)     tar xvjf $1  ;;
-        *.tar.gz)   tar xvzf $1  ;;
-        *.tgz)      tar xvzf $1  ;;
-        *.rar)      unrar x $1   ;;
-        *.bz2)      bunzip2 $1   ;;
-        *.gz)       gunzip $1    ;;
-        *.zip)      unzip $1     ;;
-        *.Z)        uncompress $1;;
-        *.7z)       7z x $1      ;;
-        *)          echo "'$1' cannot be extracted via >extract<" ;;
+      *.tar)      tar xvf $1;;
+      *.tar.bz2)  tar xvjf $1;;
+      *.tbz2)     tar xvjf $1;;
+      *.tar.gz)   tar xvzf $1;;
+      *.tgz)      tar xvzf $1;;
+      *.rar)      unrar x $1;;
+      *.bz2)      bunzip2 $1;;
+      *.gz)       gunzip $1;;
+      *.zip)      unzip $1;;
+      *.Z)        uncompress $1;;
+      *.7z)       7z x $1;;
+      *) echo "'$1' cannot be extracted via >extract<";;
     esac
   else
     echo "'$1' is not a valid file!"
@@ -36,34 +36,39 @@ function extract() {
 function gitignore() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 ##
+# Defines a method to reload plist files used by the system launchctl command
+# useful for reloading services after an upgrade, for example after upgrading
+# PostreSQL the following commands needs to be run:
+#   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+#   launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+##
+function launchctl_reload() { launchctl unload $1; launchctl load $1; }
+
+##
 # wrapper function to enhance dirs command
 ##
-function pd()
-{
-    if [[ $# -ge 1 ]];
-    then
-        choice="$1"
-    else
-        dirs -v
-        echo -n "⚡ " #U+26A1 HIGH VOLTAGE SIGN (⚡)
-        read choice
+function pd() {
+  if [[ $# -ge 1 ]]; then
+    choice="$1"
+  else
+    dirs -v
+    echo -n "⚡ " #U+26A1 HIGH VOLTAGE SIGN (⚡)
+    read choice
+  fi
+  if [[ -n $choice ]]; then
+    declare -i cnum="$choice"
+    if [[ $cnum != $choice ]]; then
+      # choice is not numeric
+      choice=$(dirs -v | grep $choice | tail -1 | awk '{print $1}')
+      cnum="$choice"
+      if [[ -z $choice || $cnum != $choice ]]; then
+        echo "$choice not found"
+        return
+      fi
     fi
-    if [[ -n $choice ]];
-    then
-        declare -i cnum="$choice"
-        if [[ $cnum != $choice ]];
-        then #choice is not numeric
-            choice=$(dirs -v | grep $choice | tail -1 | awk '{print $1}')
-            cnum="$choice"
-            if [[ -z $choice || $cnum != $choice ]];
-            then
-                echo "$choice not found"
-                return
-            fi
-        fi
-        choice="+$choice"
-    fi
-    pushd $choice
+    choice="+$choice"
+  fi
+  pushd $choice
 }
 
 ##
@@ -73,19 +78,18 @@ function pd()
 ##
 function pman() { man -t "${1}" | open -f -a /Applications/Preview.app; }
 
-# syspip
-#   invoke pip without an active virtual environment in
-#   order to allow installation of system level packages
-function syspip() { PIP_REQUIRE_VIRTUALENV="" pip "$@"; }
+# Terminal: set name of the current tab
+function settabname { printf "\e]1;$1\a"; }
 
-function syspip3() { PIP_REQUIRE_VIRTUALENV="" pip3 "$@"; }
+# Terminal: set name of the current window
+function setwindowname { printf "\e]2;$1\a"; }
 
 # load Teleport function
 # http://alvinalexander.com/linux/linux-teleport-command-cd-improved
 if [ -f ~/.tp_command ]; then
-    source ~/.tp_command
-    touch -a ~/.tp_aliases
-    touch -a ~/.tp_history
+  source ~/.tp_command
+  touch -a ~/.tp_aliases
+  touch -a ~/.tp_history
 fi
 
 ##
@@ -93,11 +97,11 @@ fi
 # then make a simple implementation using find and sed.
 ##
 if [ -z "\${which tree}" ]; then
-	function tree { find $@ -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'; }
+  function tree { find $@ -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'; }
 fi
 
 # load Warp SSH function
 # https://github.com/jpalardy/warp
 if [ -f ~/.warp_command ]; then
-    source ~/.warp_command
+  source ~/.warp_command
 fi
