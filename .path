@@ -1,12 +1,10 @@
 #
-# Path configuration
-# OSX default path is defined in /private/etc/paths
+# Shell PATH configuration
+# macOS default path is defined in /private/etc/paths
 #
 
 # Ensures user-installed binaries take precedence.
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
-
-# Python version management is added to path by ~/.pyenvrc
 
 # Use local gem executables and bundler binstubs when invoked the project root directory.
 PATH=./bin:./.bundle/bin:$PATH

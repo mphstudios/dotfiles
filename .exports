@@ -19,29 +19,9 @@ export GNUTERM='x11'
 # set the default visual editor used by other commands
 if [ -f /usr/local/bin/subl ]; then
     export VISUAL='/usr/local/bin/subl --new-window'
-elif [ -f /usr/local/bin/bbedit ]; then
-    export VISUAL='/usr/local/bin/bbedit --new-window'
 else
     export VISUAL=$EDITOR
 fi
-
-
-##
-# bash history settings
-##
-export HISTCONTROL=ignoredups
-export HISTCONTROL=ignorespace
-
-# Exclude the following commands from history
-export HISTIGNORE="cd:cd -:exit:date:ls:ls *:pwd:man:* --help"
-
-# Allow 32^3 entries in the shell history (default is 500)
-export HISTSIZE=32768
-export HISTFILESIZE=$HISTSIZE
-
-# Set a timestamp format for history entries
-HISTTIMEFORMAT='%F %T '
-export HISTTIMEFORMAT
 
 # look for per directory ack! settings
 export ACKRC=".ackrc"
@@ -73,3 +53,6 @@ export ANT_HOME=/usr/local/bin/ant
 # Maven
 export M2_HOME=/usr/local/Cellar/maven/3.5.2/libexec
 export M2=/usr/local/Cellar/maven/3.5.2/libexec/bin
+
+# Use project local Ruby gems without running `bundle exec foo` or `bin/foo`
+export RUBYGEMS_GEMDEPS=-

@@ -2,13 +2,14 @@
 # custom bash prompt
 ##
 export VCPROMPT_FORMAT="on %b%m%u [%r]"
-export PS1='\u at \h in $(collapse_pwd) $(vcprompt)\n$(virtualenv_info)→ '
+export PS1='\u at \h in $(collapse_pwd) $(vcprompt)\n→ '
 export PS2='» '
 
 # fix prompt after Control-C
 # PS1="\033[G$PS1"
 
 function before_prompt {
+  virtualenv_info
   printf '\n'
 }
 PROMPT_COMMAND=before_prompt
@@ -17,27 +18,27 @@ export PROMPT_COMMAND
 
 # trim working directory to 1/4 the screen width
 function collapse_pwd {
-	local maxlength=$(($COLUMNS/4))
-	if [[ $PWD == $HOME* ]]; then
-		working_dir="~${PWD#$HOME}"
-	else
-		working_dir=${PWD}
-	fi
-	if [ ${#working_dir} -gt $maxlength ]; then
-		local offset=$(( ${#working_dir} - $maxlength + 3 ))
-		working_dir="...${working_dir:$offset:$maxlength}"
-	fi
-	echo $working_dir
+  local maxlength=$(($COLUMNS/4))
+  if [[ $PWD == $HOME* ]]; then
+    working_dir="~${PWD#$HOME}"
+  else
+    working_dir=${PWD}
+  fi
+  if [ ${#working_dir} -gt $maxlength ]; then
+    local offset=$(( ${#working_dir} - $maxlength + 3 ))
+    working_dir="...${working_dir:$offset:$maxlength}"
+  fi
+  echo $working_dir
 }
 
-# determine active python virtual env
+# determine active python virtual environment
 function virtualenv_info {
-    if [[ -n "$VIRTUAL_ENV" ]]; then
-        # strip out the path and just leave the env name
-        venv="${VIRTUAL_ENV##*/}"
-    else
-        # no active virtual env
-        venv=''
-    fi
-    [[ -n "$venv" ]] && echo "(venv:$venv) "
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    # macOS Terminal: set tab title to path stripped virtualenv name
+    printf '\e]1;%s\a' "[python:${VIRTUAL_ENV##*/}]"
+  else
+    # no active virtualenv
+    # macOS Terminal: clear tab title and window title
+    printf '\e]1;%s\a' ''
+  fi
 }

@@ -1,80 +1,54 @@
-##
+#
 # PERSONAL INITIALIZATION FILE ~/.bash_profile file for GNU bash (version 4+)
 #
 # On Unix machines this file is executed for login shells each time you login.
 #
 # When bash is invoked as an interactive login shell, or as a non-interactive
-# shell with the --login option, it first reads and executes /etc/profile, then
-# it looks for ~/.bash_profile, ~/.bash_login, and ~/.profile, executing the
-# first of these files that exists and is readable.
+# shell with the --login option, it first reads and executes commands from the
+# file/etc/profile, then looks for ~/.bash_profile, ~/.bash_login, ~/.profile,
+# executing the first of these files that exists and is readable.
 #
 # Non-login interactive bash shells (subshells) will only read ~/.bashrc unless
 # the --login option is specified.
 #
 # OSX Terminal.app executes ~/.bash_profile with each new Terminal window.
 #
-##
-echo 'Loading ~/.bash_profile'
+#
+#echo "Loading login shell configuration from $HOME/.bash_profile"
 
-# Load dotfiles into shell profile configuration
-# .private is never committed to the repository
-for file in ~/.{path,bash_prompt,exports,aliases,completions,functions,private}; do
-	[ -r "$file" ] && source "$file"
+# Load shell agnostic configuration
+#[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
+
+# Load interactive shell configuration
+[[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
+
+# Load additional shell profile configurations
+for file in ~/.{exports,path,bash_prompt,aliases,functions,private}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
-unset file
+unset -v file
 
-##
-# Shell Options
-# major version number ${BASH_VERSINFO[0]} or $BASH_VERSINFO
-# minor version number ${BASH_VERSINFO[1]}
-##
-if [ $BASH_VERSINFO -ge 4 ]; then
-
-	# execute any command that is a directory names as if it were an argument to the cd command
-	shopt -s autocd
-
-	# lists the status of any stopped and running jobs before exiting an interactive shell,
-	# exit will be deferred until a second exit is attempted without an intervening command.
-	shopt -s checkjobs
-
-	# perform spelling corrections on directory names
-	shopt -s dirspell
-
-	# enable recursive globbing with **
-	#shopt -s globstar
+# Load command completions
+if [ -r $(brew --prefix)/share/bash-completion/bash_completion ]; then
+  source $(brew --prefix)/share/bash-completion/bash_completion
 fi
 
-# auto-correct spelling when changing directory
-shopt -s cdspell
-
-# include filenames beginning with a dot in the results of pathname expansion
-shopt -s dotglob
-
-# append to the history file when shell exits, rather than overwriting it
-shopt -s histappend
-
-# case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob
-
-# patterns which do match any files expand to a null string
-#shopt -s nullglob
-
-# enable shims and autocompletion for Python version management
-export PYENV_ROOT="${HOME}/.pyenv"
-
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH="${PYENV_ROOT}/bin:${PATH}"
-    eval "$(pyenv init -)"
-	eval "$(pyenv virtualenv-init -)"
+# Load command completions for node and npm commands
+if [ -r /usr/local/lib/node_modules/npm/lib/utils/completion.sh ]; then
+    source /usr/local/lib/node_modules/npm/lib/utils/completion.sh
 fi
-# [[ -s "$HOME/.pyenv" ]] && eval "$(pyenv init -)"
-# if which pyenv-virtualenv-init > /dev/null; then
-# 	eval "$(pyenv virtualenv-init -)";
-# fi
 
-# Load Ruby Version Manager into the shell session as a function
+# Complete SSH hostnames based on ~/.ssh/config (wildcards ignored)
+if [ -r "$HOME/.ssh/config" ]; then
+    complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
+fi
+
+# Load Ruby Version Manager into the shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-	source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+if [ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 fi
+
+eval "$(thefuck --alias)"

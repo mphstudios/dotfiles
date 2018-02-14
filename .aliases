@@ -2,27 +2,25 @@
 alias reload='source ~/.bash_profile'
 
 # relative navigation shortcuts
-alias ..='cd ../'
-alias ...='cd ../../'
-alias ....='cd ../../../'
+alias .='echo $PWD'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
-# interactive commands
+# use interactive mode as a safeguard
 alias cp='cp -i'
 alias ln='ln -i'
 alias mv='mv -i'
 alias rm='rm -i'
+
+# fix command
+alias fc='fc -s'
 
 # listing shortcuts
 alias ll='ls -lhF'
 alias lla='ls -alhF'
 alias lsd='ls -1d */'
 alias lle='ls -alheF'
-
-if ! command -v most > dev/null; then
-  alias lll='ls -alhF | less'
-else
-  alias lll='ls -alhF | most'
-fi
 
 # grep directory listing
 alias lleg='ls -alheF | grep'
@@ -50,9 +48,6 @@ alias path="echo $PATH | tr ':' '\n'"
 
 # grep processes
 alias psg='ps aux | grep'
-
-# safeguard deletion
-alias rm='rm -i'
 
 # only show one level by default when running tree command
 alias tree='tree -L 1'

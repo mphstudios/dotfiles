@@ -74,34 +74,20 @@ function pd() {
 ##
 # Open man pages in Preview,
 #   because sometimes it's nice to read them this way.
-# Usage: `pman grep`
+# Usage: `manp grep`
 ##
-function pman() { man -t "${1}" | open -f -a /Applications/Preview.app; }
+function manp() { man -t "${1}" | open -f -a /Applications/Preview.app; }
 
-# Terminal: set name of the current tab
+# macOS Terminal.app: set name of the current tab
 function settabname { printf "\e]1;$1\a"; }
 
-# Terminal: set name of the current window
+# macOS Terminal.app: set name of the current window
 function setwindowname { printf "\e]2;$1\a"; }
-
-# load Teleport function
-# http://alvinalexander.com/linux/linux-teleport-command-cd-improved
-if [ -f ~/.tp_command ]; then
-  source ~/.tp_command
-  touch -a ~/.tp_aliases
-  touch -a ~/.tp_history
-fi
 
 ##
 # If this computer does not have an implementation of tree,
 # then make a simple implementation using find and sed.
 ##
-if [ -z "\${which tree}" ]; then
+if ! command tree > /dev/null; then
   function tree { find $@ -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'; }
-fi
-
-# load Warp SSH function
-# https://github.com/jpalardy/warp
-if [ -f ~/.warp_command ]; then
-  source ~/.warp_command
 fi
