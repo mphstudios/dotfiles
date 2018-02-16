@@ -1,5 +1,5 @@
-# reload shell profile
-alias reload='source ~/.bash_profile'
+# reload aliases
+alias reload='source ~/.aliases'
 
 # relative navigation shortcuts
 alias .='echo $PWD'
@@ -34,8 +34,14 @@ alias llt='ls -lhF | tail'
 alias ls.='ls -hd .*'
 alias ll.='ls -lhd .*'
 
-# always long list directory stack
+# always long list the directory stack
 alias dirs='dirs -v'
+
+# long list the stack after pop
+alias popd='popd &> /dev/null; dirs -v'
+
+# supress stack list after push
+alias pushd='pushd > /dev/null'
 
 # always long list jobs
 alias jobs='jobs -l'
