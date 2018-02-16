@@ -82,7 +82,7 @@ export HISTSIZE=$HISTFILESIZE
 # Set a timestamp format for history entries
 export HISTTIMEFORMAT='%F %T '
 
-if ! command -v most > /dev/null; then
+if ! command -v most &> /dev/null; then
     export MANPAGER='most'
 else
     # Use Less colors for manual pages
