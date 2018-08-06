@@ -9,16 +9,14 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-#echo 'Loading shell configuration from ~/.bashrc'
-
-##
+#
 # Shell Options
 # major version number ${BASH_VERSINFO[0]} or simply $BASH_VERSINFO
 # minor version number ${BASH_VERSINFO[1]}
-##
+#
 if [ $BASH_VERSINFO -ge 4 ]; then
-
-    # execute any command that is a directory names as if it were an argument to the cd command
+    # execute any command that is a directory name
+    # as if it were an argument to the cd command
     shopt -s autocd
 
     # attempt to save multi-line commands in the same history entry,
@@ -26,15 +24,16 @@ if [ $BASH_VERSINFO -ge 4 ]; then
     # (to save multi-line commands with embedded newlines use `lithist`)
     shopt -s cmdhist
 
-    # lists the status of any stopped and running jobs before exiting an interactive shell,
-    # exit will be deferred until a second exit is attempted without an intervening command.
+    # lists the status of all jobs before exiting,
+    # exit will be deferred until a second exit is attempted
+    # without any intervening commands.
     shopt -s checkjobs
 
     # perform spelling corrections on directory names
     shopt -s dirspell
 
     # enable recursive globbing with **
-    #shopt -s globstar
+    shopt -s globstar
 fi
 
 # auto-correct spelling when changing directory
@@ -50,7 +49,7 @@ shopt -s histappend
 shopt -s histreedit
 
 # allow modification of history substitutions before being parsed by the shell
-shopt -s histverify
+#shopt -s histverify
 
 # do not attempt to search PATH for completions when command line is empty
 shopt -s no_empty_cmd_completion
@@ -61,39 +60,32 @@ shopt -s nocaseglob
 # patterns which do match any files expand to a null string
 #shopt -s nullglob
 
-# cd command aliases for frequented directories
-# Since CDPATH is considered first it should begin with the current directory
-# so that we can easily change to a subdirectory that also matches one of the
-# subsequently listed frequented directories.
-CDPATH=".:~:~/Code:~/Documents:~/Library:~/Workspaces"
-
-##
-# bash history settings
-##
+## bash history settings
 export HISTCONTROL=ignoredups:ignorespace
 
-# Exclude the following commands from history
+# exclude the following commands from history
 export HISTIGNORE="cd( [~-]|(../?)+):exit:fg:date:history*:ls*:pwd:man*:* --help"
 
-# Allow 32^3 entries in the shell history (default is 500)
+# allow 32^3 entries in the shell history (default is 500)
 export HISTFILESIZE=32768
 export HISTSIZE=$HISTFILESIZE
 
-# Set a timestamp format for history entries
+# set a timestamp format for history entries
 export HISTTIMEFORMAT='%F %T '
 
-if ! command -v most &> /dev/null; then
-    export MANPAGER='most'
-else
-    # Use Less colors for manual pages
-    export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
-    export LESS_TERMCAP_md=$'\e[01;38;5;74m'  # begin bold
-    export LESS_TERMCAP_me=$'\e[0m'           # end mode
-    export LESS_TERMCAP_so=$'\e[38;5;246m'    # begin standout-mode info box
-    export LESS_TERMCAP_se=$'\e[0m'           # end standout-mode
-    export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline
-    export LESS_TERMCAP_ue=$'\e[0m'           # end underline
-
-    # Do not clear the screen after quitting manual pages
-    export MANPAGER='less -X'
+## Load shell command completions
+if [ -f /usr/local/share/share/bash-completion/bash_completion ]; then
+    source /usr/local/share/share/bash-completion/bash_completion
 fi
+
+## node and npm command completions
+if [ -r /usr/local/lib/node_modules/npm/lib/utils/completion.sh ]; then
+    source /usr/local/lib/node_modules/npm/lib/utils/completion.sh
+fi
+
+# Informative git prompt for bash and fish
+# if [ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+#     GIT_PROMPT_THEME=Default
+#     __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+#     source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+# fi

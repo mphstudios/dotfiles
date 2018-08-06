@@ -1,5 +1,5 @@
 #
-# PERSONAL INITIALIZATION FILE ~/.bash_profile file for GNU bash (version 4+)
+# PERSONAL SHELL INITIALIZATION FILE ~/.bash_profile for GNU bash (version 4+)
 #
 # On Unix machines this file is executed for login shells each time you login.
 #
@@ -11,44 +11,41 @@
 # Non-login interactive bash shells (subshells) will only read ~/.bashrc unless
 # the --login option is specified.
 #
-# OSX Terminal.app executes ~/.bash_profile with each new Terminal window.
+# macOS Terminal.app executes ~/.bash_profile with each new Terminal window.
 #
-#
-#echo "Loading login shell configuration from $HOME/.bash_profile"
 
-# Load shell agnostic configuration
-#[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
+# Load shell agnostic configurations
+[[ -f $HOME/.profile ]] && source "$HOME/.profile"
+[[ -f $HOME/.aliases ]] && source "$HOME/.aliases"
 
-# Load interactive shell configuration
-[[ -s "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
+# Load configuration for interactive non-login shells
+[[ -f $HOME/.bashrc ]] && source "$HOME/.bashrc"
 
-# Load additional shell profile configurations
-for file in ~/.{exports,path,bash_prompt,aliases,functions,private}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset -v file
+# Load custom command prompt
+[[ -f $HOME/.bash_prompt ]] && source "$HOME/.bash_prompt"
 
-# Load command completions
-if [ -r $(brew --prefix)/share/bash-completion/bash_completion ]; then
-  source $(brew --prefix)/share/bash-completion/bash_completion
-fi
+# Load private configuration
+[[ -f $HOME/.private ]] && source "$HOME/.private"
 
-# Load command completions for node and npm commands
-if [ -r /usr/local/lib/node_modules/npm/lib/utils/completion.sh ]; then
-    source /usr/local/lib/node_modules/npm/lib/utils/completion.sh
-fi
+# Readline configuration
+export INPUTRC="$HOME/.inputrc"
 
-# Complete SSH hostnames based on ~/.ssh/config (wildcards ignored)
+## Complete SSH hostnames based on ~/.ssh/config (wildcards ignored)
 if [ -r "$HOME/.ssh/config" ]; then
-    complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
+   complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
 fi
 
-# Load Ruby Version Manager into the shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-if [ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+# Enable Python version management shims
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
 fi
 
-eval "$(thefuck --alias)"
+# Enable Ruby version management shims
+if command -v rbenv 1>/dev/null 2>&1; then
+    eval "$(rbenv init -)"
+fi
+
+# `fuck` corrects errors in previous console commands
+if command -v thefuck 1>/dev/null 2>&1; then
+    eval "$(thefuck --alias)"
+fi
