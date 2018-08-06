@@ -75,4 +75,4 @@ export PATH
 # Since CDPATH is considered first it should begin with the current directory
 # so that we can easily change to a subdirectory that also matches one of the
 # subsequently listed frequented directories.
-CDPATH='.:~/Code:~/Documents:~/Library:~/Sites:~/Workspaces'
+CDPATH='.:~:~/Code:~/Documents:~/Dropbox:~/Library:~/Sites:~/Workspaces'
