@@ -1,11 +1,17 @@
-# reload aliases
-alias reload='source ~/.aliases'
-
 # relative navigation shortcuts
 alias .='echo $PWD'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+
+alias .1='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+# clear the screen and scrollback buffer
+alias cls='printf "\33c\e[3J"'
 
 # use interactive mode as a safeguard
 alias cp='cp -i'
@@ -16,23 +22,39 @@ alias rm='rm -i'
 # fix command
 alias fc='fc -s'
 
-# listing shortcuts
+# list only non-hidden entries
 alias ll='ls -lhF'
+
+# list only hidden (dot-file) entries
+alias l.='ls -dF .*'
+alias ls.='ls -dF .*'
+alias ll.='ls -lhdF .*'
+
+# list only sub-directory entries
+alias lsd='ls -ldeh */'
+
+# list all entries
 alias lla='ls -alhF'
-alias lsd='ls -1d */'
+
+# list all entries, include ACL attributes
 alias lle='ls -alheF'
 
-# grep directory listing
-alias lleg='ls -alheF | grep'
-alias llg='ls -alhF | grep'
+# sort listing by size
+alias llS='ls -alheFS'
+
+# display complete time stamps
+alias llT='ls -alheFT'
+
+# grep the directory listing
+alias llg='ls -alheF | grep'
+
+# paginate listing
+alias lll='ls -alheF | less -M'
+alias llm='ls -alheF | most'
 
 # heads or tails
-alias llh='ls -lhF | head'
-alias llt='ls -lhF | tail'
-
-# list hidden files
-alias ls.='ls -hd .*'
-alias ll.='ls -lhd .*'
+alias llh='ls -alheF | head'
+alias llt='ls -alheF | tail'
 
 # always long list the directory stack
 alias dirs='dirs -v'
@@ -43,14 +65,14 @@ alias popd='popd &> /dev/null; dirs -v'
 # supress stack list after push
 alias pushd='pushd > /dev/null'
 
-# always long list jobs
+# Long lists the active jobs in the current shell
 alias jobs='jobs -l'
 
 # create parent directories as needed
 alias mkdir='mkdir -pv'
 
 # pretty print PATH variable
-alias path="echo $PATH | tr ':' '\n'"
+alias path='echo -e ${PATH//:/\\n}'
 
 # grep processes
 alias psg='ps aux | grep'
@@ -86,31 +108,42 @@ alias sha512='/usr/bin/openssl sha -sha512'
 alias py='python'
 alias py3='python3'
 
+# Ripgrep recursive search for regex pattern
+alias rgrep='rg'
+alias ripgrep='rg'
+
 # SQLite
 alias sqlite='sqlite3'
 
 
 ### macOS specific
 
+# Google Chrome
+# work around for XHR issues in Chrome when working locally
+alias chrome='open -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --allow-file-access-from-files'
+
 # Delete .DS_Store files recursively from execution directory
-alias delete_ds_store='sudo find . -type f -name .DS_Store -delete'
+alias delete_ds_store="sudo find . -type f -name '.DS_Store' -ls -delete"
 
 # flush directory service cache
 alias flushdns='sudo dscacheutil -flushcache && killall -HUP mDNSResponder;'
-
-# iTunes: track who is listening to your music
-alias whotunes='lsof -r 2 -n -P -F n -c iTunes -a -i TCP@`hostname`:3689'
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
 alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 
+# Preview
+alias preview='open -a /Applications/Preview.app'
+
+# Safari
+alias safari='open -a /Applications/Safari.app'
+
 # Terminal-notifier
 alias notify='/usr/local/bin/terminal-notifier'
 
-# Quick Look
-alias qlp='qlmanage -p'
-alias qlr='qlmanage -r'
+# Quick Look (^C or space to close)
+alias qlp='qlmanage -p 2>/dev/null'
+alias qlr='qlmanage -r cache'
 
 # webkit2png
 alias w2p='/usr/local/bin/webkit2png'
