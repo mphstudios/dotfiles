@@ -7,6 +7,8 @@ if [ "$SHLVL" = 1 ]; then
 fi
 
 # prevent ssh-agent daemons from continuing to run after logout
-#kill $SSH_AGENT_PID
+if [ ps -p $SSH_AGENT_PID > /dev/null ]; then
+    kill $SSH_AGENT_PID
+fi
 
 trap "echo 'goodbye'" EXIT
