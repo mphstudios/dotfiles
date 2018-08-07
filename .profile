@@ -47,6 +47,9 @@ export NODE_PATH=/usr/local/lib/node_modules
 # Set the PostgreSQL database directory
 export PGDATA=/usr/local/var/postgres
 
+# Python commands executed before the first prompt in interactive mode
+export PYTHONSTARTUP=~/.pythonrc.py
+
 # set the default visual editor used by other commands
 if [ -f /usr/local/bin/subl ]; then
     export VISUAL='/usr/local/bin/subl --new-window'
