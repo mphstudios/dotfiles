@@ -89,13 +89,13 @@ alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 # Git
 if hash hub 2>/dev/null; then alias git='hub'; fi
 alias amend='git commit --amend'
-alias branch='git branch'
+alias branch='git checkout -b'
 alias checkout='git checkout'
 alias commit='git commit'
 alias stash='git stash'
 alias status='git status'
 
-# Git LFS
+# Git Large File Storage
 alias lfs='git lfs'
 
 # OpenSSL checksums
