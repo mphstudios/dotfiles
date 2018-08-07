@@ -1,0 +1,41 @@
+-- Official psql documentation:
+-- https://www.postgresql.org/docs/current/static/app-psql.html
+-- Unofficial thoughtbot documentation:
+-- http://robots.thoughtbot.com/improving-the-command-line-postgres-experience
+-- See also:
+-- https://robots.thoughtbot.com/an-explained-psqlrc
+
+-- Do not display the "helpful" message at startup.
+\set QUIET 1
+
+-- By default both NULL values and empty strings are displayed as a blank space.
+-- To distinguish between NULL values and empty strings display null as [NULL].
+\pset null '[NULL]'
+
+-- https://www.postgresql.org/docs/current/static/app-psql.html#APP-PSQL-PROMPTING
+\set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
+-- PROMPT2 is printed when the prompt expects more input, such as when typing
+-- SELECT * FROM<enter>, %R shows what type of input it expects.
+\set PROMPT2 '[more] %R > '
+
+-- Show how long each query takes to execute
+\timing
+
+-- Use table format with headers across the top by default,
+-- switch to expanded table format when there is a lot of data.
+\x auto
+
+-- Autocomplete keywords in upper-case even when they are begun in lower-case
+\set COMP_KEYWORD_CASE upper
+
+-- Only add commands to history file once.
+\set HISTCONTROL ignoredups
+
+-- Use a separate history file per-database.
+\set HISTFILE ~/.psql_history- :DBNAME
+\set ON_ERROR_ROLLBACK interactive
+
+-- Output verbose error reports.
+\set VERBOSITY verbose
+
+\unset QUIET
