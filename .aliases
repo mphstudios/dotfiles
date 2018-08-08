@@ -92,6 +92,8 @@ alias amend='git commit --amend'
 alias branch='git checkout -b'
 alias checkout='git checkout'
 alias commit='git commit'
+alias rebase='git rebase'
+alias stage='git add'
 alias stash='git stash'
 alias status='git status'
 
