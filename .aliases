@@ -117,6 +117,8 @@ alias ripgrep='rg'
 # SQLite
 alias sqlite='sqlite3'
 
+# https://webhint.io/
+alias webhint='hint'
 
 ### macOS specific
 
