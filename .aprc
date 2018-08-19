@@ -1,0 +1,8 @@
+# https://github.com/awesome-print/awesome_print#setting-custom-defaults
+AwesomePrint.defaults = {
+  :indent => -2,
+  :color => {
+    :class => :white,
+    :hash  => :pale
+  }
+}

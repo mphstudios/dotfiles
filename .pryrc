@@ -1,0 +1,54 @@
+require 'rubygems'
+
+# https://github.com/awesome-print/awesome_print#pry-integration
+begin
+  require 'awesome_print'
+  AwesomePrint.pry!
+rescue LoadError
+  warn "Unable to load awesome_print"
+end
+
+# https://github.com/cldwalker/hirb/
+begin
+  require 'hirb'
+rescue LoadError
+  warn "Unable to load hirb"
+end
+
+Pry.config.editor = 'subl'
+Pry.config.prompt = [
+  proc { |obj, nest_level, _| ">> " },
+  proc { |obj, nest_level, _| "|  " }
+]
+
+if defined? Hirb
+  Hirb.enable
+  # https://github.com/cldwalker/hirb/issues/46#issuecomment-1870823
+  Pry.config.print = proc do |*args|
+    Hirb::View.view_or_page_output(args[1]) || Pry::DEFAULT_PRINT.call(*args)
+  end
+end
+
+# Rails environment
+if ENV['RAILS'] || (defined?(Rails) && Rails.env)
+  require 'logger'
+
+  begin
+    require 'pry-rails'
+  rescue LoadError
+    warn "Unable to load pry-rails"
+  end
+
+  if defined? ActiveRecord
+    ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Base.clear_active_connections!
+  end
+
+  if defined? Hirb
+    Hirb::Formatter.dynamic_config['ActiveRecord::Base']
+  end
+
+  if defined? PryRails::RAILS_PROMPT
+    Pry.config.prompt = PryRails::RAILS_PROMPT
+  end
+end

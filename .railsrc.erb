@@ -1,0 +1,7 @@
+--database=postgresql
+--skip-action-mailer
+--skip-coffee
+<%= (template = prompt("Application template path or URL [none]")).empty?
+  ? ""
+  : "--template=#{template.shellescape}"
+%>

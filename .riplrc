@@ -1,0 +1,17 @@
+# https://github.com/cldwalker/ripl#configuration
+require 'ripl/auto_indent'
+require 'ripl/color_error'
+require 'ripl/color_result'
+require 'ripl/color_streams'
+require 'ripl/commands'
+require 'ripl/hirb'
+require 'ripl/irb'
+require 'ripl/multi_line'
+
+# use AwesomePrint to color results
+Ripl.config[:color_result_engine] = :ap
+
+# disable warning from ripl-irb plugin
+Ripl.config[:irb_verbose] = false
+
+Ripl.config[:multi_line_prompt] = '| '
