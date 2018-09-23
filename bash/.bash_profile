@@ -38,6 +38,7 @@ fi
 # Enable Python version management shims
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
 fi
 
 # Enable Ruby version management shims
