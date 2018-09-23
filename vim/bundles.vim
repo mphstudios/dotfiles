@@ -6,7 +6,7 @@ let g:has_async = v:version >= 800 || has('nvim')
 " vim-plug minimalist plugin manager
 "(https://github.com/junegunn/vim-plug)
 " Specify a plugins directory, avoid standard Vim directories such as 'plugin'
-call plug#begin('~/.vim/vim-plugins')
+call plug#begin('~/.vim/bundles')
 
 " Colour schemes
 Plug 'altercation/solarized', {'as': 'solarized'}
