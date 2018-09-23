@@ -1,5 +1,3 @@
-# EditorConfig https://EditorConfig.org
-
 root = true
 
 [*]
@@ -12,11 +10,20 @@ trim_trailing_whitespace = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{html,js,jsx,ts}]
+[*.{xml,html}]
+indent_size = 2
+
+[*.{css,js,json,jsx}]
+indent_size = 2
+
+[*.{rake,rb,ru}]
 indent_size = 2
 
 [*.{java,py}]
 indent_size = 4
 
-[*.{rake,rb,ru}]
-indent_size = 2
+[*.sql]
+indent_size = 4
+
+[*.yaml]
+indent_size = 4
