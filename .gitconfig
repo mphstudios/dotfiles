@@ -42,7 +42,9 @@
     excludesfile = ~/.gitignore
     quotepath = false
 
-    # Safer `git rebase` on OS X
+    # Safer `git rebase` on macOS
+    # Auto-Save and Versions features can cause rebase to fail randomly
+    # because of ctime differences between the index and the working tree
     # http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/
     trustctime = false
 
@@ -73,10 +75,14 @@
 [difftool "sublimerge"]
     cmd = subl -n --wait \"$REMOTE\" \"$LOCAL\" --command \"sublimerge_diff_views {\\\"left_read_only\\\": true, \\\"right_read_only\\\": true}\"
 
+[difftool "vimdiff"]
+    cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
+
 [filter "lfs"]
     required = true
-    clean = git-lfs clean %f
-    smudge = git-lfs smudge %f
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
 
 [help]
     autocorrect = 1
