@@ -9,8 +9,8 @@ if &compatible
 end
 
 " Install plugins first as settings here may depend on plugins.
-if filereadable($HOME . "/.vim/plugins.vim")
-  source ~/.vim/plugins.vim
+if filereadable($HOME . "/.vim/bundles.vim")
+  source ~/.vim/bundles.vim
 endif
 
 " Loading key mappings
