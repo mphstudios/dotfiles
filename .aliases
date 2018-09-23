@@ -52,10 +52,6 @@ alias llg='ls -alheF | grep'
 alias lll='ls -alheF | less -M'
 alias llm='ls -alheF | most'
 
-# heads or tails
-alias llh='ls -alheF | head'
-alias llt='ls -alheF | tail'
-
 # always long list the directory stack
 alias dirs='dirs -v'
 
@@ -90,6 +86,7 @@ alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 if hash hub 2>/dev/null; then alias git='hub'; fi
 alias amend='git commit --amend'
 alias branch='git checkout -b'
+alias branches='git branch --list'
 alias checkout='git checkout'
 alias commit='git commit'
 alias rebase='git rebase'
@@ -129,8 +126,12 @@ alias chrome='open -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Ch
 # Delete .DS_Store files recursively from execution directory
 alias delete_ds_store="sudo find . -type f -name '.DS_Store' -ls -delete"
 
-# flush directory service cache
-alias flushdns='sudo dscacheutil -flushcache && killall -HUP mDNSResponder;'
+# flush directory service and local DNS cache
+alias resetDNS='sudo dscacheutil -flushcache && killall -HUP mDNSResponder;'
+
+# Vim and NeoVim GUIs
+alias macvim='mvim'
+alias neovim='nvim'
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
