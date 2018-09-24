@@ -1,8 +1,8 @@
 require 'logger'
 
 if defined? Hirb
-  Hirb.enable
   Hirb::Formatter.dynamic_config['ActiveRecord::Base']
+  Hirb.enable
 end
 
 if defined? ActiveRecord
