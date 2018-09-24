@@ -1,8 +1,8 @@
-# configuration for rcm
+# configuration for rcm tools
 COPY_ALWAYS=""
-EXCLUDES="*.md LICENSE"
 DOTFILES_DIRS="$HOME/Code/dotfiles"
+EXCLUDES="*.md LICENSE"
 HOSTNAME="heart-of-gold"
 SYMLINK_DIRS="config pry pyenv rbenv vim"
-TAGS="bash git ruby"
+TAGS="bash git python ruby"
 UNDOTTED=""

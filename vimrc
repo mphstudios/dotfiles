@@ -56,6 +56,8 @@ set timeoutlen=300        "timeout on key combinations in milliseconds
 set title                 "automaticly set title for terminals
 set ttyfast
 
+set splitbelow splitright
+
 set noerrorbells
 set visualbell            "blink cursor on error instead of beeping
 
@@ -155,12 +157,6 @@ set spelllang=en
 
 " autocomplete with dictionary  when spell check is on
 set complete+=kspell
-
-
-" ================= Window Splits =====================
-
-set splitbelow
-set splitright
 
 
 " ================= GUI Configuration =================

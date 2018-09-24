@@ -32,6 +32,9 @@ Plug 'Valloric/YouCompleteMe' "code completion engine
 
 " A salvo of edit and search enhancement plugins ...
 Plug 'chrisbra/vim-autoread', {'as': 'autoread'}
+Plug 'christoomey/vim-sort-motion', {'as': 'sort-motion'}
+Plug 'christoomey/vim-system-copy', {'as': 'system-copy'}
+Plug 'christoomey/vim-titlecase', {'as': 'titlecase'}
 Plug 'ddrscott/vim-side-search', {'as': 'side-search'}
 Plug 'dhruvasagar/vim-table-mode', {'as': 'table-mode'}
 Plug 'easymotion/vim-easymotion', {'as': 'easymotion'}
@@ -39,6 +42,7 @@ Plug 'editorconfig/editorconfig-vim', {'as': 'editorconfig'}
 Plug 'ervandew/supertab', {'as': 'supertab'} "autocomplete using tab
 Plug 'godlygeek/tabular', {'as': 'tabular'}
 Plug 'jceb/vim-orgmode', {'as': 'orgmode'}
+Plug 'jeffkreeftmeijer/vim-numbertoggle', {'as': 'numbertoggle'}
 Plug 'jiangmiao/auto-pairs', {'as': 'auto-pairs'}
 Plug 'jlanzarotta/bufexplorer', {'as': 'bufexplorer'}
 Plug 'junegunn/rainbow_parentheses.vim', {'as': 'rainbow_parentheses'}
