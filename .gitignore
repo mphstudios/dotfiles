@@ -1,0 +1,14 @@
+# Local config
+*.local
+
+vim/bundles/
+
+# Keep these folders...
+!vim/backup/.keep
+!vim/undo/.keep
+# ...but ignore their contents
+vim/backup/*
+vim/undo/*
+
+# ignore vim-plug backups created by :PlugUpgrade
+plug.vim.old
