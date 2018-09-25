@@ -156,6 +156,8 @@ Plug 'Keithbsmiley/rspec.vim', {'as': 'rspec'}
 " TaskPaper
 Plug 'davidoc/taskpaper.vim', {'as': 'taskpaper', 'for': 'taskpaper'}
 
+" Tom's Obvious, Minimal Language
+Plug 'toml-lang/toml', {'as': 'toml', 'for': 'toml'}
 
 " Initialize plugin system
 call plug#end()
