@@ -36,6 +36,7 @@ if [ -r "$HOME/.ssh/config" ]; then
 fi
 
 # Enable Python version management shims
+# and auto-(de)activation of virtualenvs
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
@@ -44,6 +45,11 @@ fi
 # Enable Ruby version management shims
 if command -v rbenv 1>/dev/null 2>&1; then
     eval "$(rbenv init -)"
+fi
+
+# Load/unload environment variables based on $PWD
+if command -v direnv 1>/dev/null 2>&1; then
+    eval "$(direnv hook bash)"
 fi
 
 # `fuck` corrects errors in previous console commands
