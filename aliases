@@ -107,15 +107,8 @@ alias sha512='/usr/bin/openssl sha -sha512'
 alias py='python'
 alias py3='python3'
 
-# Ripgrep recursive search for regex pattern
-alias rgrep='rg'
-alias ripgrep='rg'
-
 # SQLite
 alias sqlite='sqlite3'
-
-# https://webhint.io/
-alias webhint='hint'
 
 ### macOS specific
 
