@@ -1,4 +1,4 @@
-:source $HOME/.vimrc
+:so $HOME/.vimrc
 
 set backupcopy=yes  "prevent macOS Finder file labels from disappearing on save
 set guifont=OfficeCodeProD-Light:h16

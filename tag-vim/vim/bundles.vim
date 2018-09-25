@@ -4,7 +4,15 @@
 let g:has_async = v:version >= 800 || has('nvim')
 
 " vim-plug minimalist plugin manager
-"(https://github.com/junegunn/vim-plug)
+" https://github.com/junegunn/vim-plug
+
+" Automatic installation
+"if empty(glob('~/.vim/autoload/plug.vim'))
+"  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
+
 " Specify a plugins directory, avoid standard Vim directories such as 'plugin'
 call plug#begin('~/.vim/bundles')
 
@@ -19,7 +27,6 @@ Plug 'mileszs/ack.vim', {'as': 'ack'}
 Plug 'junegunn/fzf.vim', {'as': 'fzf'}
 Plug 'ctrlpvim/ctrlp.vim', {'as': 'ctrlp'}
 Plug 'nixprime/cpsm' "matcher for CtrlP
-"Plug 'wincent/command-t', {'as': 'command-t'}
 
 " Core Unix file operations as Vim commands in the context of the current file
 Plug 'tpope/vim-eunuch', {'as': 'eunuch'}
@@ -28,7 +35,7 @@ Plug 'tpope/vim-eunuch', {'as': 'eunuch'}
 Plug 'tpope/vim-surround', {'as': 'surround'}
 
 Plug 'tpope/vim-unimpaired', {'as': 'unimpaired'}
-Plug 'Valloric/YouCompleteMe' "code completion engine
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'} "code completion engine
 
 " A salvo of edit and search enhancement plugins ...
 Plug 'chrisbra/vim-autoread', {'as': 'autoread'}
@@ -102,7 +109,7 @@ endif
 Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}
 
 " ChucK audio programming language
-Plug 'wilsaj/chuck.vim', {'as': 'chuck'}
+Plug 'wilsaj/chuck.vim', {'as': 'chuck', 'for': 'chuck'}
 
 " Git
 Plug 'airblade/vim-gitgutter', {'as': 'gitgutter'}  "git diff information
@@ -119,12 +126,14 @@ Plug 'slim-template/vim-slim', {'as': 'slim'}
 Plug 'mustache/vim-mustache-handlebars', {'as': 'mustache-handlebars'}
 
 " JavaScript
-Plug 'pangloss/vim-javascript', {'as': 'javascript'}
-Plug 'elzr/vim-json', {'as': 'json'}
+Plug 'pangloss/vim-javascript', {'as': 'javascript', 'for': 'javascript'}
 Plug 'mxw/vim-jsx', {'as': 'jsx'}
 
+" JSON
+Plug 'elzr/vim-json', {'as': 'json'}
+
 " Markdown
-Plug 'plasticboy/vim-markdown', {'as': 'markdown'}
+Plug 'plasticboy/vim-markdown', {'as': 'markdown', 'for': 'markdown'}
 
 " Node.js
 Plug 'moll/vim-node', {'as': 'node'}
@@ -134,6 +143,7 @@ Plug 'kurtpreston/vim-autoformat-rails', {'as': 'autoformat-rails'}
 Plug 'jgdavey/vim-blockle', {'as': 'blockle'}
 Plug 'tpope/vim-bundler', {'as': 'bundler'}
 Plug 'tpope/vim-endwise', {'as': 'endwise'}
+Plug 'tpope/vim-liquid', {'as': 'liquid'}
 Plug 'tpope/vim-rails', {'as': 'rails'}
 Plug 'tpope/vim-rake', {'as': 'rake'}
 Plug 'tpope/vim-rbenv', {'as': 'rbenv'}
@@ -144,7 +154,7 @@ Plug 'nelstrom/vim-textobj-rubyblock', {'as': 'rubyblock'}
 Plug 'Keithbsmiley/rspec.vim', {'as': 'rspec'}
 
 " TaskPaper
-Plug 'davidoc/taskpaper.vim', {'as': 'taskpaper'}
+Plug 'davidoc/taskpaper.vim', {'as': 'taskpaper', 'for': 'taskpaper'}
 
 
 " Initialize plugin system
