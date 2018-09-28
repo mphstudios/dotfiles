@@ -20,4 +20,5 @@ ripl-commands
 ripl-irb
 ripl-multi_line
 rubocop
+seeing_is_believing
 wirb

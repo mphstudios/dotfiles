@@ -140,6 +140,7 @@ Plug 'moll/vim-node', {'as': 'node'}
 
 " Ruby/Rails
 Plug 'kurtpreston/vim-autoformat-rails', {'as': 'autoformat-rails'}
+Plug 'joshcheek/seeing_is_believing', {'for': 'ruby'}
 Plug 'jgdavey/vim-blockle', {'as': 'blockle'}
 Plug 'tpope/vim-bundler', {'as': 'bundler'}
 Plug 'tpope/vim-endwise', {'as': 'endwise'}
