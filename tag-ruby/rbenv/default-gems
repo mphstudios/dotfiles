@@ -11,6 +11,7 @@ pry-inline
 pry-state
 rake
 rdoc
+rib
 ripl
 ripl-auto_indent
 ripl-color_error

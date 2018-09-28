@@ -1,0 +1,1 @@
+require 'rib/extra/spring'
