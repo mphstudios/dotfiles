@@ -12,7 +12,7 @@ IRB.conf[:EVAL_HISTORY] = 100
 IRB.conf[:PROMPT][:CUSTOM] = { # name of prompt mode
   :AUTO_INDENT => true,        # enable automatic indentation
   :PROMPT_I => ">> ",          # default prompt
-  :PROMPT_C => "|  ",          # continued statement
+  :PROMPT_C => "↪ ",          # continued statement
   :PROMPT_N => "|  ",          # unknown continuation
   :PROMPT_S => "%l> ",         # continued string
   :RETURN => "=> %s\n"         # printf output

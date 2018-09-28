@@ -14,4 +14,4 @@ Ripl.config[:color_result_engine] = :ap
 # disable warning from ripl-irb plugin
 Ripl.config[:irb_verbose] = false
 
-Ripl.config[:multi_line_prompt] = '| '
+Ripl.config[:multi_line_prompt] = '↳ '

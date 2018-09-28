@@ -142,7 +142,7 @@ set tabstop=2       "number of spaces per <TAB>
 set breakindent
 set breakindentopt=sbr
 set linebreak         "wrap lines at convenient points
-set showbreak=↪\      "unicode curly array with a <backslash><space>
+set showbreak=↪\     "unicode curly array with a <backslash><space>
 set sidescroll=1      "minimal number of columns to scroll horizontally
 set sidescrolloff=10  "keep n columns of context afte the cursor
 set wrap              "wrap lines
