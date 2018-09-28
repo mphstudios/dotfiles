@@ -45,8 +45,8 @@ alias llS='ls -alheFS'
 # display complete time stamps
 alias llT='ls -alheFT'
 
-# grep the directory listing
-alias llg='ls -alheF | grep'
+# grep the directory listing, ignore-case
+alias llg='ls -alheF | grep -i'
 
 # paginate listing
 alias lll='ls -alheF | less -M'
@@ -70,8 +70,8 @@ alias mkdir='mkdir -pv'
 # pretty print PATH variable
 alias path='echo -e ${PATH//:/\\n}'
 
-# grep processes
-alias psg='ps aux | grep'
+# grep processes, ignore-case
+alias psg='ps aux | grep -i'
 
 # only show one level by default when running tree command
 alias tree='tree -L 1'
