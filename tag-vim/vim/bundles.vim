@@ -108,6 +108,9 @@ endif
 
 Plug 'sheerun/vim-polyglot', {'as': 'polyglot'}
 
+" bioSyntax https://biosyntax.org/man
+Plug 'biosyntax/biosyntax-vim', {'as': 'biosyntax'}
+
 " ChucK audio programming language
 Plug 'wilsaj/chuck.vim', {'as': 'chuck', 'for': 'chuck'}
 
