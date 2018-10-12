@@ -11,6 +11,13 @@
     save = stash save
     unapply = !git stash show -p | git apply -R
 
+    # discard current changes to the working copy
+    # and restore it to the last committed version
+    discard = reset --hard HEAD
+
+    # undo the previous commit but preserve changes to the working copy
+    uncommit = reset --soft HEAD~1
+
     log = log --graph --decorate --pretty=oneline --abbrev-commit
     tree = log --all --graph --decorate --oneline --simplify-by-decoration
 
@@ -41,6 +48,9 @@
     editor = "subl -n -w"
     excludesfile = ~/.gitignore
     quotepath = false
+
+    # Use system ssh in order to have access to ids in Keychain
+    sshCommand = "/usr/bin/ssh"
 
     # Safer `git rebase` on macOS
     # Auto-Save and Versions features can cause rebase to fail randomly
