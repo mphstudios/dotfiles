@@ -5,6 +5,7 @@ bundleup
 byebug
 hirb
 interactive_editor
+lambda
 pry
 pry-byebug
 pry-inline
@@ -20,6 +21,8 @@ ripl-color_streams
 ripl-commands
 ripl-irb
 ripl-multi_line
+rouge
 rubocop
 seeing_is_believing
+tmuxinator
 wirb
