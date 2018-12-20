@@ -89,3 +89,6 @@ fi
 #     __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
 #     source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 # fi
+
+## fuzzy find completion
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
