@@ -25,6 +25,13 @@ filetype indent plugin on "auto-detect filetypes
 runtime! macros/matchit.vim
 
 
+" ================= Functions =========================
+
+if filereadable($HOME . "~/.vim/functions/visual-at.vim")
+  source ~/.vim/functions/visual-at.vim
+endif
+
+
 " ================= General Config ====================
 
 set autochdir             "change working directory automatically
@@ -32,8 +39,6 @@ set autoread              "auto-reload files changed outside Vim
 set autowrite             "automatically :write before running commands
 set backspace=indent,eol,start "allow backspace in insert mode
 set clipboard=unnamed     "clipboard support on macOS
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
 set cmdheight=2           "increase command prompt height
 set confirm               "prompt to save file when there are unsaved changes
 set diffopt+=vertical     "always use vertical diffs
@@ -49,12 +54,15 @@ set laststatus=2          "show the statusline even with only one window open
 set lazyredraw            "do not redraw while executing macros
 set mat=7                 "blink duration in 1/10s when matching brackets
 set modelines=0           "disable reading modelines for security
-set mouse=a               "enable mouse
 set nojoinspaces          "use one space, not two, after punctuation
 set nostartofline         "keep the cursor on the same column when jumping lines
 set timeoutlen=300        "timeout on key combinations in milliseconds
 set title                 "automaticly set title for terminals
 set ttyfast
+
+if has('mouse')
+  set mouse=a            "enable mouse
+endif
 
 set splitbelow splitright
 

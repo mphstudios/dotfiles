@@ -69,6 +69,12 @@ Plug 'tpope/vim-repeat', {'as': 'repeat'}
 Plug 'vim-scripts/bash-support.vim', {'as': 'bash-support'}
 Plug 'vim-scripts/CursorLineCurrentWindow'
 
+" Homebrew instally fuzzy completion
+Plug '/usr/local/opt/fzf'
+
+" Notational Velocity + fzf
+Plug 'https://github.com/Alok/notational-fzf-vim', {'as': 'nv-fzf'}
+
 " enhancements for netrw built-in file explorer
 Plug 'tpope/vim-vinegar', {'as': 'vinegar'}
 
