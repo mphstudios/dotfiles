@@ -1,6 +1,8 @@
 # Local config
 *.local
 
+*/node_modules/
+
 */vim/bundles/
 
 # Keep these folders...
