@@ -15,6 +15,9 @@
     # and restore it to the last committed version
     discard = reset --hard HEAD
 
+    # commit --amend for older commits
+    fixup = "!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
+
     # undo the previous commit but preserve changes to the working copy
     uncommit = reset --soft HEAD~1
 
@@ -66,18 +69,23 @@
 
 [diff]
     tool = sublimerge
+    guitool = Kaleidoscope
 
 [diff "exif"]
     textconv = exiftool
 
 [difftool]
     prompt = false
+    trustExitCode = true
 
 [difftool "bbdiff"]
     cmd = bbdiff-wrapper.sh \"$LOCAL\" \"$REMOTE\"
 
 [difftool "Kaleidoscope"]
     cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+[difftool "kitty"]
+    cmd = kitty +kitten diff \"$LOCAL\" \"$REMOTE\"
 
 [difftool "opendiff"]
     cmd = opendiff-wrapper \"$LOCAL\" \"$REMOTE\"
