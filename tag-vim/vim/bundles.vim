@@ -157,11 +157,12 @@ Plug 'tpope/vim-liquid', {'as': 'liquid'}
 Plug 'tpope/vim-rails', {'as': 'rails'}
 Plug 'tpope/vim-rake', {'as': 'rake'}
 Plug 'tpope/vim-rbenv', {'as': 'rbenv'}
+Plug 'thoughtbot/vim-rspec', {'as': 'rspec'}
+Plug 'Keithbsmiley/rspec.vim', {'as': 'rspec'} " rspec syntax highlighting
 Plug 'ngmy/vim-rubocop', {'as': 'rubocop'}
 Plug 'vim-ruby/vim-ruby', {'as': 'ruby'}
 Plug 'ecomba/vim-ruby-refactoring', {'as': 'ruby-refactoring'}
 Plug 'nelstrom/vim-textobj-rubyblock', {'as': 'rubyblock'}
-Plug 'Keithbsmiley/rspec.vim', {'as': 'rspec'}
 
 " TaskPaper
 Plug 'davidoc/taskpaper.vim', {'as': 'taskpaper', 'for': 'taskpaper'}
