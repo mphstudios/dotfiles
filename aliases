@@ -97,6 +97,10 @@ alias status='git status'
 # Git Large File Storage
 alias lfs='git lfs'
 
+# Kitty terminal emulator
+alias icat='kitty +kitten icat'
+alias kdiff='kitty +kitten diff'
+
 # OpenSSL checksums
 alias md5='/usr/bin/openssl md5'
 alias sha1='/usr/bin/openssl sha -sha1'
