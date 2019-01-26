@@ -129,9 +129,10 @@ Plug 'vim-scripts/gitignore'
 " GraphQL
 Plug 'jparise/vim-graphql', {'as': 'graphql'}
 
-" HTML
+" HTML/CSS
 Plug 'mattn/emmet-vim', {'as': 'emmet'} "Completion tool for HTML/CSS/JavaScript
 Plug 'slim-template/vim-slim', {'as': 'slim'}
+Plug 'stephenway/postcss.vim', {'as': 'postcss', 'for': 'css'}
 Plug 'mustache/vim-mustache-handlebars', {'as': 'mustache-handlebars'}
 
 " JavaScript
