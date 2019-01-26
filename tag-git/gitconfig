@@ -1,6 +1,11 @@
 [alias]
     aliases = config --get-regexp alias
 
+    branches = branch --all
+    description = branch --edit-description
+
+    remotes = remote --verbose
+
     assume = update-index --assume-unchanged
     presume = update-index --no-assume-unchanged
 
