@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 # relative navigation shortcuts
 alias .='echo $PWD'
 alias ..='cd ..'
@@ -86,10 +88,11 @@ alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 if hash hub 2>/dev/null; then alias git='hub'; fi
 alias amend='git commit --amend'
 alias branch='git checkout -b'
-alias branches='git branch --list'
+alias branches='git branch --all'
 alias checkout='git checkout'
 alias commit='git commit'
 alias rebase='git rebase'
+alias remotes='git remote --verbose'
 alias stage='git add'
 alias stash='git stash'
 alias status='git status'
@@ -102,10 +105,7 @@ alias icat='kitty +kitten icat'
 alias kdiff='kitty +kitten diff'
 
 # OpenSSL checksums
-alias md5='/usr/bin/openssl md5'
-alias sha1='/usr/bin/openssl sha -sha1'
-alias sha256='/usr/bin/openssl sha -sha256'
-alias sha512='/usr/bin/openssl sha -sha512'
+alias digest='/usr/bin/openssl dgst'
 
 # Python
 alias py='python'
