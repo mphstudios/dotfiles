@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 ##
 # Personal login shell configuraton ~/.profile
 #
@@ -16,11 +18,22 @@ export C_INCLUDE_PATH=/usr/local/include
 # make vim the default editor
 export EDITOR='vim'
 
+# set the default visual editor used by other commands
+if [ -f /usr/local/bin/subl ]; then
+    export VISUAL='/usr/local/bin/subl --new-window'
+else
+    export VISUAL=$EDITOR
+fi
+
 # Locale
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
 export GNUTERM='x11'
+
+# enable colored output from commands on FreeBSD-based systems
+export CLICOLOR=true
+
 
 # Symlink Homebrew Cask apps to system Applications directory
 # https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
@@ -49,13 +62,6 @@ export PGDATA=/usr/local/var/postgres
 
 # Python commands executed before the first prompt in interactive mode
 export PYTHONSTARTUP=~/.pythonrc.py
-
-# set the default visual editor used by other commands
-if [ -f /usr/local/bin/subl ]; then
-    export VISUAL='/usr/local/bin/subl --new-window'
-else
-    export VISUAL=$EDITOR
-fi
 
 #
 # Path configuration
