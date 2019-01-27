@@ -28,7 +28,7 @@ function current_directory {
 function virtualenv_info {
   if [[ -n $VIRTUAL_ENV ]]; then
     # macOS Terminal: set tab title to path stripped virtualenv name
-    printf '\e]1;%s\a' "[python:${VIRTUAL_ENV##*/}]"
+    printf '\e]1;%s\a' "[venv:${VIRTUAL_ENV##*/}]"
   else
     # no active virtualenv
     # macOS Terminal: clear tab title and window title
@@ -43,6 +43,6 @@ PROMPT_COMMAND=before_prompt
 
 export VCPROMPT_FORMAT="on %b%m%u [%r]"
 export PS1='\u at \h in $(current_directory) $(vcprompt)\n→ '
-export PS2='» '
+export PS2='↪ '
 
 export PROMPT_COMMAND

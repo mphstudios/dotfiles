@@ -1,10 +1,11 @@
-##
+#!/usr/bin/env bash
+#
+#
 # PERSONAL INITIALIZATION FILE ~/.bashrc for GNU bash version 4 or later
 #
 # This file is normally read ONLY by interactive, NON-login shells each time
 # a new session is started or when a script is invoked using /usr/bin/env bash
 #
-##
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return

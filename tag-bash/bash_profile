@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # PERSONAL SHELL INITIALIZATION FILE ~/.bash_profile for GNU bash (version 4+)
 #
@@ -5,7 +6,7 @@
 #
 # When bash is invoked as an interactive login shell, or as a non-interactive
 # shell with the --login option, it first reads and executes commands from the
-# file/etc/profile, then looks for ~/.bash_profile, ~/.bash_login, ~/.profile,
+# /etc/profile, then looks for one of ~/.bash_profile ~/.bash_login ~/.profile,
 # executing the first of these files that exists and is readable.
 #
 # Non-login interactive bash shells (subshells) will only read ~/.bashrc unless
@@ -14,8 +15,9 @@
 # macOS Terminal.app executes ~/.bash_profile with each new Terminal window.
 #
 
-# Load shell agnostic configurations
+# Load shell agnostic user configuration files
 [[ -f $HOME/.profile ]] && source "$HOME/.profile"
+[[ -f $HOME/.private ]] && source "$HOME/.private"
 [[ -f $HOME/.aliases ]] && source "$HOME/.aliases"
 
 # Load configuration for interactive non-login shells
@@ -23,9 +25,6 @@
 
 # Load custom command prompt
 [[ -f $HOME/.bash_prompt ]] && source "$HOME/.bash_prompt"
-
-# Load private configuration
-[[ -f $HOME/.private ]] && source "$HOME/.private"
 
 # Readline configuration
 export INPUTRC="$HOME/.inputrc"
