@@ -7,40 +7,8 @@
 # .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
 #
 
-# if (( $+commands[asdf] )) then
-#   source $HOME/.asdf/asdf.sh
-# fi
-
-# Enable Python version management shims
-# and auto-(de)activation of virtualenvs
-if (( $+commands[pyenv] )) then
-    PATH="$HOME/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-    #source $(pyenv root)/completions/pyenv.zsh
-fi
-
-# Enable Ruby version management shims
-if (( $+commands[rbenv] )) then
-    PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
-    #source $(rbenv root)/completions/rbenv.zsh
-fi
-
-# Enable Node version management shims
-if (( $+commands[nodenv] )) then
-    PATH="$HOME/.nodenv/bin:$PATH"
-    eval "$(nodenv init -)"
-    #source $(nodenv root)/completions/nodenv.zsh
-fi
-
-# `fuck` corrects errors in previous console commands
-if (( $+commands[thefuck] )) then
-    eval "$(thefuck --alias)"
-fi
-
-# ensure dotfiles bin directory is loaded first
-# PATH="$HOME/.bin:/usr/local/sbin:$PATH"
-# PATH=./bin:./.bundle/bin:$PATH
-
-export -U PATH
+# Disable Loading Global Profiles
+# macOS (>= 10.11) loads /etc/zprofile after user ~/.zshenv is loaded
+# /etc/zprofile calls /usr/libexec/path_helper, which adds system directories
+# to $PATH, reorders it, and then removes duplicates.
+setopt no_global_rcs

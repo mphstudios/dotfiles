@@ -1,2 +1,1 @@
-# Source shell agnostic aliases
-[[ -f ~/.aliases ]] && source ~/.aliases
+#!/usr/bin/env zsh

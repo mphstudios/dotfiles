@@ -7,5 +7,40 @@
 # .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
 #
 
-# Source shell agnostic .profile configurtion
-[[ -f ~/.profile ]] && source ~/.profile
+# Load shell agnostic user configurtion files
+[ -f ~/.profile ] && source ~/.profile
+[ -f ~/.private ] && source ~/.private
+[ -f ~/.aliases ] && source ~/.aliases
+
+## Dev-tools Version Management
+#if (( $+commands[asdf] )) then
+#  source $HOME/.asdf/asdf.sh
+#fi
+
+# Enable Python version management shims
+# and auto-(de)activation of virtualenvs
+if (( $+commands[pyenv] )) then
+    PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+# Enable Ruby version management shims
+if (( $+commands[rbenv] )) then
+    PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
+
+# Enable Node version management shims
+if (( $+commands[nodenv] )) then
+    PATH="$HOME/.nodenv/bin:$PATH"
+    eval "$(nodenv init -)"
+fi
+
+# `fuck` corrects errors in previous console commands
+if (( $+commands[thefuck] )) then
+    eval "$(thefuck --alias)"
+fi
+
+export -U PATH
+
