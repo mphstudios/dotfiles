@@ -21,7 +21,7 @@ endif
 syntax on                 "enable syntax processing
 filetype indent plugin on "auto-detect filetypes
 
-" % matches on if/else, html tags, et cetera
+" % matches on paired tags if/else, html tags, et cetera
 runtime! macros/matchit.vim
 
 
