@@ -69,6 +69,9 @@ export PYTHONSTARTUP=~/.pythonrc.py
 # Use user-installed binaries before system install versions.
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 
+# Ensure dotfiles bin directory is loaded first
+PATH=$HOME/.bin:$PATH
+
 # Use local node modules
 # when invoked from the root directory of a project.
 PATH=./node_modules/.bin:$PATH
