@@ -1,11 +1,9 @@
 #!/usr/bin/env sh
-
-##
+#
 # Personal login shell configuraton ~/.profile
 #
 # A shell agnostic file for login configuration and environment variables.
 #
-##
 
 # look for per directory ack! settings
 export ACKRC='.ackrc'
@@ -26,14 +24,14 @@ else
 fi
 
 # Locale
-export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US.UTF-8'
 
 export GNUTERM='x11'
 
 # enable colored output from commands on FreeBSD-based systems
 export CLICOLOR=true
-
 
 # Symlink Homebrew Cask apps to system Applications directory
 # https://github.com/phinze/homebrew-cask/blob/master/USAGE.md

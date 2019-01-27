@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+#
+# Zsh interactive shell configuration
+#
+# This file is normally read by login shells each time a new session is started,
+# configurtion file load order:
+# .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
+#
+
+# Source shell agnostic .profile configurtion
+[[ -f ~/.profile ]] && source ~/.profile

@@ -1,0 +1,123 @@
+#!/usr/bin/env zsh
+#
+# Zsh interactive shell configuration
+#
+# This file is normally read ONLY by interactive, NON-login shells each time
+# a new session is started or when a script is invoked using /usr/bin/env zsh
+#
+# configurtion file load order:
+# .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
+#
+ZSH_DIR=~/.zsh
+
+# make color constants available
+autoload -U colors
+colors
+
+# load custom executable functions
+fpath=($ZSH_DIR/functions/ $fpath)
+
+# autoload -U $ZSH/functions/*(:t)
+
+# for function in $ZSH_DIR/functions/*; do
+#   source $function
+# done
+
+# -----------------------------------------------
+# --------->>> DIRECTORY NAVIGATION <<<----------
+# -----------------------------------------------
+
+DIRSTACKSIZE=7
+
+setopt auto_cd      # if command is unrecognized and is the name of a directory
+setopt auto_pushd   # cd pushes old directory onto the directory stack
+setopt cdable_vars  # attempt to expand any cd argument that is not a directory
+setopt pushd_ignore_dups  # do not push dupelicates onto the directory stack
+setopt pushd_minus        # exchange ‘+’ and ‘-’ for the directory stack
+setopt pushd_to_home      # pushd with no arguments acts like ‘pushd $HOME’
+
+
+# -----------------------------------------------
+# -------------->>> COMPLETION <<<---------------
+# -----------------------------------------------
+
+setopt always_to_end    # move cursor to end of word on full completion
+setopt auto_list        # automatically list choices on an ambiguous completion
+setopt auto_menu        # show completion menu on successive tab press
+setopt complete_aliases # make aliases distinct commands for completion purposes
+setopt complete_in_word # completion from both start and end of a word
+setopt glob_complete    # generate matches and cycle through like menu_complete
+setopt hash_list_all    # avoid false reports of spelling errors
+setopt list_ambiguous   # auto-list only when nothing would be inserted
+setopt list_types       # show file types in completion list
+setopt no_list_beep     # do not beet on an ambiguous completion
+
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# pasting with tabs does not perform completion
+zstyle ':completion:*' insert-tab pending
+
+
+# -----------------------------------------------
+# ------------->>> EXPANSION <<<-----------------
+# -----------------------------------------------
+unsetopt no_match         # do not print an error when filename has no matches
+
+setopt extended_glob      # treat ‘#~^’ as part of filename generation patterns
+setopt glob_dots          # do not require leading ‘.’ for explicit file match
+setopt glob_star_short    # pattern ‘**/*’ can be abbreviated as ‘**’, et cetera
+setopt no_case_glob       # case-insensitive globbing
+setopt numeric_glob_sort
+
+
+# -----------------------------------------------
+# -------------->>> HISTORY <<<------------------
+# -----------------------------------------------
+
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
+
+setopt APPEND_HISTORY       # append to, rather than replace, the history file
+setopt EXTENDED_HISTORY     # <beginning time>:<elapsed seconds>;<command>
+setopt HIST_IGNORE_ALL_DUPS # older command is removed
+setopt HIST_REDUCE_BLANKS   # remove superfluous blanks from each command
+setopt HIST_VERIFY          # expand and reload command into editing buffer
+setopt HISTIGNORESPACE      # do not add commands that begin with <SPACE>
+setopt SHARE_HISTORY        # append incrementally and share across sessions
+
+
+# -----------------------------------------------
+# ----------->>> INPUT/OUTPUT <<<----------------
+# -----------------------------------------------
+
+setopt aliases      # expand aliases
+setopt correct      # auto-correction prompt for mistyped commands
+setopt ignore_eof   # do not exit on end-of-file
+setopt no_clobber   # do not override files using `>` (override using `>!`)
+setopt path_dirs    # search path even on command names containing slashes
+
+
+# -----------------------------------------------
+# ------------>>> JOB CONTROL <<<----------------
+# -----------------------------------------------
+
+setopt long_list_jobs # print job notifications in long format by default
+setopt no_hup         # do not send HUP signal to jobs when the shell exits
+setopt no_bg_nice     # do not nice background tasks
+
+
+# -----------------------------------------------
+# ----------->>> ADDITION CONFIG <<<-------------
+# -----------------------------------------------
+
+[ -f $ZSH_DIR/plugins.zsh ] && source $ZSH_DIR/plugins.zsh
+
+[ -f $ZSH_DIR/bindings.zsh ] && source $ZSH_DIR/bindings.zsh
+
+[ -f $ZSH_DIR/prompt.zsh ] && source $ZSH_DIR/prompt.zsh
+
+[ -f $ZSH_DIR/aliases.zsh ] && source $ZSH_DIR/aliases.zsh
+
+[ -f $ZSH_DIR/smartdots.zsh ] && source $ZSH_DIR/smartdots.zsh
