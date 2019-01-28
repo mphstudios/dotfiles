@@ -33,10 +33,6 @@ export GNUTERM='x11'
 # enable colored output from commands on FreeBSD-based systems
 export CLICOLOR=true
 
-# Symlink Homebrew Cask apps to system Applications directory
-# https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
-export HOMEBREW_CASK_OPTS='--appdir=/Applications'
-
 if ! command -v most &> /dev/null; then
     export MANPAGER='most'
 else
@@ -52,14 +48,6 @@ else
     # Do not clear the screen after quitting manual pages
     export MANPAGER='less -X'
 fi
-
-export NODE_PATH=/usr/local/lib/node_modules
-
-# Set the PostgreSQL database directory
-export PGDATA=/usr/local/var/postgres
-
-# Python commands executed before the first prompt in interactive mode
-export PYTHONSTARTUP=~/.pythonrc.py
 
 #
 # Path configuration
@@ -82,7 +70,23 @@ PATH=./bin:./.bundle/bin:$PATH
 
 export PATH
 
+# Symlink Homebrew Cask apps to system Applications directory
+# https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
+export HOMEBREW_CASK_OPTS='--appdir=/Applications'
+
+export NODE_PATH=/usr/local/lib/node_modules
+
+# Set the PostgreSQL database directory
+export PGDATA=/usr/local/var/postgres
+
+# Python commands executed before the first prompt in interactive mode
+export PYTHONSTARTUP=~/.pythonrc.py
+
+# Configure ruby-build to use Homebrew installed readline
+export RUBY_CONFIGURE_OPTS="--with-readline-dir=$(brew --prefix readline)"
+
 # Since CDPATH is considered first it should begin with the current directory
 # so that we can easily change to a subdirectory that also matches one of the
 # subsequently listed frequented directories.
 CDPATH='.:~:~/Code:~/Documents:~/Dropbox:~/Library:~/Sites:~/Workspaces'
+
