@@ -3,12 +3,6 @@
 # relative navigation shortcuts
 alias .='echo $PWD'
 
-alias .1='cd ..'
-alias .2='cd ../..'
-alias .3='cd ../../..'
-alias .4='cd ../../../..'
-alias .5='cd ../../../../..'
-
 # clear the screen and scrollback buffer
 alias cls='printf "\33c\e[3J"'
 
@@ -18,13 +12,10 @@ alias ln='ln -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-# fix command
-alias fc='fc -s'
-
 # list only non-hidden entries
 alias ll='ls -lhF'
 
-# list only hidden (dot-file) entries
+# list only hidden (dotfile) entries
 alias l.='ls -dF .*'
 alias ls.='ls -dF .*'
 alias ll.='ls -lhdF .*'
