@@ -6,6 +6,7 @@
 # This file is normally read ONLY by interactive, NON-login shells each time
 # a new session is started or when a script is invoked using /usr/bin/env bash
 #
+BASH_DIR=~/.bash
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -92,4 +93,4 @@ fi
 # fi
 
 ## fuzzy find completion
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f $BASH_DIR/fzf.bash ] && source $BASH_DIR/fzf.bash

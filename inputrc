@@ -1,3 +1,8 @@
+#!/usr/bin/env sh
+#
+# readline configuration file
+#
+
 # Vi-mode
 set editing-mode vi
 set show-mode-in-prompt on

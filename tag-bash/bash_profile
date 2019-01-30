@@ -14,23 +14,24 @@
 #
 # macOS Terminal.app executes ~/.bash_profile with each new Terminal window.
 #
+BASH_DIR=~/.bash
 
 # Load shell agnostic user configuration files
-[[ -f $HOME/.profile ]] && source "$HOME/.profile"
-[[ -f $HOME/.private ]] && source "$HOME/.private"
-[[ -f $HOME/.aliases ]] && source "$HOME/.aliases"
+[[ -f ~/.profile ]] && source ~/.profile
+[[ -f ~/.private ]] && source ~/.private
+[[ -f ~/.aliases ]] && source ~/.aliases
 
 # Load configuration for interactive non-login shells
-[[ -f $HOME/.bashrc ]] && source "$HOME/.bashrc"
+[[ -f ~/.bashrc ]] && source ~/.bashrc
 
 # Load custom command prompt
-[[ -f $HOME/.bash_prompt ]] && source "$HOME/.bash_prompt"
+[[ -f $BASH_DIR/prompt.bash ]] && source "$BASH_DIR/prompt.bash"
 
 # Readline configuration
-export INPUTRC="$HOME/.inputrc"
+export INPUTRC=~/.inputrc
 
 ## Complete SSH hostnames based on ~/.ssh/config (wildcards ignored)
-if [ -r "$HOME/.ssh/config" ]; then
+if [ -r ~/.ssh/config ]; then
    complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
 fi
 
