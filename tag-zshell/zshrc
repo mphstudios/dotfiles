@@ -14,14 +14,11 @@ ZSH_DIR=~/.zsh
 autoload -U colors
 colors
 
-# load custom executable functions
+# add custom executable functions to front of path
 fpath=($ZSH_DIR/functions/ $fpath)
+# and autoload each with alias expansion disabled
+autoload -U $ZSH_DIR/functions/*(:t)
 
-# autoload -U $ZSH/functions/*(:t)
-
-# for function in $ZSH_DIR/functions/*; do
-#   source $function
-# done
 
 # -----------------------------------------------
 # --------->>> DIRECTORY NAVIGATION <<<----------
@@ -50,7 +47,7 @@ setopt glob_complete    # generate matches and cycle through like menu_complete
 setopt hash_list_all    # avoid false reports of spelling errors
 setopt list_ambiguous   # auto-list only when nothing would be inserted
 setopt list_types       # show file types in completion list
-setopt no_list_beep     # do not beet on an ambiguous completion
+setopt no_list_beep     # do not beep on an ambiguous completion
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
