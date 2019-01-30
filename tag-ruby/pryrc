@@ -17,7 +17,7 @@ end
 
 Pry.config.editor = 'subl'
 Pry.config.prompt = [
-  proc { |obj, nest_level, _| ">> " },
+  proc { |obj, nest_level, _| "❯❯ " },
   proc { |obj, nest_level, _| "|  " }
 ]
 

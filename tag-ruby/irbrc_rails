@@ -15,11 +15,11 @@ rails_root = File.basename(Dir.pwd)
 
 IRB.conf[:PROMPT] ||= {}
 IRB.conf[:PROMPT][:RAILS] = {        # prompt mode name
-  :PROMPT_I => "#{rails_root} >> ",  # default prompt
+  :PROMPT_I => "#{rails_root} ❯❯ ",  # default prompt
   :PROMPT_C => "#{rails_root} ↪ ",  # continued statement
   :PROMPT_N => "#{rails_root} |  ",  # unknown continuation
-  :PROMPT_S => "#{rails_root} %l> ", # continued string
-  :RETURN => "#{rails_root} => %s\n" # prefix output
+  :PROMPT_S => "#{rails_root} %l❯ ", # continued string
+  :RETURN => "#{rails_root} ☛ %s\n" # prefix output
 }
 IRB.conf[:PROMPT_MODE] = :RAILS
 
