@@ -13,7 +13,7 @@
     noskip = update-index --no-skip-worktree
 
     pop = stash pop --index
-    save = stash save
+    save = stash push --message
     unapply = !git stash show -p | git apply -R
 
     # discard current changes to the working copy
