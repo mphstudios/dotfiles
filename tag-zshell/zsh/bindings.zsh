@@ -5,7 +5,7 @@
 # Vi mode
 bindkey -v
 
-## <Ctrl-P> and <Ctrl-N> search history
+## <CTRL-P> and <CTRL-N> search history
 #bindkey '^P' up-history
 #bindkey '^N' down-history
 
@@ -22,6 +22,17 @@ bindkey '^r' history-incremental-search-backward
 
 
 # -----------------------------------------------
+# ---------->>> zsh-autosuggestions <<<----------
+# -----------------------------------------------
+
+# <CTRL-SPACE> to accept the current suggestion
+bindkey '^ ' autosuggest-accept
+
+# <CTRL-BACKSPACE> to clear the current suggestion
+bindkey '^H' autosuggest-clear
+
+
+# -----------------------------------------------
 # ----->>> zsh-history-substring-search <<<------
 # -----------------------------------------------
 
@@ -34,7 +45,7 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# bind <Ctrl-P> and <Ctrl-N> for Emacs mode
+# bind <CTRL-P> and <CTRL-N> for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
 

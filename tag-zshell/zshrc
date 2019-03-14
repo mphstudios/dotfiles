@@ -80,7 +80,7 @@ setopt APPEND_HISTORY       # append to, rather than replace, the history file
 setopt EXTENDED_HISTORY     # <beginning time>:<elapsed seconds>;<command>
 setopt HIST_IGNORE_ALL_DUPS # older command is removed
 setopt HIST_REDUCE_BLANKS   # remove superfluous blanks from each command
-setopt HIST_VERIFY          # expand and reload command into editing buffer
+unsetopt HIST_VERIFY        # exec command without reload into the editing buffer
 setopt HISTIGNORESPACE      # do not add commands that begin with <SPACE>
 setopt SHARE_HISTORY        # append incrementally and share across sessions
 
@@ -110,6 +110,8 @@ setopt no_bg_nice     # do not nice background tasks
 # -----------------------------------------------
 
 [ -f $ZSH_DIR/plugins.zsh ] && source $ZSH_DIR/plugins.zsh
+
+[ -f $ZSH_DIR/autosuggestions.zsh ] && source $ZSH_DIR/autosuggestions.zsh
 
 [ -f $ZSH_DIR/bindings.zsh ] && source $ZSH_DIR/bindings.zsh
 
