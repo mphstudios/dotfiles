@@ -106,12 +106,22 @@ setopt no_bg_nice     # do not nice background tasks
 
 
 # -----------------------------------------------
-# ----------->>> ADDITION CONFIG <<<-------------
+# --------------->>> PLUGINS <<<-----------------
 # -----------------------------------------------
 
 [ -f $ZSH_DIR/plugins.zsh ] && source $ZSH_DIR/plugins.zsh
 
+# Load zsh-autosuggestions configuration
 [ -f $ZSH_DIR/autosuggestions.zsh ] && source $ZSH_DIR/autosuggestions.zsh
+
+# Configure zsh-notify
+zstyle ':notify:*' error-title "Command Failed"
+zstyle ':notify:*' success-title "Command Completed"
+
+
+# -----------------------------------------------
+# -------->>> ADDITIONAL CONFIG FILES <<<--------
+# -----------------------------------------------
 
 [ -f $ZSH_DIR/bindings.zsh ] && source $ZSH_DIR/bindings.zsh
 
