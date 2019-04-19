@@ -1,5 +1,7 @@
 --database=postgresql
+--skip-bundle
 --skip-coffee
+--skip-test-unit
 <%= (template = prompt("Application template path or URL [none]")).empty?
   ? ""
   : "--template=#{template.shellescape}"
