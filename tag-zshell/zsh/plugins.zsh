@@ -36,7 +36,7 @@ zplug "zsh-users/zsh-history-substring-search", from:github
 zplug "buonomo/yarn-completion", defer:3
 
 # Desktop notifications for long running commands
-zplug "marzocchi/zsh-notify", defer:3
+#zplug "marzocchi/zsh-notify", defer:3
 
 # Vi-mode
 zplug "oh-my-zsh/vi-mode", from:oh-my-zsh
