@@ -5,6 +5,6 @@ set guifont=OfficeCodeProD-Light:h16
 set guioptions-=T
 set lines=60 columns=108
 set macligatures
-set transparency=10
+set transparency=5
 
 colorscheme dracula
