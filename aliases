@@ -112,7 +112,7 @@ alias chrome='open -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Ch
 alias delete_ds_store="sudo find . -type f -name '.DS_Store' -ls -delete"
 
 # flush directory service and local DNS cache
-alias resetDNS='sudo dscacheutil -flushcache && killall -HUP mDNSResponder;'
+alias resetDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder && echo "macOS DNS Cache Reset"'
 
 # Vim and NeoVim GUIs
 alias macvim='mvim'
