@@ -72,6 +72,10 @@ setopt numeric_glob_sort
 # -------------->>> HISTORY <<<------------------
 # -----------------------------------------------
 
+# set an exclude pattern to use when history files are written
+# matching commands are still added to the interactive history
+HISTORY_IGNORE="(cd|cd ..|l[alsh]#( *)#|pwd|exit)"
+
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
