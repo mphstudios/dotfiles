@@ -3,9 +3,11 @@ bundler
 bundler-audit
 bundleup
 byebug
+dotenv
 hirb
 interactive_editor
 lambda
+license_finder
 pry
 pry-byebug
 pry-inline
