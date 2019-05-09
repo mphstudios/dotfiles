@@ -74,19 +74,27 @@ setopt numeric_glob_sort
 
 # set an exclude pattern to use when history files are written
 # matching commands are still added to the interactive history
-HISTORY_IGNORE="(cd|cd ..|l[alsh]#( *)#|pwd|exit)"
+HISTORY_IGNORE="(cd|cd ..|cls|l[alsh]#( *)#|pwd|exit)"
 
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 
-setopt APPEND_HISTORY       # append to, rather than replace, the history file
+setopt APPEND_HISTORY       # append to the history file rather than replace it
+setopt BANG_HIST            # expand '!' character when writing to history
 setopt EXTENDED_HISTORY     # <beginning time>:<elapsed seconds>;<command>
-setopt HIST_IGNORE_ALL_DUPS # older command is removed
-setopt HIST_REDUCE_BLANKS   # remove superfluous blanks from each command
+setopt HIST_EXPIRE_DUPS_FIRST # expire duplicates first when trimming history
+setopt HIST_FCNTL_LOCK      # use system fcntl call to lock history files
+setopt HIST_IGNORE_DUPS     # do not record consecutive duplicate entries
+setopt HIST_IGNORE_ALL_DUPS # delete older entry if a new entry is a duplicate
+setopt HIST_IGNORE_SPACE    # do not add commands that begin with <SPACE>
+setopt HIST_NO_FUNCTIONS    # do not record function definitions
+setopt HIST_NO_STORE        # do not reocrd the 'history' command
+setopt HIST_REDUCE_BLANKS   # remove superfluous blanks before recording entry
+setopt HIST_SAVE_NO_DUPS    # do not write duplicate entries to history files
 unsetopt HIST_VERIFY        # exec command without reload into the editing buffer
-setopt HISTIGNORESPACE      # do not add commands that begin with <SPACE>
-setopt SHARE_HISTORY        # append incrementally and share across sessions
+setopt INC_APPEND_HISTORY   # incrementally write to history files
+#setopt SHARE_HISTORY       # inc append history and share across sessions
 
 
 # -----------------------------------------------
