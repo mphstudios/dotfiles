@@ -75,6 +75,35 @@ module.exports = {
     // default font weight for bold characters
     fontWeightBold: 'normal',
 
+    hyperBorder: {
+      animate: {
+        duration: '3s', // default is 16s
+      },
+      borderColors: ['#fc1da7', '#fba506'],
+      borderRadiusInner: '6px',
+      borderRadiusOuter: '6px',
+      borderWidth: '1px'
+    },
+
+    hyperCwd: {
+      initialWorkingDirectory: '~/Code'
+    },
+
+    hyperStatusLine: {
+      aheadColor: 'ivory',
+      dirtyColor: 'salmon',
+      footerTransparent: true,
+    },
+
+    hyperTabs: {
+      activityPulse: true,
+      border: true,
+      closeAlign: 'right',
+      tabIcons: true,
+      tabIconsColored: true,
+      trafficButtons: true,
+    },
+
     // custom padding (css format, i.e.: `top right bottom left`)
     padding: '12px 14px',
 
@@ -124,29 +153,12 @@ module.exports = {
   plugins: [
     'hyper-dracula',
     'hyper-opacity',
+    'hyper-pane',
     'hyper-statusline',
     'hyper-tabs-enhanced',
     'hyper-visual-bell',
+    'hyperborder',
     'hypercwd',
-    'hyperterm-bold-tab',
+    'hyperterm-bold-tab'
   ],
-
-  hyperCwd: {
-    initialWorkingDirectory: '~/Code'
-  },
-
-  hyperStatusLine: {
-    aheadColor: 'ivory',
-    dirtyColor: 'salmon',
-    footerTransparent: true,
-  },
-
-  hyperTabs: {
-    activityPulse: true,
-    border: true,
-    closeAlign: 'right',
-    tabIcons: true,
-    tabIconsColored: true,
-    trafficButtons: true,
-  },
 };
