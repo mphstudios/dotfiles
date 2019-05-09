@@ -84,6 +84,7 @@ alias remotes='git remote --verbose'
 alias stage='git add'
 alias stash='git stash'
 alias status='git status'
+alias unstage='git reset HEAD'
 
 # Git Large File Storage
 alias lfs='git lfs'
