@@ -10,7 +10,7 @@ function before_prompt {
 }
 
 # trim working directory to 1/4 the screen width
-function current_directory {
+function trim_working_dir {
   local maxlength=$(($COLUMNS/4))
   if [[ $PWD == $HOME* ]]; then
     working_dir="~${PWD#$HOME}"
@@ -37,12 +37,13 @@ function virtualenv_info {
 }
 
 PROMPT_COMMAND=before_prompt
+PROMPT_DIRTRIM=3
 
 # fix prompt after Control-C
 # PS1="\033[G$PS1"
 
-export VCPROMPT_FORMAT="on %b%m%u [%r]"
-export PS1='\u at \h in $(current_directory) $(vcprompt)\n→ '
+export VCPROMPT_FORMAT="on %b %m%u [%r]"
+export PS1='\u at \h in \w $(vcprompt)\n→ '
 export PS2='↪ '
 
 export PROMPT_COMMAND
