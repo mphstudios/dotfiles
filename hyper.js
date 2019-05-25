@@ -105,7 +105,20 @@ module.exports = {
     },
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '12px 14px',
+    padding: '8px 22px 16px 22px',
+
+    paneNavigation: {
+      focusOnMouseHover: true,
+      inactivePaneOpacity: 0.6, // Set to 1 to disable inactive panes dimming
+      indicatorPrefix: '^⌥',   // Will be completed with pane number
+      indicatorStyle: {
+        position: 'absolute',
+        top: '0px',
+        right: '6px',
+        fontSize: '12px'
+      },
+      showIndicators: true
+    },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
     // if left empty, your system's login shell will be used by default
