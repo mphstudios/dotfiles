@@ -4,6 +4,7 @@ bundler-audit
 bundleup
 byebug
 dotenv
+erblint
 hirb
 interactive_editor
 lambda
