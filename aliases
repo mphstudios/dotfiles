@@ -73,7 +73,6 @@ alias unmount='umount'
 alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
 # Git
-if hash hub 2>/dev/null; then alias git='hub'; fi
 alias amend='git commit --amend'
 alias branch='git checkout -b'
 alias branches='git branch --all'
@@ -114,10 +113,6 @@ alias delete_ds_store="sudo find . -type f -name '.DS_Store' -ls -delete"
 
 # flush directory service and local DNS cache
 alias resetDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder && echo "macOS DNS Cache Reset"'
-
-# Vim and NeoVim GUIs
-alias macvim='mvim'
-alias neovim='nvim'
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
