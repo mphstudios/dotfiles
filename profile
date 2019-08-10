@@ -76,6 +76,8 @@ export HOMEBREW_CASK_OPTS='--appdir=/Applications'
 
 export NODE_PATH=/usr/local/lib/node_modules
 
+export NPM_TOKEN # Set this var in ~/.private
+
 # Set the PostgreSQL database directory
 export PGDATA=/usr/local/var/postgres
 

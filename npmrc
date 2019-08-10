@@ -1,7 +1,7 @@
-; list userconfig and default values with `npm config ls -l`
 depth=0
-editor="subl"
+editor=subl
 loglevel=silent
-tmp="/tmp"
+tmp=/tmp
 unsafe-perm=true
-viewer="pman"
+viewer=pman
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
