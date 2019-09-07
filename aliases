@@ -83,10 +83,14 @@ alias remotes='git remote --verbose'
 alias stage='git add'
 alias stash='git stash'
 alias status='git status'
+alias switch='git switch'
 alias unstage='git reset HEAD'
 
 # Git Large File Storage
 alias lfs='git lfs'
+
+# extend git with GitHub commands
+alias git='hub'
 
 # Kitty terminal emulator
 alias icat='kitty +kitten icat'
