@@ -1,7 +1,7 @@
 # -----------------------------------------------
 # --------------->>> ZPLUG <<<-------------------
 # -----------------------------------------------
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=$(brew --prefix zplug)
 
 source $ZPLUG_HOME/init.zsh
 
@@ -19,9 +19,6 @@ zplug "hlissner/zsh-autopair", from:github, defer:2
 
 # Syntax highlighting for commands; load last!
 zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:3
-
-# Automatically switch Python virtualenvs when changing directory
-zplug "MichaelAquilina/zsh-autoswitch-virtualenv", from:github
 
 # Show reminders when using a command for which you already have an alias
 zplug "MichaelAquilina/zsh-you-should-use", from:github
