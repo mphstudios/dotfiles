@@ -72,7 +72,7 @@ alias unmount='umount'
 # output random hexidecimal gradoo
 alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
-# Git
+# Git (alternately use gitsh)
 alias amend='git commit --amend'
 alias branch='git checkout -b'
 alias branches='git branch --all'
@@ -89,13 +89,6 @@ alias unstage='git reset HEAD'
 # Git Large File Storage
 alias lfs='git lfs'
 
-# extend git with GitHub commands
-alias git='hub'
-
-# Kitty terminal emulator
-alias icat='kitty +kitten icat'
-alias kdiff='kitty +kitten diff'
-
 # OpenSSL checksums
 alias digest='/usr/bin/openssl dgst'
 
@@ -108,11 +101,7 @@ alias sqlite='sqlite3'
 
 ### macOS specific
 
-# Google Chrome
-# work around for XHR issues in Chrome when working locally
-alias chrome='open -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --allow-file-access-from-files'
-
-# Delete .DS_Store files recursively from execution directory
+# Recursively delete .DS_Store files starting from the current directory
 alias delete_ds_store="sudo find . -type f -name '.DS_Store' -ls -delete"
 
 # flush directory service and local DNS cache
@@ -128,12 +117,6 @@ alias preview='open -a /Applications/Preview.app'
 # Safari
 alias safari='open -a /Applications/Safari.app'
 
-# Terminal-notifier
-alias notify='/usr/local/bin/terminal-notifier'
-
-# Quick Look (^C or space to close)
+# Quick Look (^C or SPACE to close)
 alias qlp='qlmanage -p 2>/dev/null'
 alias qlr='qlmanage -r cache'
-
-# webkit2png
-alias w2p='/usr/local/bin/webkit2png'
