@@ -15,9 +15,9 @@ autoload -U colors
 colors
 
 # add custom executable functions to front of path
-fpath=($ZSH_DIR/functions/ $fpath)
+# fpath=($ZSH_DIR/functions "${fpath[@]}" )
 # and autoload each with alias expansion disabled
-autoload -U $ZSH_DIR/functions/*(:t)
+# autoload -Uz $fpath[1]/*(.:t)
 
 
 # -----------------------------------------------
