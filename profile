@@ -9,7 +9,7 @@
 export ACKRC='.ackrc'
 
 # Set architecture flags
-export ARCHFLAGS='-arch x86_64'
+export ARCHFLAGS="-arch $(uname -m)"
 
 export C_INCLUDE_PATH=/usr/local/include
 
@@ -17,8 +17,9 @@ export C_INCLUDE_PATH=/usr/local/include
 export EDITOR='vim'
 
 # set the default visual editor used by other commands
-if [ -f /usr/local/bin/subl ]; then
-    export VISUAL='/usr/local/bin/subl --new-window'
+if [ -f $(command -v subl) ]
+then
+    export VISUAL="$(command -v subl) --new-window"
 else
     export VISUAL=$EDITOR
 fi
@@ -85,10 +86,9 @@ export PGDATA=/usr/local/var/postgres
 export PYTHONSTARTUP=~/.pythonrc.py
 
 # Configure ruby-build to use Homebrew installed readline
-export RUBY_CONFIGURE_OPTS="--with-readline-dir=$(brew --prefix readline)"
+# export RUBY_CONFIGURE_OPTS="--with-readline-dir=$(brew --prefix readline)"
 
 # Since CDPATH is considered first it should begin with the current directory
 # so that we can easily change to a subdirectory that also matches one of the
 # subsequently listed frequented directories.
 CDPATH='.:~:~/Code:~/Documents:~/Dropbox:~/Library:~/Sites:~/Workspaces'
-
