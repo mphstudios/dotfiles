@@ -38,10 +38,10 @@ zplug "buonomo/yarn-completion", defer:3
 # Vi-mode
 zplug "oh-my-zsh/vi-mode", from:oh-my-zsh
 
-# Spaceship-prompt
-zplug "denysdovhan/spaceship-prompt", as:theme, from:github, use:"spaceship.zsh"
+# Spaceship Prompt @see https://spaceship-prompt.sh/getting-started/#Installing
+zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
-# Terminal Theme
+# Terminal theme
 zplug "dracula/zsh", as:theme
 
 # Iinstall missing plugins, prompt user for confirmation

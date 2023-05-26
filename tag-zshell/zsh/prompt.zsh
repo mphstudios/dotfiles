@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 #
-# [Spaceship ZSH](https://denysdovhan.com/spaceship-prompt/)
+# Spaceship Prompt
+# @see https://spaceship-prompt.sh/config/prompt/
 #
 SPACESHIP_PROMPT_ORDER=(
   user
