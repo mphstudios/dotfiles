@@ -20,6 +20,9 @@ build/*
 *.sql
 *.sqlite*
 
+# direnv
+.envrc
+
 # floobits: cross-editor collaboration
 .floo
 .flooignore
