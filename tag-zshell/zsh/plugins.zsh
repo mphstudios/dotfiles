@@ -41,10 +41,12 @@ zplug "oh-my-zsh/vi-mode", from:oh-my-zsh
 # Spaceship Prompt @see https://spaceship-prompt.sh/getting-started/#Installing
 zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
+export SPACESHIP_CONFIG="$HOME/.zsh/prompt.zsh"
+
 # Terminal theme
 zplug "dracula/zsh", as:theme
 
-# Iinstall missing plugins, prompt user for confirmation
+# Install missing plugins, prompt user for confirmation
 if ! zplug check --verbose; then
   printf "Install zplug plugins? [y/N]: "
   if read -q; then
