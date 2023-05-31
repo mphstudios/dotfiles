@@ -3,7 +3,7 @@
 # Zsh interactive shell configuration
 #
 # This file is normally read by login shells each time a new session is started,
-# configurtion file load order:
+# load order of configuration files:
 # .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
 #
 

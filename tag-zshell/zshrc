@@ -5,7 +5,7 @@
 # This file is normally read ONLY by interactive, NON-login shells each time
 # a new session is started or when a script is invoked using /usr/bin/env zsh
 #
-# configurtion file load order:
+# Load order of configuration files:
 # .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
 #
 ZSH_DIR=~/.zsh

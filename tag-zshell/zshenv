@@ -2,8 +2,9 @@
 #
 # Zsh shell environment configuration
 #
-# This file is automatically loaded for every new session,
-# configurtion file load order:
+# This file is automatically loaded for every new session.
+#
+# Load order of configuration files:
 # .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
 #
 
