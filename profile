@@ -71,10 +71,6 @@ PATH=./bin:./.bundle/bin:$PATH
 
 export PATH
 
-# Symlink Homebrew Cask apps to system Applications directory
-# https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
-export HOMEBREW_CASK_OPTS='--appdir=/Applications'
-
 export NODE_PATH=/usr/local/lib/node_modules
 
 export NPM_TOKEN # Set this var in ~/.private
