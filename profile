@@ -50,6 +50,9 @@ else
     export MANPAGER='less -X'
 fi
 
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
 #
 # Path configuration
 # macOS default path is defined in /private/etc/paths
@@ -71,15 +74,16 @@ PATH=./bin:./.bundle/bin:$PATH
 
 export PATH
 
-export NODE_PATH=/usr/local/lib/node_modules
-
-export NPM_TOKEN # Set this var in ~/.private
-
 # Set the PostgreSQL database directory
 export PGDATA=/usr/local/var/postgres
 
 # Python commands executed before the first prompt in interactive mode
 export PYTHONSTARTUP=~/.pythonrc.py
+
+# Skip Chromium installs when running Puppeteer
+# see https://rickynguyen.medium.com/puppeteer-for-apple-m1-43a5c31e4f9d
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 # Configure ruby-build to use Homebrew installed readline
 # export RUBY_CONFIGURE_OPTS="--with-readline-dir=$(brew --prefix readline)"
@@ -88,3 +92,5 @@ export PYTHONSTARTUP=~/.pythonrc.py
 # so that we can easily change to a subdirectory that also matches one of the
 # subsequently listed frequented directories.
 CDPATH='.:~:~/Code:~/Documents:~/Dropbox:~/Library:~/Sites:~/Workspaces'
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
