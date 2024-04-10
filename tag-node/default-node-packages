@@ -1,6 +1,3 @@
-gluegun
-grunt-cli
-gulp-cli
-node-inspect
 npm
-yo
+npm-check-updates
+prettier
