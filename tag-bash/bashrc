@@ -94,3 +94,5 @@ fi
 
 ## fuzzy find completion
 [ -f $BASH_DIR/fzf.bash ] && source $BASH_DIR/fzf.bash
+
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
