@@ -12,9 +12,4 @@
 [ -f ~/.private ] && source ~/.private
 [ -f ~/.aliases ] && source ~/.aliases
 
-# `fuck` corrects errors in previous console commands
-if (( $+commands[thefuck] )) then
-    eval "$(thefuck --alias)"
-fi
-
 export -U PATH

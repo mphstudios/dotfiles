@@ -34,8 +34,3 @@ export INPUTRC=~/.inputrc
 if [ -r ~/.ssh/config ]; then
    complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
 fi
-
-# `fuck` corrects errors in previous console commands
-if command -v thefuck 1>/dev/null 2>&1; then
-    eval "$(thefuck --alias)"
-fi
