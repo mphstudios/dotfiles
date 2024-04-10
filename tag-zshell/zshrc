@@ -19,6 +19,8 @@ colors
 # and autoload each with alias expansion disabled
 # autoload -Uz $fpath[1]/*(.:t)
 
+# Zsh file renamer
+autoload zmv
 
 # -----------------------------------------------
 # --------->>> DIRECTORY NAVIGATION <<<----------
