@@ -116,3 +116,5 @@ alias safari='open -a /Applications/Safari.app'
 # Quick Look (^C or SPACE to close)
 alias qlp='qlmanage -p 2>/dev/null'
 alias qlr='qlmanage -r cache'
+
+alias notify='/opt/homebrew/bin/terminal-notifier'
