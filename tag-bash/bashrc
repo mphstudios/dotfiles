@@ -92,7 +92,8 @@ fi
 #     source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 # fi
 
-## fuzzy find completion
+# fuzzy find completion
 [ -f $BASH_DIR/fzf.bash ] && source $BASH_DIR/fzf.bash
 
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+# mise-en-place
+eval "$(mise activate bash)"

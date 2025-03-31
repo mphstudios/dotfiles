@@ -145,4 +145,5 @@ setopt no_bg_nice     # do not nice background tasks
 
 [ -f $ZSH_DIR/smartdots.zsh ] && source $ZSH_DIR/smartdots.zsh
 
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+# mise-en-place
+eval "$(mise activate zsh)"
