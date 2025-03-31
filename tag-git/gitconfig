@@ -16,6 +16,8 @@
     save = stash push --message
     unapply = !git stash show -p | git apply -R
 
+    conflicts = diff --name-only --diff-filter=U
+
     # discard current changes to the working copy
     # and restore it to the last committed version
     discard = reset --hard HEAD
@@ -51,10 +53,14 @@
     status = auto
     ui = auto
 
+[commit]
+    gpgsign = false
+
 [core]
     attributesfile = ~/.gitattributes
     editor = "subl -n -w"
     excludesfile = ~/.gitignore
+    ignorecase = false
     quotepath = false
 
     # Use system ssh in order to have access to ids in Keychain
@@ -107,11 +113,17 @@
     process = git-lfs filter-process
     smudge = git-lfs smudge -- %f
 
+[gpg]
+    program = /opt/homebrew/bin/gpg
+
 [help]
     autocorrect = 1
 
 [include]
-  path = .github
+    path = .github
+
+[init]
+    defaultBranch = main
 
 [log]
     pretty = oneline
@@ -132,7 +144,7 @@
     driver = hookup resolve-schema %A %O %B %L
 
 [mergetool]
-    keepBackup = false
+    keepBackup = true
     prompt = false
 
 [mergetool "bbdiff"]
@@ -167,6 +179,7 @@
 
 [rebase]
     # autosquash = true
+    updateRefs = true
 
 [rerere]
     # Record how to resolve conflicts during a "test" merge and reuse the same
