@@ -1,0 +1,2 @@
+# prevent ssh-agent daemons from continuing to run after logout
+kill $SSH_AGENT_PID

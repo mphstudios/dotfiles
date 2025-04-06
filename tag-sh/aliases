@@ -89,22 +89,11 @@ alias unstage='git reset HEAD'
 # Git Large File Storage
 alias lfs='git lfs'
 
-# extend git with GitHub commands
-alias git='hub'
-
-# Kitty terminal emulator
-alias icat='kitty +kitten icat'
-alias kdiff='kitty +kitten diff'
-
 # OpenSSL checksums
 alias digest='/usr/bin/openssl dgst'
 
-# Python
-alias py='python'
-alias py3='python3'
-
-# SQLite
-alias sqlite='sqlite3'
+# Kamal https://kamal-deploy.org/docs/installation/
+alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
 
 ### macOS specific
 

@@ -13,8 +13,8 @@ export ARCHFLAGS='-arch x86_64'
 
 export C_INCLUDE_PATH=/usr/local/include
 
-# make vim the default editor
-export EDITOR='vim'
+# Set the default editor
+export EDITOR='subl'
 
 # set the default visual editor used by other commands
 if [ -f /usr/local/bin/subl ]; then
@@ -57,7 +57,13 @@ fi
 # Use user-installed binaries before system install versions.
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 
-# Ensure dotfiles bin directory is loaded first
+# Python dependency and package manager
+export POETRY_HOME=$HOME/.local/bin
+
+# Add Poetry dependency and packager manager for Python
+PATH=$POETRY_HOME:$PATH
+
+# Ensure user bin directory has precedence
 PATH=$HOME/.bin:$PATH
 
 # Use local node modules
@@ -73,6 +79,7 @@ export PATH
 # Symlink Homebrew Cask apps to system Applications directory
 # https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
 export HOMEBREW_CASK_OPTS='--appdir=/Applications'
+export HOMEBREW_NO_ENV_HINTS=true
 
 export NODE_PATH=/usr/local/lib/node_modules
 
@@ -82,7 +89,7 @@ export NPM_TOKEN # Set this var in ~/.private
 export PGDATA=/usr/local/var/postgres
 
 # Python commands executed before the first prompt in interactive mode
-export PYTHONSTARTUP=~/.pythonrc.py
+export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 # Configure ruby-build to use Homebrew installed readline
 export RUBY_CONFIGURE_OPTS="--with-readline-dir=$(brew --prefix readline)"
@@ -91,4 +98,3 @@ export RUBY_CONFIGURE_OPTS="--with-readline-dir=$(brew --prefix readline)"
 # so that we can easily change to a subdirectory that also matches one of the
 # subsequently listed frequented directories.
 CDPATH='.:~:~/Code:~/Documents:~/Dropbox:~/Library:~/Sites:~/Workspaces'
-

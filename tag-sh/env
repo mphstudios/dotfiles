@@ -1,0 +1,2 @@
+SSL_CERT_PATH=$HOME/.ssl/localhost.cert
+SSL_KEY_PATH=$HOME/.ssl/localhost.key
