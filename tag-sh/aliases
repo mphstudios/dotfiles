@@ -12,6 +12,10 @@ alias ln='ln -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
+# eza shorthand
+alias l='eza --all --colour=always --long | most'
+alias lt='eza -all --colour=always --tree --level=2 | most'
+
 # list only non-hidden entries
 alias ll='ls -lhF'
 
@@ -39,8 +43,8 @@ alias llT='ls -alheFT'
 alias llg='ls -alheF | grep -i'
 
 # paginate listing
-alias lll='ls -alheF | less -M'
-alias llm='ls -alheF | most'
+alias lll='ls -alheF --color=always | less -M'
+alias llm='ls -alheF --color=always | most'
 
 # always long list the directory stack
 alias dirs='dirs -v'
