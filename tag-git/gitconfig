@@ -113,6 +113,9 @@
 [include]
   path = .github
 
+[init]
+    defaultBranch = main
+
 [log]
     pretty = oneline
 
@@ -160,7 +163,7 @@
     trustExitCode = false
 
 [pull]
-    # rebase = preserve  # preserve merge commits when rebasing
+	rebase = true
 
 [push]
     default = simple
