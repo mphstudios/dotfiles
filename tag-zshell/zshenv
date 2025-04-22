@@ -12,3 +12,5 @@
 # /etc/zprofile calls /usr/libexec/path_helper, which adds system directories
 # to $PATH, reorders it, and then removes duplicates.
 setopt no_global_rcs
+
+export ZDOTDIR="$HOME"
