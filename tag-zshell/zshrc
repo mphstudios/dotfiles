@@ -5,7 +5,7 @@
 # This file is normally read ONLY by interactive, NON-login shells each time
 # a new session is started or when a script is invoked using /usr/bin/env zsh
 #
-# configurtion file load order:
+# Load order of configuration files:
 # .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
 #
 ZSH_DIR=~/.zsh
@@ -15,9 +15,9 @@ autoload -U colors
 colors
 
 # add custom executable functions to front of path
-fpath=($ZSH_DIR/functions/ $fpath)
+# fpath=($ZSH_DIR/functions "${fpath[@]}" )
 # and autoload each with alias expansion disabled
-autoload -U $ZSH_DIR/functions/*(:t)
+# autoload -Uz $fpath[1]/*(.:t)
 
 
 # -----------------------------------------------
@@ -55,6 +55,9 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 # pasting with tabs does not perform completion
 zstyle ':completion:*' insert-tab pending
 
+fpath=(/Users/mph/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
 
 # -----------------------------------------------
 # ------------->>> EXPANSION <<<-----------------
@@ -74,7 +77,7 @@ setopt numeric_glob_sort
 
 # set an exclude pattern to use when history files are written
 # matching commands are still added to the interactive history
-HISTORY_IGNORE="(cd|cd ..|cls|l[alsh]#( *)#|pwd|exit)"
+HISTORY_IGNORE="(cd|cd ..|cls|l[alsh]#( *)#|llg|open .|pwd|exit)"
 
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
@@ -121,12 +124,20 @@ setopt no_bg_nice     # do not nice background tasks
 # --------------->>> PLUGINS <<<-----------------
 # -----------------------------------------------
 
-[ -f $ZSH_DIR/plugins.zsh ] && source $ZSH_DIR/plugins.zsh
+## Sheldon command-line tool to manage and load shell plugins
+# set a shell specific configuration file and data directory for installed plugins
+# see https://github.com/rossmacarthur/sheldon/issues/166
+export SHELDON_CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/zsh-plugins.toml"
+export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/zsh"
+# https://sheldon.cli.rs/Getting-started.html#loading-plugins
+if (( $+commands[sheldon] )) then
+  eval "$(sheldon source)"
+fi
 
-# Load zsh-autosuggestions configuration
+# Load configuration for zsh-autosuggestions plugin
 [ -f $ZSH_DIR/autosuggestions.zsh ] && source $ZSH_DIR/autosuggestions.zsh
 
-# Configure zsh-notify
+## Configure zsh-notify
 #zstyle ':notify:*' error-title "Command Failed"
 #zstyle ':notify:*' success-title "Command Completed"
 
@@ -142,3 +153,16 @@ setopt no_bg_nice     # do not nice background tasks
 [ -f $ZSH_DIR/aliases.zsh ] && source $ZSH_DIR/aliases.zsh
 
 [ -f $ZSH_DIR/smartdots.zsh ] && source $ZSH_DIR/smartdots.zsh
+
+## replace default cd command with zoxide
+# https://github.com/ajeetdsouza/zoxide
+if (( $+commands[zoxide] )) then
+  eval "$(zoxide init zsh --cmd cd)"
+fi
+
+## mise-en-place dev tools, environment, and tasks manager
+# https://mise.jdx.dev/about.html
+if (( $+commands[mise] )) then
+  eval "$(mise activate zsh)"
+fi
+
