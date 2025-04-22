@@ -1,0 +1,41 @@
+# sheldon configuration file
+#
+# Modify this file directly or use one of the following `sheldon` commands
+# which are provided to assist in editing the config file:
+#
+# `sheldon add` to add a new plugin to the config file
+# `sheldon edit` to open up the config file in the default editor
+# `sheldon remove` to remove a plugin from the config file
+#
+# See https://github.com/rossmacarthur/sheldon#readme
+
+shell = "zsh"
+
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+[plugins.dracula]
+github = "dracula/zsh"
+
+[plugins.autopair]
+github = "hlissner/zsh-autopair"
+
+[plugins.autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+
+[plugins.completions]
+github = "zsh-users/zsh-completions"
+
+[plugins.syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+apply = ["defer"]
+
+[plugins.you-should-use]
+github = "MichaelAquilina/zsh-you-should-use"
+
+[plugins.history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+
