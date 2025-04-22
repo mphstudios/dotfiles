@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+#
+# Executed before the command line is written to history.
+# If execution does not return 1, the command line is neither appended to
+# the history file nor to the local history stack.
+# An unrecognized command can still be accessed using <UP> so that it can be
+# corrected but is not in the history stack; check with `fc -l`
+#
+zshaddhistory() {
+  # emulate -L zsh
+  whence ${${(z)1}[1]} >| /dev/null || return 1
+}

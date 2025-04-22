@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+function zshaddhistory_erase_history {
+  [[ $1 != [[:space:]]#erase_history[[:space:]]# ]]
+}
+zshaddhistory_functions+=(zshaddhistory_erase_history)
