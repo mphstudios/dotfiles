@@ -24,6 +24,8 @@ filetype indent plugin on "auto-detect filetypes
 " % matches on paired tags if/else, html tags, et cetera
 runtime! macros/matchit.vim
 
+" Prepend mise shims to PATH
+let $PATH = $HOME . '/.local/share/mise/shims:' . $PATH
 
 " ================= Functions =========================
 
