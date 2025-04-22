@@ -1,0 +1,126 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+command_timeout = 3000
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$nodejs\
+$python\
+$ruby\
+$direnv\
+$env_var\
+$custom\
+$sudo\
+$line_break\
+$jobs\
+$os\
+$container\
+$shell\
+$character
+"""
+
+right_format = "$cmd_duration $status"
+
+continuation_prompt = '[↪](white) '
+
+palette = 'gradoo'
+
+[palettes.gradoo]
+# TODO
+
+[character]
+error_symbol = '[❯](white)'
+success_symbol = '[❯](white)'
+vimcmd_symbol = '[❮](bold green)'
+vimcmd_replace_symbol = '[❮](bold purple)'
+vimcmd_visual_symbol = '[❮](bold yellow)'
+
+[cmd_duration]
+format = '[$duration]($style)'
+style = 'bold yellow'
+
+[directory]
+format = 'in [$path]($style)[$read_only]($read_only_style)'
+style = 'bold cyan'
+read_only = ''
+read_only_style = 'bold red'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
+repo_root_style = 'underline white'
+truncation_length = 8
+truncation_symbol = '…/'
+
+[docker_context]
+disabled = true
+
+[git_branch]
+style = 'bold magenta'
+symbol = ''
+truncation_symbol = ''
+
+[git_commit]
+format = '[$hash \[$tag\]]($style) '
+tag_symbol = ''
+
+[git_state]
+cherry_pick = '[🍒](bold red)'
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+conflicted = '⚠'
+deleted = '!'
+diverged = '⇡⇣'
+modified = '⦿'
+renamed = '➜'
+staged = '[✚\($count\)](green)'
+stashed = '❖'
+untracked = '?'
+up_to_date = '✓'
+
+[hostname]
+disabled = false
+format = '[$ssh_symbol](bold blue)[$hostname]($style) '
+ssh_only = false
+ssh_symbol = 'SSH:'
+style = 'yellow'
+
+[nodejs]
+format = '[$symbol $version]($style) '
+symbol = 'Node'
+version_format = '${raw}'
+
+[python]
+format = '[$symbol $version]($style) '
+pyenv_version_name = true
+symbol = 'Python'
+version_format = '${raw}'
+
+[ruby]
+format = '[$symbol $version]($style) '
+symbol = 'Ruby'
+version_format = '${raw}'
+
+[sudo]
+disabled = false
+style = 'bold green'
+symbol = ''
+
+[username]
+disabled = true
+format = '[$user]($style)'
+show_always = true
+style_root = 'red'
+style_user = 'white'
