@@ -16,6 +16,9 @@ export C_INCLUDE_PATH=/usr/local/include
 # Set the default editor
 export EDITOR='subl'
 
+# Override default eza config directory
+export EZA_CONFIG_DIR=$HOME/.config/eza
+
 # set the default visual editor used by other commands
 if [ -f /usr/local/bin/subl ]; then
     export VISUAL='/usr/local/bin/subl --new-window'

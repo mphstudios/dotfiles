@@ -1,0 +1,111 @@
+# See https://github.com/eza-community/eza-themes
+
+colourful: true
+
+blocks: {foreground: Cyan}
+broken_path_overlay: {foreground: Default, is_underline: true}
+broken_symlink: {foreground: Red}
+control_char: {foreground: Red}
+date: {foreground: Blue}
+flags: {foreground: Default}
+header: {foreground: Default, is_underline: true}
+inode: {foreground: Purple}
+octal: {foreground: Purple}
+punctuation: {foreground: DarkGray, is_bold: true}
+symlink_path: {foreground: Cyan}
+
+extensions:
+  # Custom extension-based overrides
+  # rs: {filename: {foreground: Red}, icon: {glyph: 🦀}}
+
+filekinds:
+  normal: {foreground: Default}
+  directory: {foreground: Blue, is_bold: true}
+  symlink: {foreground: Cyan}
+  pipe: {foreground: Yellow}
+  block_device: {foreground: Yellow, is_bold: true}
+  char_device: {foreground: Yellow, is_bold: true}
+  socket: {foreground: Red, is_bold: true}
+  special: {foreground: Yellow}
+  executable: {foreground: Green, is_bold: true}
+  mount_point: {foreground: Blue, is_bold: true, is_underline: true}
+
+filenames:
+  # Custom filename-based overrides
+  # Cargo.toml: {icon: {glyph: 🦀}}
+
+file_type:
+  image: {foreground: Purple}
+  video: {foreground: Purple, is_bold: true}
+  music: {foreground: Cyan}
+  lossless: {foreground: Cyan, is_bold: true}
+  crypto: {foreground: Green, is_bold: true}
+  document: {foreground: Green}
+  compressed: {foreground: Red}
+  temp: {foreground: White}
+  compiled: {foreground: Yellow}
+  build: {foreground: Yellow, is_bold: true, is_underline: true}
+  source: {foreground: Yellow, is_bold: true}
+
+git:
+  new: {foreground: Green}
+  modified: {foreground: Blue}
+  deleted: {foreground: Red}
+  renamed: {foreground: Yellow}
+  typechange: {foreground: Purple}
+  ignored: {foreground: Default, is_dimmed: true}
+  conflicted: {foreground: Red}
+
+git_repo:
+  branch_main: {foreground: Green}
+  branch_other: {foreground: Yellow}
+  git_clean: {foreground: Green}
+  git_dirty: {foreground: Yellow}
+
+links:
+  normal: {foreground: Red, is_bold: true}
+  multi_link_file: {foreground: Red, background: Yellow}
+
+perms:
+  user_read: {foreground: White, is_bold: true}
+  user_write: {foreground: White, is_bold: true}
+  user_execute_file: {foreground: White, is_bold: true, is_underline: true}
+  user_execute_other: {foreground: White, is_bold: true}
+  group_read: {foreground: White}
+  group_write: {foreground: White}
+  group_execute: {foreground: White}
+  other_read: {foreground: White}
+  other_write: {foreground: White}
+  other_execute: {foreground: White}
+  special_user_file: {foreground: White}
+  special_other: {foreground: White}
+  attribute: {foreground: Default}
+
+size:
+  major: {foreground: Green, is_bold: true}
+  minor: {foreground: Green}
+  number_byte: {foreground: Green, is_bold: true}
+  number_kilo: {foreground: Green, is_bold: true}
+  number_mega: {foreground: Green, is_bold: true}
+  number_giga: {foreground: Green, is_bold: true}
+  number_huge: {foreground: Green, is_bold: true}
+  unit_byte: {foreground: Green}
+  unit_kilo: {foreground: Green}
+  unit_mega: {foreground: Green}
+  unit_giga: {foreground: Green}
+  unit_huge: {foreground: Green}
+
+users:
+  user_you: {foreground: White, is_bold: true}
+  user_root: {foreground: Default}
+  user_other: {foreground: Default}
+  group_yours: {foreground: White, is_bold: true}
+  group_other: {foreground: Default}
+  group_root: {foreground: Default}
+
+security_context:
+  colon: {foreground: Default, is_dimmed: true}
+  user: {foreground: Blue}
+  role: {foreground: Green}
+  typ: {foreground: Yellow}
+  range: {foreground: Cyan}

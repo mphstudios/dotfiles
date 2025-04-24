@@ -12,53 +12,68 @@ alias ln='ln -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-# eza shorthand
-alias l='eza --all --colour=always --long | most'
-alias lt='eza -all --colour=always --tree --level=2 | most'
+if command -v eza > /dev/null ; then
+  # replace built-in ls command with eza called with options:
+  alias ls='eza --all --color-scale=size --hyperlink --icons'
 
-# list only non-hidden entries
-alias ll='ls -lhF'
+  # display long list of entries
+  alias ll='eza --long --header'
 
-# list only hidden (dotfile) entries
-alias l.='ls -dF .*'
-alias ls.='ls -dF .*'
-alias ll.='ls -lhdF .*'
+   # grep list of entries, ignore-case
+  alias llg='ll | grep -i'
 
-# list only sub-directory entries
-alias lsd='ls -ldeh */'
+  # list only directory entries
+  alias lsd='ls --only-dirs --show-symlinks'
+  alias lld='ll --only-dirs --show-symlinks'
 
-# list all entries
-alias lla='ls -alhF'
+  # list only file entries
+  alias lsf='ls --only-files --show-symlinks'
+  alias llf='ll --only-files --show-symlinks'
 
-# list all entries, include ACL attributes
-alias lle='ls -alheF'
+  # list entries by last creation date
+  alias llc='ll --sort=created'
 
-# sort listing by size
-alias llS='ls -alheFS'
+  # list entries by last modified date
+  alias llm='ll --sort=oldest'
 
-# display complete time stamps
-alias llT='ls -alheFT'
+  # list entries by last modified date
+  alias llr='ll --time-style=relative'
 
-# grep the directory listing, ignore-case
-alias llg='ls -alheF | grep -i'
+  # list entries by list entries by  by size, decending
+  alias lls='ll --reverse --sort=size'
 
-# paginate listing
-alias lll='ls -alheF --color=always | less -M'
-alias llm='ls -alheF --color=always | most'
+  # list entries by file type
+  alias llt='ll --sort=type'
 
-# always long list the directory stack
+  alias tree='eza --tree --level=2 --group-directories-first'
+
+else
+  # list all entries
+  alias ll='ls -alhF'
+
+  # grep list of entries, ignore-case
+  alias llg='ls -alheF | grep -i'
+
+  # list only directory entries
+  alias lsd='ls -aldeh */'
+
+  # list entries by size
+  alias lls='ls -alheFS'
+fi
+
+# use long list format for dirs stack
 alias dirs='dirs -v'
 
-# long list the stack after pop
+# list the dirs stack after pop
 alias popd='popd &> /dev/null; dirs -v'
 
 # supress stack list after push
 alias pushd='pushd > /dev/null'
 
-# Long lists the active jobs in the current shell
+# use long format for list of active jobs in the current shell
 alias jobs='jobs -l'
 
-# create parent directories as needed
+# akways create parent directories as needed
 alias mkdir='mkdir -pv'
 
 # pretty print PATH variable
@@ -66,9 +81,6 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # grep processes, ignore-case
 alias psg='ps aux | grep -i'
-
-# only show one level by default when running tree command
-alias tree='tree -L 1'
 
 # fix unintuitive unix command names
 alias unmount='umount'
@@ -128,5 +140,3 @@ alias notify='/usr/local/bin/terminal-notifier'
 alias qlp='qlmanage -p 2>/dev/null'
 alias qlr='qlmanage -r cache'
 
-# webkit2png
-alias w2p='/usr/local/bin/webkit2png'
