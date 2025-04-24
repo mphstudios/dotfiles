@@ -51,7 +51,7 @@ format = '[$duration]($style)'
 style = 'bold yellow'
 
 [directory]
-format = 'in [$path]($style)[$read_only]($read_only_style)'
+format = 'in [$path]($style)[$read_only]($read_only_style) '
 style = 'bold cyan'
 read_only = ''
 read_only_style = 'bold red'
