@@ -19,6 +19,9 @@ colors
 # and autoload each with alias expansion disabled
 # autoload -Uz $fpath[1]/*(.:t)
 
+# Z shell move command
+autoload -U zmv
+
 
 # -----------------------------------------------
 # --------->>> DIRECTORY NAVIGATION <<<----------
