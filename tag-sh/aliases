@@ -14,13 +14,16 @@ alias rm='rm -i'
 
 if command -v eza > /dev/null ; then
   # replace built-in ls command with eza called with options:
-  alias ls='eza --all --color-scale=size --hyperlink --icons'
+  alias ls='eza --color-scale=size --hyperlink --icons'
 
   # display long list of entries
-  alias ll='eza --long --header'
+  alias ll='ls --long --header'
+
+  # include dot file entries
+  alias lla='lla --all'
 
    # grep list of entries, ignore-case
-  alias llg='ll | grep -i'
+  alias llg='ll --all | grep -i'
 
   # list only directory entries
   alias lsd='ls --only-dirs --show-symlinks'
