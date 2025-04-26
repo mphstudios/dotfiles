@@ -14,20 +14,26 @@ alias rm='rm -i'
 
 if command -v eza > /dev/null ; then
   # replace built-in ls command with eza called with options:
-  alias ls='eza --color-scale=size --hyperlink --icons'
+  alias ls='eza --colour-scale=size --hyperlink --icons --no-quotes'
 
   # display long list of entries
-  alias ll='ls --long --header'
+  alias ll='ls --long --header --total-size'
 
   # include dot file entries
-  alias lla='lla --all'
+  alias lla='ls --long --header --all --all'
 
-   # grep list of entries, ignore-case
+  # grep list of entries, ignore-case
   alias llg='ll --all | grep -i'
 
+  # display numeric user and group ids
+  alias lln='ll --all --numeric'
+
+  # display permission in octal format
+  alias ll8='ll --all --octal-permissions'
+
   # list only directory entries
-  alias lsd='ls --only-dirs --show-symlinks'
-  alias lld='ll --only-dirs --show-symlinks'
+  alias lsd='ls --only-dirs --show-symlinks --total-size'
+  alias lld='ll --only-dirs --show-symlinks --total-size'
 
   # list only file entries
   alias lsf='ls --only-files --show-symlinks'
@@ -48,20 +54,24 @@ if command -v eza > /dev/null ; then
   # list entries by file type
   alias llt='ll --sort=type'
 
-  alias tree='eza --tree --level=2 --group-directories-first'
+  alias tree='ls --tree --level=2 --group-directories-first'
 
 else
   # list all entries
-  alias ll='ls -alhF'
+  alias ll='ls -lhF'
+
+  # include dot file entries
+  alias lla='ls -alhF'
 
   # grep list of entries, ignore-case
   alias llg='ls -alheF | grep -i'
 
   # list only directory entries
-  alias lsd='ls -aldeh */'
+  alias lsd='ls -deh */'
+  alias lld='ls -ldeh */'
 
   # list entries by size
-  alias lls='ls -alheFS'
+  alias lls='ls -lheFS'
 fi
 
 # use long list format for dirs stack
