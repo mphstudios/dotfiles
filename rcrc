@@ -1,7 +1,7 @@
 # configuration for rcm tools
 COPY_ALWAYS=""
 DOTFILES_DIRS="$HOME/Code/dotfiles"
-EXCLUDES="*.md LICENSE"
+EXCLUDES="*.md LICENSE assets docs"
 HOSTNAME="heart-of-gold"
 SYMLINK_DIRS="config vim"
 TAGS="bash git node python ruby sh vim zshell"
