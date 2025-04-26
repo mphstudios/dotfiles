@@ -100,6 +100,7 @@ fi
 # see https://github.com/rossmacarthur/sheldon/issues/166
 export SHELDON_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/bash-plugins.toml"
 export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/bash"
+
 # https://sheldon.cli.rs/Getting-started.html#loading-plugins
 if command -v sheldon 1>/dev/null 2>&1; then
   eval "$(sheldon source)"
