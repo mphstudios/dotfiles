@@ -1,7 +1,9 @@
+# npm user config file
+# @see https://docs.npmjs.com/cli/v11/configuring-npm/npmrc
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+
+# @see https://docs.npmjs.com/cli/v11/using-npm/config
 depth=0
 editor=subl
-loglevel=silent
-tmp=/tmp
-unsafe-perm=true
-viewer=pman
-//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+loglevel=notice
+viewer=browser
