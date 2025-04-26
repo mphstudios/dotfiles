@@ -17,25 +17,26 @@ defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file 
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"
 
+[plugins.zsh-autopair]
+github = "hlissner/zsh-autopair"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+
 [plugins.dracula]
 github = "dracula/zsh"
 
-[plugins.autopair]
-github = "hlissner/zsh-autopair"
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
 
-[plugins.autosuggestions]
-github = "zsh-users/zsh-autosuggestions"
-
-[plugins.completions]
-github = "zsh-users/zsh-completions"
-
-[plugins.syntax-highlighting]
+[plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
 
-[plugins.you-should-use]
+[plugins.zsh-you-should-use]
 github = "MichaelAquilina/zsh-you-should-use"
-
-[plugins.history-substring-search]
-github = "zsh-users/zsh-history-substring-search"
 

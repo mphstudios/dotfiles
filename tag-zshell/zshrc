@@ -132,6 +132,7 @@ setopt no_bg_nice     # do not nice background tasks
 # see https://github.com/rossmacarthur/sheldon/issues/166
 export SHELDON_CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/zsh-plugins.toml"
 export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/zsh"
+
 # https://sheldon.cli.rs/Getting-started.html#loading-plugins
 if (( $+commands[sheldon] )) then
   eval "$(sheldon source)"
