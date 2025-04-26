@@ -20,6 +20,7 @@ $python\
 $ruby\
 $direnv\
 $env_var\
+$mise\
 $custom\
 $sudo\
 $line_break\
@@ -51,7 +52,7 @@ format = '[$duration]($style)'
 style = 'bold yellow'
 
 [directory]
-format = 'in [$path]($style)[$read_only]($read_only_style) '
+format = '[$path]($style)[$read_only]($read_only_style) '
 style = 'bold cyan'
 read_only = ''
 read_only_style = 'bold red'
@@ -96,6 +97,14 @@ format = '[$ssh_symbol](bold blue)[$hostname]($style) '
 ssh_only = false
 ssh_symbol = 'SSH:'
 style = 'yellow'
+
+[mise]
+disabled = false
+format = '[$symbol $health]($style) '
+healthy_symbol = '\ue795' # terminal icon
+style = 'bold purple'
+symbol = 'mise'
+unhealthy = '⚠️' # warning icon '\uf071'
 
 [nodejs]
 format = '[$symbol $version]($style) '
