@@ -1,6 +1,6 @@
 [settings]
 activate_aggressive = true
-env_file = '.env'
+env_file = ".env"
 experimental = true
 paranoid = false
 
@@ -11,14 +11,14 @@ uv_venv_auto = true
 verbose_install = true
 
 [settings.status]
-missing_tools = 'always'
+missing_tools = "always"
 show_env = false
 show_tools = false
 
 [tools]
-node = 'latest'
+node = "latest"
 "npm:npm-check-updates" = "latest"
 "npm:tinpig" = "latest"
-python = 'latest'
-ruby = 'latest'
-usage = 'latest'
+python = "latest"
+ruby = "latest"
+usage = "latest"
