@@ -3,14 +3,15 @@
 
 */node_modules/
 
-*/vim/bundles/
-
 # Keep these folders...
 !*/vim/backup/.keep
+!*/vim/bundles/.keep
 !*/vim/undo/.keep
 # ...but ignore their contents
 */vim/backup/*
+*/vim/bundles/*
 */vim/undo/*
 
-# ignore vim-plug backups created by :PlugUpgrade
-plug.vim.old
+config/configstore
+
+private/
