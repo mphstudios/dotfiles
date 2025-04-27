@@ -130,7 +130,7 @@ setopt no_bg_nice     # do not nice background tasks
 ## Sheldon command-line tool to manage and load shell plugins
 # set a shell specific configuration file and data directory for installed plugins
 # see https://github.com/rossmacarthur/sheldon/issues/166
-export SHELDON_CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/sheldon/zsh-plugins.toml"
+export SHELDON_CONFIG_FILE="${XDG_CONFIG_HOME:-$ZSH_DIR}/zsh-plugins.toml"
 export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/zsh"
 
 # https://sheldon.cli.rs/Getting-started.html#loading-plugins
@@ -169,4 +169,3 @@ fi
 if (( $+commands[mise] )) then
   eval "$(mise activate zsh)"
 fi
-
