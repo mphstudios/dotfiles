@@ -23,7 +23,7 @@ if command -v eza > /dev/null ; then
   alias lla='ls --long --header --all --all'
 
   # grep list of entries, ignore-case
-  alias llg='ll --all | grep -i'
+  alias llg='ls --long --header -all | grep -i'
 
   # display numeric user and group ids
   alias lln='ll --all --numeric'
