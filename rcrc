@@ -1,4 +1,5 @@
-# configuration for rcm tools
+# configuration for rcm dotfile management
+# https://thoughtbot.github.io/rcm/rcrc.5.html
 COPY_ALWAYS=""
 DOTFILES_DIRS="$HOME/Code/dotfiles"
 EXCLUDES="*.md LICENSE assets docs"
