@@ -71,25 +71,29 @@ truncation_symbol = ''
 
 [git_commit]
 format = '[$hash \[$tag\]]($style) '
-tag_symbol = ''
+tag_symbol = ''
 
 [git_state]
+bisect = 'BISECTING'
 cherry_pick = '[🍒](bold red)'
+merge = 'MERGING'
+rebase = 'REBASING'
+revert = 'REVERTING'
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
 
 [git_status]
 format = '([$all_status$ahead_behind]($style) )'
-ahead = '⇡${count}'
-behind = '⇣${count}'
-conflicted = '⚠'
-deleted = '!'
-diverged = '⇡⇣'
-modified = '⦿'
-renamed = '➜'
-staged = '[✚\($count\)](green)'
-stashed = '❖'
+ahead = '↑${count}'
+behind = '↓${count}'
+conflicted = '≠'
+deleted = '✘'
+diverged = '🡙'
+modified = '❕'
+renamed = '🠖'
+staged = '[+$count](green)'
+stashed = ''
 untracked = '?'
-up_to_date = '✓'
+up_to_date = ''
 
 [hostname]
 disabled = false
@@ -101,10 +105,10 @@ style = 'yellow'
 [mise]
 disabled = false
 format = '[$symbol $health]($style) '
-healthy_symbol = '\ue795' # terminal icon
+healthy_symbol = '󱐋'
 style = 'bold purple'
 symbol = 'mise'
-unhealthy = '⚠️' # warning icon '\uf071'
+unhealthy_symbol = ''
 
 [nodejs]
 format = '[$symbol $version]($style) '
@@ -124,8 +128,9 @@ version_format = '${raw}'
 
 [sudo]
 disabled = false
+format = '[as $symbol]($style)'
 style = 'bold green'
-symbol = ''
+symbol = ''
 
 [username]
 disabled = true
