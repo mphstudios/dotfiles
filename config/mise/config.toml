@@ -16,9 +16,16 @@ show_env = false
 show_tools = false
 
 [tools]
+# allow mise to verify tools automatically
+cosign = "latest"
+slsa-verifier = "latest"
+
+# usage-spec support for tasks
+usage = "latest"
+
 node = "latest"
-"npm:npm-check-updates" = "latest"
-"npm:tinpig" = "latest"
 python = "latest"
 ruby = "latest"
-usage = "latest"
+
+"npm:npm-check-updates" = "latest"
+"npm:tinpig" = "latest"
