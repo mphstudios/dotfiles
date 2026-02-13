@@ -138,7 +138,7 @@ alias resetDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder &&
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
-alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/MacOS/join'
 
 # Preview
 alias preview='open -a /Applications/Preview.app'
