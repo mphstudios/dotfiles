@@ -1,0 +1,14 @@
+# Yazi general configuration file
+# @see https://yazi-rs.github.io/docs/configuration/yazi
+
+[mgr]
+linemode = "size_and_mtime"
+show_hidden = true
+show_symlink = true
+sort_by = "natural"
+sort_dir_first = true
+sort_sensitive = true
+sort_translit = true
+
+[input]
+cursor_blink = true
