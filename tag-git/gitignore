@@ -1,6 +1,6 @@
 ### OSX ###
-.DS_Store
 .AppleDouble
+.DS_Store
 .LSOverride
 
 # files that might appear on external disk
@@ -19,11 +19,6 @@ build/*
 *.log
 *.sql
 *.sqlite*
-
-# floobits: cross-editor collaboration
-.floo
-.flooignore
-.floobits/
 
 ## packages
 # unpack these files and commit the raw source
