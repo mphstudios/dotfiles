@@ -100,9 +100,6 @@ export PGDATA=/usr/local/var/postgres
 # Python commands executed before the first prompt in interactive mode
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
-# Configure ruby-build to use Homebrew installed readline
-export RUBY_CONFIGURE_OPTS="--with-readline-dir=$(brew --prefix readline)"
-
 # Since CDPATH is considered first it should begin with the current directory
 # so that we can easily change to a subdirectory that also matches one of the
 # subsequently listed frequented directories.
