@@ -1,14 +1,21 @@
+[env]
+# Nota bene: settings.node.default_packages_file is not a supported key
+MISE_NODE_DEFAULT_PACKAGES_FILE = "$XDG_CONFIG_HOME/node/default-packages"
+
 [settings]
 activate_aggressive = true
 env_file = ".env"
+env_shell_expand = true
 experimental = true
 paranoid = false
-idiomatic_version_file_enable_tools = ["node"]
+idiomatic_version_file_enable_tools = ["node", "python", "ruby"]
 
 [settings.python]
+default_packages_file = "$XDG_CONFIG_HOME/python/default-packages"
 uv_venv_auto = true
 
 [settings.ruby]
+default_packages_file = "$XDG_CONFIG_HOME/ruby/default-gems"
 verbose_install = true
 
 [settings.status]
