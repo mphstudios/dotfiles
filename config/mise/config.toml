@@ -3,6 +3,7 @@ activate_aggressive = true
 env_file = ".env"
 experimental = true
 paranoid = false
+idiomatic_version_file_enable_tools = ["node"]
 
 [settings.python]
 uv_venv_auto = true
@@ -13,19 +14,16 @@ verbose_install = true
 [settings.status]
 missing_tools = "always"
 show_env = false
+show_prepare_stale = true
 show_tools = false
 
 [tools]
-# allow mise to verify tools automatically
-cosign = "latest"
-slsa-verifier = "latest"
+usage = "latest" # usage-spec support for tasks
 
-# usage-spec support for tasks
-usage = "latest"
-
-node = "latest"
 python = "latest"
+uv = "latest"
 ruby = "latest"
+rust = "latest"
+node = "latest"
 
-"npm:npm-check-updates" = "latest"
-"npm:tinpig" = "latest"
+"cargo:hygg" = "latest"
