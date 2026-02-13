@@ -161,7 +161,7 @@ fi
 ## Atuin improved shell history for zsh, bash, fish and nushell
 # https://docs.atuin.sh/cli/guide/installation/
 if (( $+commands[atuin] )) then
-  echo 'eval "$(atuin init zsh)"'
+  eval "$(atuin init zsh)"
 fi
 
 ## Carapace multi-shell multi-command argument completer
