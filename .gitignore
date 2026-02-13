@@ -1,6 +1,8 @@
 # Local config
 *.local
 
+.claude
+
 */node_modules/
 
 # Keep these folders...
@@ -13,5 +15,16 @@
 */vim/undo/*
 
 config/configstore
+
+# Podman containers
+config/containers
+
+# Hygg
+config/hygg/highlights
+
+# Nushell
+config/nushell/history.txt
+config/nushell/plugin.msgpackz
+config/nushell/vendor
 
 private/
