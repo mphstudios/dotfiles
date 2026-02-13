@@ -34,7 +34,7 @@ source modules/aliases.nu
 
 mkdir ($nu.data-dir | path join "vendor/autoload")
 
-# atuin init nu | save --force ($nu.data-dir | path join "vendor/autoload/atuin.nu")
+atuin init nu | save --force ($nu.data-dir | path join "vendor/autoload/atuin.nu")
 carapace _carapace nushell | save --force ($nu.data-dir | path join "vendor/autoload/carapace.nu")
 mise activate nu | save --force ($nu.data-dir | path join "vendor/autoload/mise.nu")
 starship init nu | save --force ($nu.data-dir | path join "vendor/autoload/starship.nu")
