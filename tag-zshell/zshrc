@@ -158,6 +158,26 @@ fi
 
 [ -f $ZSH_DIR/smartdots.zsh ] && source $ZSH_DIR/smartdots.zsh
 
+## Atuin improved shell history for zsh, bash, fish and nushell
+# https://docs.atuin.sh/cli/guide/installation/
+if (( $+commands[atuin] )) then
+  echo 'eval "$(atuin init zsh)"'
+fi
+
+## Carapace multi-shell multi-command argument completer
+# https://carapace-sh.github.io/carapace-bin/setup.html#zsh
+if (( $+commands[carapace] )) then
+  export CARAPACE_BRIDGES='zsh,fish,bash'
+  zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+  source <(carapace _carapace)
+fi
+
+## Zellij terminal multiplexer
+# https://zellij.dev/documentation/integration.html
+if (( $+commands[zellij] )) then
+  eval "$(zellij setup --generate-auto-start zsh)"
+fi
+
 ## replace default cd command with zoxide
 # https://github.com/ajeetdsouza/zoxide
 if (( $+commands[zoxide] )) then
