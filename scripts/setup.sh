@@ -2,15 +2,17 @@
 
 # Install or Upgrade vim-plug minimalist plugin manager
 # https://github.com/junegunn/vim-plug
-if [ -e "$HOME/.vim/autoload/plug.vim" ]; then
+VIMHOME="${XDG_CONFIG_HOME:-$HOME/.config}/vim"
+
+if [ -e "$VIMHOME/autoload/plug.vim" ]; then
   vim -E -s +PlugUpgrade +qa
 else
-  curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+  curl -fLo "$VIMHOME/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 # Install or update plugins
-vim -u "$HOME/.vim/bundles.vim" +PlugUpdate +PlugClean! +qa
+vim -u "$VIMHOME/bundles.vim" +PlugUpdate +PlugClean! +qa
 
 reset -Q
 
