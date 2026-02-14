@@ -1,3 +1,9 @@
---target=~/.dotfiles
---ignore=*.md
---ignore=.stowrc
+--target=$HOME
+--ignore=\.md$
+--ignore=^LICENSE$
+--ignore=^assets
+--ignore=^bin
+--ignore=^functions
+--ignore=^scripts
+--ignore=^private
+--ignore=\.stowrc

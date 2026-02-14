@@ -5,26 +5,4 @@
 
 */node_modules/
 
-# Keep these folders...
-!*/vim/backup/.keep
-!*/vim/bundles/.keep
-!*/vim/undo/.keep
-# ...but ignore their contents
-*/vim/backup/*
-*/vim/bundles/*
-*/vim/undo/*
-
-config/configstore
-
-# Podman containers
-config/containers
-
-# Hygg
-config/hygg/highlights
-
-# Nushell
-config/nushell/history.txt
-config/nushell/plugin.msgpackz
-config/nushell/vendor
-
 private/
