@@ -1,2 +1,5 @@
 # Yazi keymap configuration file
 # @see https://yazi-rs.github.io/docs/configuration/keymap
+[[mgr.prepend_keymap]]
+on  = "M"
+run = "plugin mount"
