@@ -5,4 +5,6 @@
 set -e
 
 cd "$(dirname "$0")"
-stow */
+# [!.]*/ excludes hidden directories (.git, .claude, et cetera)
+# because when bash dotglob is set */ matches dotfiles as well
+stow [!.]*/
