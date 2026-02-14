@@ -6,7 +6,7 @@ require 'rubygems'
 IRB.conf[:USE_READLINE] = true
 
 IRB.conf[:SAVE_HISTORY] = 500
-IRB.conf[:HISTORY_FILE] = File.expand_path('~/.irb_history')
+IRB.conf[:HISTORY_FILE] = File.join(ENV.fetch('XDG_STATE_HOME', File.expand_path('~/.local/state')), 'irb', 'history')
 IRB.conf[:EVAL_HISTORY] = 100
 
 IRB.conf[:PROMPT][:CUSTOM] = { # name of prompt mode
@@ -42,10 +42,27 @@ rescue LoadError
 end
 
 # Rails environment
-if (ENV['RAILS_ENV'] || defined? Rails) && File.exists?(irbrc_rails)
-  begin
-    load File.expand_path('~/.irbrc_rails')
-  rescue Exception
-    warn "Unable to load ~/.irbrc_rails\n#{$!.message}"
+if ENV['RAILS_ENV'] || defined?(Rails)
+  require 'logger'
+
+  if defined? Hirb
+    Hirb::Formatter.dynamic_config['ActiveRecord::Base']
+    Hirb.enable
   end
+
+  if defined? ActiveRecord
+    ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Base.clear_active_connections!
+  end
+
+  rails_root = File.basename(Dir.pwd)
+
+  IRB.conf[:PROMPT][:RAILS] = {
+    :PROMPT_I => "#{rails_root} ❯❯ ",
+    :PROMPT_C => "#{rails_root} ↪ ",
+    :PROMPT_N => "#{rails_root} |  ",
+    :PROMPT_S => "#{rails_root} %l❯ ",
+    :RETURN => "#{rails_root} ☛ %s\n"
+  }
+  IRB.conf[:PROMPT_MODE] = :RAILS
 end
