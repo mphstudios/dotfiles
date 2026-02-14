@@ -10,6 +10,11 @@
 #
 ZSH_DIR=$ZDOTDIR
 
+# Load shell agnostic user configuration files
+[ -f ~/.profile ] && source ~/.profile
+[ -f ~/.private ] && source ~/.private
+[ -f ~/.aliases ] && source ~/.aliases
+
 # add custom functions to fpath and autoload each
 fpath=($ZSH_DIR/functions "${fpath[@]}")
 autoload -Uz $ZSH_DIR/functions/*(.:t)
@@ -124,7 +129,7 @@ setopt no_bg_nice     # do not nice background tasks
 ## Sheldon command-line tool to manage and load shell plugins
 # set a shell specific configuration file and data directory for installed plugins
 # see https://github.com/rossmacarthur/sheldon/issues/166
-export SHELDON_CONFIG_FILE="${XDG_CONFIG_HOME:-$ZSH_DIR}/plugins.toml"
+export SHELDON_CONFIG_FILE="$ZSH_DIR/plugins.toml"
 export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/zsh"
 
 # https://sheldon.cli.rs/Getting-started.html#loading-plugins

@@ -1,15 +1,11 @@
 #!/usr/bin/env zsh
 #
-# Zsh interactive shell configuration
+# Zsh login shell configuration
 #
-# This file is normally read by login shells each time a new session is started,
-# configurtion file load order:
-# .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
+# This file is only read by login shells. Since most terminals launch
+# interactive non-login shells, shared configuration has moved to .zshrc.
 #
-
-# Load shell agnostic user configurtion files
-[ -f ~/.profile ] && source ~/.profile
-[ -f ~/.private ] && source ~/.private
-[ -f ~/.aliases ] && source ~/.aliases
+# Load order: .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
+#
 
 export -U PATH
