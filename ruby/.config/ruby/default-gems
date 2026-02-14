@@ -1,0 +1,13 @@
+bundle_update_interactive
+bundler
+bundler-audit
+byebug
+dotenv
+license_finder
+pry
+pry-byebug
+rake
+rdoc
+rouge
+rubocop
+seeing_is_believing

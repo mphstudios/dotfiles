@@ -1,0 +1,52 @@
+AllCops:
+  NewCops: enable
+  Include:
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/*.rake'
+    - '**/*.rb'
+    - '**/*.ru'
+    - '**/*.gemfile'
+    - '**/*.gemspec'
+  Exclude:
+    - !ruby/regexp /old_and_unused\.rb$/
+    - bin/**/*
+    - config.ru
+    - config/**/*
+    - db/**/*
+    - Gemfile
+    - node_modules/**/*
+    - Rakefile
+    - script/**/*
+    - templates/**/*
+    - test/**/*
+    - tmp/**/*
+    - vendor/**/*
+
+require:
+  - rubocop-rails
+
+Documentation:
+  Enabled: false
+
+Layout/AlignHash:
+  Enabled: false
+
+Layout/EmptyLines:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: true
+  Max: 120
+
+Performance/RegexpMatch:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/MethodDefParentheses:
+  Enabled: false
