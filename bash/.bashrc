@@ -6,7 +6,7 @@
 # This file is normally read ONLY by interactive, NON-login shells each time
 # a new session is started or when a script is invoked using /usr/bin/env bash
 #
-BASH_DIR=~/.bash
+BASHDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/bash"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -93,12 +93,12 @@ fi
 # fi
 
 ## fuzzy find completion
-[ -f $BASH_DIR/fzf.bash ] && source $BASH_DIR/fzf.bash
+[ -f $BASHDOTDIR/fzf.bash ] && source $BASHDOTDIR/fzf.bash
 
 ## Sheldon command-line tool to manage and load shell plugins
 # set a shell specific configuration file and data directory for installed plugins
 # see https://github.com/rossmacarthur/sheldon/issues/166
-export SHELDON_CONFIG_DIR="${XDG_CONFIG_HOME:-$BASH_DIR}/bash-plugins.toml"
+export SHELDON_CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/bash/plugins.toml"
 export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/bash"
 
 ## Carapace multi-shell multi-command argument completer
@@ -108,9 +108,23 @@ if command -v carapace 1>/dev/null 2>&1; then
     source <(carapace _carapace)
 fi
 
+## mise-en-place dev tools, environment, and tasks manager
+# https://mise.jdx.dev/about.html
+if command -v mise 1>/dev/null 2>&1; then
+    eval "$(mise activate bash)"
+fi
+
 # https://sheldon.cli.rs/Getting-started.html#loading-plugins
 if command -v sheldon 1>/dev/null 2>&1; then
     eval "$(sheldon source)"
+fi
+
+## try manager for code experiments
+# https://github.com/tobi/try
+if command -v try 1>/dev/null 2>&1; then
+    export TRY_PATH="$HOME/Code/sketches/"
+    mkdir -p $TRY_PATH # ensure tries directory has been created
+    eval "$(/usr/local/bin/try init)"
 fi
 
 ## Zellij terminal multiplexer
@@ -123,18 +137,4 @@ fi
 # https://github.com/ajeetdsouza/zoxide
 if command -v zoxide 1>/dev/null 2>&1; then
     eval "$(zoxide init bash --cmd cd)"
-fi
-
-## mise-en-place dev tools, environment, and tasks manager
-# https://mise.jdx.dev/about.html
-if command -v mise 1>/dev/null 2>&1; then
-    eval "$(mise activate bash)"
-fi
-
-## try manager for code experiments
-# https://github.com/tobi/try
-if command -v try 1>/dev/null 2>&1; then
-    export TRY_PATH="$HOME/Code/sketches/"
-    mkdir -p $TRY_PATH # ensure tries directory has been created
-    eval "$(/usr/local/bin/try init)"
 fi

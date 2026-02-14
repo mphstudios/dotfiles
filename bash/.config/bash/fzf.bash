@@ -17,7 +17,7 @@ export FZF_DEFAULT_COMMAND="fd . $HOME --type f --hidden --follow --exclude .git
 export FZF_DEFAULT_OPTS='--inline-info --layout=reverse --no-height'
 
 # Load colour scheme
-[ -f ~/.fzf-base16-dracula ] && source ~/.fzf-base16-dracula
+[ -f "${BASHDOTDIR:-$HOME/.config/bash}/fzf-base16-dracula" ] && source "${BASHDOTDIR:-$HOME/.config/bash}/fzf-base16-dracula"
 
 # Options to fzf command
 export FZF_COMPLETION_OPTS='+c -x'

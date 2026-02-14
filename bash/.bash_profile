@@ -14,7 +14,7 @@
 #
 # macOS Terminal.app executes ~/.bash_profile with each new Terminal window.
 #
-BASH_DIR=~/.bash
+BASHDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/bash"
 
 # Load shell agnostic user configuration files
 [[ -f ~/.profile ]] && source ~/.profile
@@ -24,8 +24,10 @@ BASH_DIR=~/.bash
 # Load configuration for interactive non-login shells
 [[ -f ~/.bashrc ]] && source ~/.bashrc
 
-# Load custom command prompt
-[[ -f $BASH_DIR/prompt.bash ]] && source "$BASH_DIR/prompt.bash"
+# Starship cross-shell prompt
+if command -v starship 1>/dev/null 2>&1; then
+  eval "$(starship init bash)"
+fi
 
 # Readline configuration
 export INPUTRC=~/.inputrc
