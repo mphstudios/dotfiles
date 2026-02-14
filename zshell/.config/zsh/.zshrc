@@ -10,14 +10,9 @@
 #
 ZSH_DIR=$ZDOTDIR
 
-# make color constants available
-autoload -U colors
-colors
-
-# add custom executable functions to front of path
-# fpath=($ZSH_DIR/functions "${fpath[@]}" )
-# and autoload each with alias expansion disabled
-# autoload -Uz $fpath[1]/*(.:t)
+# add custom functions to fpath and autoload each
+fpath=($ZSH_DIR/functions "${fpath[@]}")
+autoload -Uz $ZSH_DIR/functions/*(.:t)
 
 # Z shell move command
 autoload -U zmv
@@ -58,7 +53,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 # pasting with tabs does not perform completion
 zstyle ':completion:*' insert-tab pending
 
-fpath=(/Users/mph/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 
@@ -82,7 +76,8 @@ setopt numeric_glob_sort
 # matching commands are still added to the interactive history
 HISTORY_IGNORE="(cd|cd ..|cls|l[alsh]#( *)#|llg|open .|pwd|exit)"
 
-HISTFILE=~/.zsh_history
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
+[[ -d ${HISTFILE:h} ]] || mkdir -p ${HISTFILE:h}
 HISTSIZE=1000
 SAVEHIST=1000
 
@@ -100,7 +95,6 @@ setopt HIST_REDUCE_BLANKS   # remove superfluous blanks before recording entry
 setopt HIST_SAVE_NO_DUPS    # do not write duplicate entries to history files
 unsetopt HIST_VERIFY        # exec command without reload into the editing buffer
 setopt INC_APPEND_HISTORY   # incrementally write to history files
-#setopt SHARE_HISTORY       # inc append history and share across sessions
 
 
 # -----------------------------------------------
@@ -140,10 +134,6 @@ fi
 
 # Load configuration for zsh-autosuggestions plugin
 [ -f $ZSH_DIR/autosuggestions.zsh ] && source $ZSH_DIR/autosuggestions.zsh
-
-## Configure zsh-notify
-#zstyle ':notify:*' error-title "Command Failed"
-#zstyle ':notify:*' success-title "Command Completed"
 
 
 # -----------------------------------------------

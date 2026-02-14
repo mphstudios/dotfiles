@@ -68,8 +68,9 @@ export HISTCONTROL=ignoredups:ignorespace
 # exclude the following commands from history
 export HISTIGNORE="cd( [~-]|(../?)+):exit:fg:date:history*:ls*:pwd:man*:* --help"
 
-# allow 32^3 entries in the shell history (default is 500)
-export HISTFILESIZE=32768
+HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/bash/history"
+mkdir -p "$(dirname "$HISTFILE")"
+export HISTFILESIZE=1000
 export HISTSIZE=$HISTFILESIZE
 
 # set a timestamp format for history entries

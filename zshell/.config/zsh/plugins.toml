@@ -24,14 +24,8 @@ github = "hlissner/zsh-autopair"
 github = "zsh-users/zsh-autosuggestions"
 use = ["{{ name }}.zsh"]
 
-[plugins.zsh-completions]
-github = "zsh-users/zsh-completions"
-
 [plugins.dracula]
 github = "dracula/zsh"
-
-[plugins.zsh-history-substring-search]
-github = "zsh-users/zsh-history-substring-search"
 
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
