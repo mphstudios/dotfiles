@@ -111,7 +111,7 @@
     autocorrect = 1
 
 [include]
-  path = .github
+  path = config.local
 
 [init]
     defaultBranch = main
