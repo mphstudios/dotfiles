@@ -32,13 +32,24 @@ path add ($env.HOME | path join ".bin")
 
 source modules/aliases.nu
 
-mkdir ($nu.data-dir | path join "vendor/autoload")
+let vendor = ($nu.data-dir | path join "vendor/autoload")
+mkdir $vendor
 
-atuin init nu | save --force ($nu.data-dir | path join "vendor/autoload/atuin.nu")
-carapace _carapace nushell | save --force ($nu.data-dir | path join "vendor/autoload/carapace.nu")
-mise activate nu | save --force ($nu.data-dir | path join "vendor/autoload/mise.nu")
-starship init nu | save --force ($nu.data-dir | path join "vendor/autoload/starship.nu")
-zoxide init nushell | save --force ($nu.data-dir | path join vendor/autoload/zoxide.nu)
+if (which atuin | is-not-empty) {
+    atuin init nu | save --force ($vendor | path join "atuin.nu")
+}
+if (which carapace | is-not-empty) {
+    carapace _carapace nushell | save --force ($vendor | path join "carapace.nu")
+}
+if (which mise | is-not-empty) {
+    mise activate nu | save --force ($vendor | path join "mise.nu")
+}
+if (which starship | is-not-empty) {
+    starship init nu | save --force ($vendor | path join "starship.nu")
+}
+if (which zoxide | is-not-empty) {
+    zoxide init nushell | save --force ($vendor | path join "zoxide.nu")
+}
 
 $env.config = {
   show_banner: false
