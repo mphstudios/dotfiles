@@ -7,10 +7,10 @@ alias .='echo $PWD'
 alias cls='printf "\33c\e[3J"'
 
 # use interactive mode as a safeguard
-alias cp='cp -i'
-alias ln='ln -i'
-alias mv='mv -i'
-alias rm='rm -i'
+alias cp='cp --interactive --progress'
+alias ln='ln --interactive'
+alias mv='mv --interactive'
+alias rm='rm --interactive --progress'
 
 if command -v eza > /dev/null ; then
   # replace built-in ls command with eza called with options:
@@ -121,19 +121,9 @@ alias lfs='git lfs'
 # OpenSSL checksums
 alias digest='/usr/bin/openssl dgst'
 
-# Kamal https://kamal-deploy.org/docs/installation/
-alias kamal='docker run -it --rm -v "${PWD}:/workdir" -v "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock" -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/basecamp/kamal:latest'
-
 ### macOS specific
 
-# Google Chrome
-# work around for XHR issues in Chrome when working locally
-alias chrome='open -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --allow-file-access-from-files'
-
-# Delete .DS_Store files recursively from execution directory
-alias delete_ds_store="sudo find . -type f -name '.DS_Store' -ls -delete"
-
-# flush directory service and local DNS cache
+# DNS: flush directory service and local DNS cache
 alias resetDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder && echo "macOS DNS Cache Reset"'
 
 # Merge PDF files

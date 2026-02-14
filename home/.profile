@@ -96,9 +96,10 @@ export NPM_TOKEN # Set this var in ~/.private
 
 # Set the PostgreSQL database directory
 export PGDATA=/usr/local/var/postgres
+export PSQLRC="${XDG_CONFIG_HOME:-$HOME/.config}/postgres/psqlrc"
 
 # Python commands executed before the first prompt in interactive mode
-export PYTHONSTARTUP=$HOME/.pythonrc.py
+export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/python/pythonrc.py"
 
 # Since CDPATH is considered first it should begin with the current directory
 # so that we can easily change to a subdirectory that also matches one of the

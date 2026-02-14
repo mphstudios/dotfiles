@@ -1,6 +1,4 @@
-# ~/.ignore
 # Directory and file patterns ignored by Ripgrep, Sift, and The Silver Searcher
-#
 .git/
 /node_modules/
 /tmp
