@@ -8,9 +8,6 @@
 # look for per directory ack! settings
 export ACKRC='.ackrc'
 
-# Set architecture flags
-export ARCHFLAGS='-arch x86_64'
-
 export C_INCLUDE_PATH=/usr/local/include
 
 # Set the default editor
@@ -57,8 +54,15 @@ fi
 # macOS default path is defined in /private/etc/paths
 #
 
-# Use user-installed binaries before system install versions.
-PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+# Base system path
+PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+# Homebrew: Apple Silicon (/opt/homebrew) or Intel (/usr/local)
+if [ -d /opt/homebrew/bin ]; then
+    PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+elif [ -d /usr/local/bin ]; then
+    PATH=/usr/local/bin:/usr/local/sbin:$PATH
+fi
 
 # Python dependency and package manager
 export POETRY_HOME=$HOME/.local/bin

@@ -7,10 +7,10 @@ alias .='echo $PWD'
 alias cls='printf "\33c\e[3J"'
 
 # use interactive mode as a safeguard
-alias cp='cp --interactive --progress'
-alias ln='ln --interactive'
-alias mv='mv --interactive'
-alias rm='rm --interactive --progress'
+alias cp='cp -i'
+alias ln='ln -i'
+alias mv='mv -i'
+alias rm='rm -i'
 
 if command -v eza > /dev/null ; then
   # replace built-in ls command with eza called with options:
@@ -122,24 +122,25 @@ alias lfs='git lfs'
 alias digest='/usr/bin/openssl dgst'
 
 ### macOS specific
+if [ "$(uname -s)" = "Darwin" ]; then
+  # DNS: flush directory service and local DNS cache
+  alias resetDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder && echo "macOS DNS Cache Reset"'
 
-# DNS: flush directory service and local DNS cache
-alias resetDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder && echo "macOS DNS Cache Reset"'
+  # Merge PDF files
+  # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
+  alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/MacOS/join'
 
-# Merge PDF files
-# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
-alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/MacOS/join'
+  # Preview
+  alias preview='open -a /Applications/Preview.app'
 
-# Preview
-alias preview='open -a /Applications/Preview.app'
+  # Safari
+  alias safari='open -a /Applications/Safari.app'
 
-# Safari
-alias safari='open -a /Applications/Safari.app'
+  # Terminal-notifier
+  alias notify='/usr/local/bin/terminal-notifier'
 
-# Terminal-notifier
-alias notify='/usr/local/bin/terminal-notifier'
-
-# Quick Look (^C or space to close)
-alias qlp='qlmanage -p 2>/dev/null'
-alias qlr='qlmanage -r cache'
+  # Quick Look (^C or space to close)
+  alias qlp='qlmanage -p 2>/dev/null'
+  alias qlr='qlmanage -r cache'
+fi
 
