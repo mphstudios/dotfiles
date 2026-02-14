@@ -1,9 +1,0 @@
-# configuration for rcm dotfile management
-# https://thoughtbot.github.io/rcm/rcrc.5.html
-COPY_ALWAYS=""
-DOTFILES_DIRS="$HOME/Code/dotfiles"
-EXCLUDES="*.md LICENSE assets docs"
-HOSTNAME="heart-of-gold"
-SYMLINK_DIRS="config vim"
-TAGS="bash git node python ruby sh vim zshell"
-UNDOTTED=""

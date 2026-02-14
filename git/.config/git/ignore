@@ -1,0 +1,73 @@
+### OSX ###
+.AppleDouble
+.DS_Store
+.LSOverride
+
+# files that might appear on external disk
+.fseventsd
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+
+# automatic backup files
+*(Autosaved).rtfd/
+
+# build products
+build/*
+
+# database and log files
+*.log
+*.sql
+*.sqlite*
+
+## packages
+# unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.egg
+*.deb
+*.dmg
+*.gem
+*.gz
+*.iso
+*.jar
+*.rar
+*.rpm
+*.tar
+*.xpi
+*.zip
+
+# temporary files
+*~
+*~.nib
+*.swp
+
+# thumbnails
+._*
+
+## version control
+.cvs
+.hg
+.svn
+CVS
+
+# vim swap files
+.*.sw[a-z]
+*.un~
+Session.vim
+
+## Xcode user-specific files
+*.mode*
+*.pbxuser
+*.perspective*
+*.user
+*.xcuserstate
+xcuserdata
+
+# Claude Code
+**/.claude/settings.local.json
+
+## Mac OS X custom folder icon files
+# Since the "Icon\r\r" file name contains two ASCII CRLF characters
+# this statement must come at the end of the .gitignore file with the double \r
+Icon
