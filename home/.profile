@@ -33,7 +33,7 @@ export GNUTERM='x11'
 # enable colored output from commands on FreeBSD-based systems
 export CLICOLOR=true
 
-if ! command -v most &> /dev/null; then
+if command -v most &> /dev/null; then
     export MANPAGER='most'
 else
     # Use Less Colors for manual pages
