@@ -1,8 +1,1 @@
-# Local config
-*.local
-
 .claude
-
-*/node_modules/
-
-private/
