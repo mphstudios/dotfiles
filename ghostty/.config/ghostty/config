@@ -24,7 +24,7 @@ macos-icon-screen-color = "#04B575"
 macos-option-as-alt = true
 
 macos-titlebar-proxy-icon = hidden
-macos-titlebar-style = transparent
+macos-titlebar-style = native
 
 # Mouse
 focus-follows-mouse = true
