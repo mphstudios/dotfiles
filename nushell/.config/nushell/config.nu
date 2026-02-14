@@ -47,5 +47,4 @@ $env.config = {
 # overlays must be after $env.config to be merged rather than being overwritten
 overlay use modules/macOS.nu
 overlay use modules/git.nu
-overlay use modules/kamal.nu
 overlay use modules/keybindings.nu
