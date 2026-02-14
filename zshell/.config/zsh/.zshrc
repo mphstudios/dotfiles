@@ -8,7 +8,7 @@
 # Load order of configuration files:
 # .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login]
 #
-ZSH_DIR=~/.zsh
+ZSH_DIR=$ZDOTDIR
 
 # make color constants available
 autoload -U colors
@@ -130,7 +130,7 @@ setopt no_bg_nice     # do not nice background tasks
 ## Sheldon command-line tool to manage and load shell plugins
 # set a shell specific configuration file and data directory for installed plugins
 # see https://github.com/rossmacarthur/sheldon/issues/166
-export SHELDON_CONFIG_FILE="${XDG_CONFIG_HOME:-$ZSH_DIR}/zsh-plugins.toml"
+export SHELDON_CONFIG_FILE="${XDG_CONFIG_HOME:-$ZSH_DIR}/plugins.toml"
 export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/zsh"
 
 # https://sheldon.cli.rs/Getting-started.html#loading-plugins
@@ -152,10 +152,6 @@ fi
 
 [ -f $ZSH_DIR/bindings.zsh ] && source $ZSH_DIR/bindings.zsh
 
-[ -f $ZSH_DIR/prompt.zsh ] && source $ZSH_DIR/prompt.zsh
-
-[ -f $ZSH_DIR/aliases.zsh ] && source $ZSH_DIR/aliases.zsh
-
 [ -f $ZSH_DIR/smartdots.zsh ] && source $ZSH_DIR/smartdots.zsh
 
 ## Atuin improved shell history for zsh, bash, fish and nushell
@@ -164,12 +160,24 @@ if (( $+commands[atuin] )) then
   eval "$(atuin init zsh)"
 fi
 
+## Starship cross-shell prompt
+# https://starship.rs/config/
+if (( $+commands[starship] )) then
+  eval "$(starship init zsh)"
+fi
+
 ## Carapace multi-shell multi-command argument completer
 # https://carapace-sh.github.io/carapace-bin/setup.html#zsh
 if (( $+commands[carapace] )) then
   export CARAPACE_BRIDGES='zsh,fish,bash'
   zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
   source <(carapace _carapace)
+fi
+
+## mise-en-place dev tools, environment, and tasks manager
+# https://mise.jdx.dev/about.html
+if (( $+commands[mise] )) then
+  eval "$(mise activate zsh)"
 fi
 
 ## Zellij terminal multiplexer
@@ -182,10 +190,4 @@ fi
 # https://github.com/ajeetdsouza/zoxide
 if (( $+commands[zoxide] )) then
   eval "$(zoxide init zsh --cmd cd)"
-fi
-
-## mise-en-place dev tools, environment, and tasks manager
-# https://mise.jdx.dev/about.html
-if (( $+commands[mise] )) then
-  eval "$(mise activate zsh)"
 fi

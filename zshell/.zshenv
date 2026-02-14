@@ -23,5 +23,4 @@ export PATH="$XDG_BIN_HOME:$PATH"
 # export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 # export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
 
-# export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export ZDOTDIR="$HOME"
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
