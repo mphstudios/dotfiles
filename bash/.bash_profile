@@ -24,14 +24,6 @@ BASHDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/bash"
 # Load configuration for interactive non-login shells
 [[ -f ~/.bashrc ]] && source ~/.bashrc
 
-# Starship cross-shell prompt
-if command -v starship 1>/dev/null 2>&1; then
-  eval "$(starship init bash)"
-fi
-
-# Readline configuration
-export INPUTRC=~/.inputrc
-
 ## Complete SSH hostnames based on ~/.ssh/config (wildcards ignored)
 if [ -r ~/.ssh/config ]; then
   complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh

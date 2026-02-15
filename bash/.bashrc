@@ -102,6 +102,11 @@ fi
 export SHELDON_CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/bash/plugins.toml"
 export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/bash"
 
+# https://sheldon.cli.rs/Getting-started.html#loading-plugins
+if command -v sheldon 1>/dev/null 2>&1; then
+    eval "$(sheldon source)"
+fi
+
 ## Carapace multi-shell multi-command argument completer
 # https://carapace-sh.github.io/carapace-bin/setup.html#bash
 if command -v carapace 1>/dev/null 2>&1; then
@@ -115,9 +120,10 @@ if command -v mise 1>/dev/null 2>&1; then
     eval "$(mise activate bash)"
 fi
 
-# https://sheldon.cli.rs/Getting-started.html#loading-plugins
-if command -v sheldon 1>/dev/null 2>&1; then
-    eval "$(sheldon source)"
+## Starship cross-shell prompt
+# https://starship.rs
+if command -v starship 1>/dev/null 2>&1; then
+    eval "$(starship init bash)"
 fi
 
 ## try manager for code experiments
