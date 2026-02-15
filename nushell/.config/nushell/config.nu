@@ -30,6 +30,7 @@ path add ($env.CARGO_HOME? | default ($env.HOME | path join ".cargo") | path joi
 path add ($env.HOME | path join ".local/bin")
 path add ($env.HOME | path join ".bin")
 
+# Nota bene: to control load order aliases are *not* autoloaded
 source modules/aliases.nu
 
 let vendor = ($nu.data-dir | path join "vendor/autoload")
