@@ -52,9 +52,7 @@
     ui = auto
 
 [core]
-    attributesfile = ~/.gitattributes
     editor = "subl -n -w"
-    excludesfile = ~/.gitignore
     quotepath = false
 
     # Use system ssh in order to have access to ids in Keychain

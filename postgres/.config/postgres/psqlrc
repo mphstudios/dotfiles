@@ -32,7 +32,8 @@
 \set HISTCONTROL ignoredups
 
 -- Use a separate history file per-database.
-\set HISTFILE ~/.psql_history- :DBNAME
+-- Note bene: hardcode XDG_STATE_HOME because history does not expand env vars
+\set HISTFILE ~/.local/state/postgres/psql_history- :DBNAME
 \set ON_ERROR_ROLLBACK interactive
 
 -- Output verbose error reports.

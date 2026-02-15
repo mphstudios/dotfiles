@@ -60,9 +60,6 @@ fi
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 PATH="$CARGO_HOME/bin:$PATH"
 
-# Ensure user bin directory has precedence
-PATH=$HOME/.bin:$PATH
-
 # Use local node modules
 # when invoked from the root directory of a project.
 PATH=./node_modules/.bin:$PATH
