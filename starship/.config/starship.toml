@@ -126,6 +126,16 @@ format = '[$symbol $version]($style) '
 symbol = 'Ruby'
 version_format = '${raw}'
 
+[shell]
+disabled = false
+format = "[$indicator]($style)"
+style = "white"
+bash_indicator = "\\$"
+fish_indicator = ">"
+nu_indicator = "" # use default
+unknown_indicator = "?"
+zsh_indicator = "%"
+
 [sudo]
 disabled = false
 format = '[as $symbol]($style)'
