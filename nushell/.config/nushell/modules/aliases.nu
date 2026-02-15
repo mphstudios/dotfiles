@@ -74,6 +74,9 @@ def ll [...rest] { ls --long ...$rest }
 # display directory list including dot file entries
 def lla [...rest] { ls --all --long ...$rest }
 
+# list only dotfile entries
+def "ll." [...rest] { lla ...$rest | where { |it| ($it.name | path basename) | str starts-with "." } }
+
 # list only directory entries
 def lsd [...rest] { ls ...$rest | where type == dir }
 def lld [...rest] { ls --long ...$rest | where type == dir }
@@ -81,6 +84,7 @@ def lld [...rest] { ls --long ...$rest | where type == dir }
 # list only file entries
 def lsf [...rest] { ls ...$rest | where type == file }
 def llf [...rest] { ls --long ...$rest | where type == file }
+
 
 # list only symlink entries (which requires using the --all flag)
 def lsl [...rest] { ls --all --long ...$rest | where type == symlink }
