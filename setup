@@ -1,0 +1,106 @@
+#!/usr/bin/env sh
+#
+# Manage dotfiles with GNU Stow.
+#
+# Running without arguments stows all packages. The `add` subcommand
+# automates adopting existing config files into a new stow package
+# by creating the package directory, moving the files, and stowing.
+#
+set -e
+
+DOTFILES="$(cd "$(dirname "$0")" && pwd)"
+
+usage() {
+    cat <<EOF
+Manage dotfiles with GNU Stow.
+
+Usage: ./setup                        install all packages
+       ./setup add <name>             adopt ~/.<name>
+       ./setup add .config <name>     adopt ~/.config/<name>
+       ./setup add .config            scan ~/.config for unmanaged dirs
+
+The add command moves config files into a new stow package and
+creates symlinks back to their original locations.
+EOF
+}
+
+add_package() {
+    package="$1"
+    source="$2"
+
+    if [ ! -e "$source" ]; then
+        echo "error: $source does not exist" >&2
+        return 1
+    fi
+
+    if [ -d "$DOTFILES/$package" ]; then
+        echo "skip: $package already managed" >&2
+        return 1
+    fi
+
+    relative="${source#$HOME/}"
+    dest="$DOTFILES/$package/$relative"
+
+    mkdir -p "$(dirname "$dest")"
+    mv "$source" "$dest"
+    cd "$DOTFILES" && stow "$package"
+    echo "added $package: ~/$relative"
+}
+
+scan_dotconfig() {
+    for dir in "$HOME"/.config/*/; do
+        [ -L "$dir" ] && continue
+        name="$(basename "$dir")"
+        [ -d "$DOTFILES/$name" ] && continue
+
+        printf "Add %s? [y/N] " "$name"
+        read -r answer
+        case "$answer" in
+            [yY]*) add_package "$name" "$dir" ;;
+        esac
+    done
+}
+
+case "${1:-}" in
+    help|--help|-h)
+        usage
+        ;;
+    add)
+        case "${2:-}" in
+            .config)
+                if [ -n "${3:-}" ]; then
+                    add_package "$3" "$HOME/.config/$3"
+                else
+                    scan_dotconfig
+                fi
+                ;;
+            .config/*)
+                name="${2#.config/}"
+                add_package "$name" "$HOME/.config/$name"
+                ;;
+            "")
+                usage >&2
+                exit 1
+                ;;
+            *)
+                add_package "$2" "$HOME/.$2"
+                ;;
+        esac
+        ;;
+    "")
+        cd "$DOTFILES"
+        # [!.]*/ excludes hidden directories (.git, .claude, et cetera)
+        # because when bash dotglob is set */ matches dotfiles as well
+        output="$(stow --verbose [!.]*/ 2>&1)" || { echo "$output" >&2; exit 1; }
+        if [ -n "$output" ]; then
+            echo "$output"
+        else
+            echo "all packages up to date"
+        fi
+        ;;
+    *)
+        echo "unknown command: $1" >&2
+        usage >&2
+        exit 1
+        ;;
+esac
