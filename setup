@@ -11,7 +11,7 @@ set -e
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 
 usage() {
-    cat <<EOF
+  cat <<EOF
 Manage dotfiles with GNU Stow.
 
 Usage: ./setup                        install all packages
@@ -25,82 +25,97 @@ EOF
 }
 
 add_package() {
-    package="$1"
-    source="$2"
+  package="$1"
+  source="$2"
 
-    if [ ! -e "$source" ]; then
-        echo "error: $source does not exist" >&2
-        return 1
-    fi
+  if [ ! -e "$source" ]; then
+    echo "error: $source does not exist" >&2
+    return 1
+  fi
 
-    if [ -d "$DOTFILES/$package" ]; then
-        echo "skip: $package already managed" >&2
-        return 1
-    fi
+  if [ -d "$DOTFILES/$package" ]; then
+    echo "skip: $package already managed" >&2
+    return 1
+  fi
 
-    relative="${source#$HOME/}"
-    dest="$DOTFILES/$package/$relative"
+  relative="${source#$HOME/}"
+  dest="$DOTFILES/$package/$relative"
 
-    mkdir -p "$(dirname "$dest")"
-    mv "$source" "$dest"
-    cd "$DOTFILES" && stow "$package"
-    echo "added $package: ~/$relative"
+  mkdir -p "$(dirname "$dest")"
+  mv "$source" "$dest"
+  cd "$DOTFILES" && stow "$package"
+  echo "added $package: ~/$relative"
+}
+
+# Check if a name is already managed by any stow package:
+# either as a top-level package or as .config/<name> inside
+# a differently-named package, for example ruby/.config/gem
+is_managed() {
+  [ -d "$DOTFILES/$1" ] && return 0
+  for package in "$DOTFILES"/[!.]*/; do
+    [ -d "${package}.config/$1" ] && return 0
+  done
+  return 1
 }
 
 scan_dotconfig() {
-    for dir in "$HOME"/.config/*/; do
-        [ -L "$dir" ] && continue
-        name="$(basename "$dir")"
-        [ -d "$DOTFILES/$name" ] && continue
+  for dir in "$HOME"/.config/*/; do
+    [ -L "$dir" ] && continue
+    name="$(basename "$dir")"
+    is_managed "$name" && continue
 
-        printf "Add %s? [y/N] " "$name"
-        read -r answer
-        case "$answer" in
-            [yY]*) add_package "$name" "$dir" ;;
-        esac
-    done
+    printf "Add %s? [y/N] " "$name"
+    read -r answer
+    case "$answer" in
+      [yY]*) add_package "$name" "$dir" ;;
+    esac
+  done
 }
 
 case "${1:-}" in
-    help|--help|-h)
-        usage
-        ;;
-    add)
-        case "${2:-}" in
-            .config)
-                if [ -n "${3:-}" ]; then
-                    add_package "$3" "$HOME/.config/$3"
-                else
-                    scan_dotconfig
-                fi
-                ;;
-            .config/*)
-                name="${2#.config/}"
-                add_package "$name" "$HOME/.config/$name"
-                ;;
-            "")
-                usage >&2
-                exit 1
-                ;;
-            *)
-                add_package "$2" "$HOME/.$2"
-                ;;
-        esac
-        ;;
-    "")
-        cd "$DOTFILES"
-        # [!.]*/ excludes hidden directories (.git, .claude, et cetera)
-        # because when bash dotglob is set */ matches dotfiles as well
-        output="$(stow --verbose [!.]*/ 2>&1)" || { echo "$output" >&2; exit 1; }
-        if [ -n "$output" ]; then
-            echo "$output"
+  help|--help|-h)
+    usage
+    ;;
+  add)
+    case "${2:-}" in
+      .config)
+        if [ -n "${3:-}" ]; then
+          add_package "$3" "$HOME/.config/$3"
         else
-            echo "all packages up to date"
+          scan_dotconfig
         fi
         ;;
-    *)
-        echo "unknown command: $1" >&2
+      .config/*)
+        name="${2#.config/}"
+        add_package "$name" "$HOME/.config/$name"
+        ;;
+      "")
         usage >&2
         exit 1
         ;;
+      .*)
+        echo "error: package name must not start with '.'" >&2
+        exit 1
+        ;;
+      *)
+        add_package "$2" "$HOME/.$2"
+        ;;
+    esac
+    ;;
+  "")
+    cd "$DOTFILES"
+    # [!.]*/ excludes hidden directories (.git, .claude, et cetera)
+    # because when bash dotglob is set */ matches dotfiles as well
+    output="$(stow --verbose [!.]*/ 2>&1)" || { echo "$output" >&2; exit 1; }
+    if [ -n "$output" ]; then
+      echo "$output"
+    else
+      echo "all packages up to date"
+    fi
+    ;;
+  *)
+    echo "unknown command: $1" >&2
+    usage >&2
+    exit 1
+    ;;
 esac
