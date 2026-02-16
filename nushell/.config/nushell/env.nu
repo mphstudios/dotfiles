@@ -79,6 +79,9 @@ $env.PYTHONSTARTUP = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".c
 $env.RUSTUP_HOME = ($env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share") | path join "rustup")
 $env.WGETRC = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "wget/wgetrc")
 
+# Starship ignores XDG_CACHE_HOME (starship/starship#6672)
+$env.STARSHIP_CACHE = ($env.XDG_CACHE_HOME | path join "starship")
+
 # Homebrew
 $env.HOMEBREW_CASK_OPTS = "--appdir=/Applications"
 $env.HOMEBREW_NO_ANALYTICS = "true"

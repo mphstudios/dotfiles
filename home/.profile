@@ -82,6 +82,9 @@ export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/python/pythonrc.py"
 export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 
+# Starship ignores XDG_CACHE_HOME (starship/starship#6672)
+export STARSHIP_CACHE="${XDG_CACHE_HOME:-$HOME/Library/Caches}/starship"
+
 # Symlink Homebrew Cask apps to system Applications directory
 # https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
 export HOMEBREW_CASK_OPTS='--appdir=/Applications'
