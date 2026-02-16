@@ -4,7 +4,9 @@
 # Make the dirs command and its subcommands available in all shells
 # see https://www.nushell.sh/book/directory_stack.html#dirs-module-and-commands
 use std/dirs
-
+# jump to entry in dirs stack
+def --env goto [n: int] { dirs goto $n }
+# push/pop on the dirs stack
 alias pushd = dirs add
 alias popd = dirs drop
 
