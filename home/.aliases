@@ -1,8 +1,5 @@
 #!/usr/bin/env sh
 
-# relative navigation shortcuts
-alias .='echo $PWD'
-
 # clear the screen and scrollback buffer
 alias cls='printf "\33c\e[3J"'
 
@@ -23,7 +20,7 @@ if command -v eza > /dev/null ; then
   alias lla='ls --long --header --all --all'
 
   # grep list of entries, ignore-case
-  alias llg='ls --long --header -all | grep -i'
+  alias llg='ls --long --header --all | grep -i'
 
   # display numeric user and group ids
   alias lln='ll --all --numeric'
@@ -48,7 +45,7 @@ if command -v eza > /dev/null ; then
   # list entries by last modified date
   alias llr='ll --time-style=relative'
 
-  # list entries by list entries by  by size, decending
+  # list entries by size, decending
   alias lls='ll --reverse --sort=size'
 
   # list entries by file type
@@ -86,11 +83,11 @@ alias pushd='pushd > /dev/null'
 # use long format for list of active jobs in the current shell
 alias jobs='jobs -l'
 
-# akways create parent directories as needed
+# always create parent directories as needed
 alias mkdir='mkdir -pv'
 
 # pretty print PATH variable
-alias path='echo -e ${PATH//:/\\n}'
+alias path="echo $PATH | tr ':' '\n'"
 
 # grep processes, ignore-case
 alias psg='ps aux | grep -i'
@@ -113,7 +110,7 @@ alias stage='git add'
 alias stash='git stash'
 alias status='git status'
 alias switch='git switch'
-alias unstage='git reset HEAD'
+alias unstage='git restore --staged .'
 
 # Git Large File Storage
 alias lfs='git lfs'
@@ -122,7 +119,7 @@ alias lfs='git lfs'
 alias digest='/usr/bin/openssl dgst'
 
 ### macOS specific
-if [ "$(uname -s)" = "Darwin" ]; then
+case "$OSTYPE" in darwin*)
   # DNS: flush directory service and local DNS cache
   alias resetDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder && echo "macOS DNS Cache Reset"'
 
@@ -142,5 +139,5 @@ if [ "$(uname -s)" = "Darwin" ]; then
   # Quick Look (^C or space to close)
   alias qlp='qlmanage -p 2>/dev/null'
   alias qlr='qlmanage -r cache'
-fi
+;; esac
 
