@@ -64,6 +64,7 @@ $env.VISUAL = (if ("/usr/local/bin/subl" | path exists) {
 })
 
 # Use XDG Base Directory for configuration files
+$env.CLAUDE_CONFIG_DIR = ($env.XDG_CONFIG_HOME | path join "claude")
 $env.CARGO_HOME = ($env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share") | path join "cargo")
 $env.CURL_HOME = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "curl")
 $env.DOCKER_CONFIG = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "docker")

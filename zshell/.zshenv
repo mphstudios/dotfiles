@@ -25,6 +25,8 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+
 # Starship ignores XDG_CACHE_HOME (starship/starship#6672)
 export STARSHIP_CACHE="$XDG_CACHE_HOME/starship"
 

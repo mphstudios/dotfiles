@@ -71,6 +71,7 @@ PATH=./bin:./.bundle/bin:$PATH
 export PATH
 
 # Use XDG Base Directory for configuration files
+export CLAUDE_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/claude"
 export CURL_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/curl"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/docker"
 export EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
