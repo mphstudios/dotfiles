@@ -12,7 +12,7 @@ export alias stage = git add
 export alias stash = git stash
 export alias status = git status
 export alias switch = git switch
-export alias unstage = git reset HEAD
+export alias unstage = git restore --staged .
 
 # Git Large File Storage
 export alias lfs = git lfs

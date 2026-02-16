@@ -4,37 +4,35 @@
 # Make the dirs command and its subcommands available in all shells
 # see https://www.nushell.sh/book/directory_stack.html#dirs-module-and-commands
 use std/dirs
-# jump to entry in dirs stack
+# Jump to an entry in dirs stack
 def --env goto [n: int] { dirs goto $n }
-# push/pop on the dirs stack
-alias pushd = dirs add
-alias popd = dirs drop
-
-# relative navigation shortcuts
-alias . = echo $env.PWD
 
 alias aliases = help aliases
 
-# clear screen and scroll buffer
-alias cls = clear
-
-# always use interactive mode as a safeguard
+# Copy entries using interactive mode as a safeguard
 alias cp = cp --interactive --progress
+
+# Symlink source to target
 alias ln = ln -i
+
+# Move entries using interactive mode as a safeguard
 alias mv = mv --interactive --progress
+
+# Move entries to Trash
 alias rm = rm --interactive --trash
 
-# fix unintuitive unix command names
-alias unmount = umount
-
-# because this makes sense
-alias plugins = plugin
-
-# use nuopen to access Nushell's built-in open; open calls macOS open
+# Use nuopen to access Nushell's built-in open
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
+# macOS open command
 alias open = ^open
 
-# rename the built-in ls command so that we can define aliases for ls
+# List Nushell plugins
+alias plugins = plugin
+
+# Unmount a volume
+alias unmount = umount
+
+# Alias for the built-in ls command (so that we can define other aliases for ls)
 alias ls-builtin = ls
 
 # Redefine ls to default to '.' when no pattern is given, because
@@ -50,7 +48,7 @@ def ls [
   --threads (-t),     # Use multiple threads to list contents. Output will be non-deterministic.
   ...pattern: glob,   # The glob pattern to use.
 ]: [ nothing -> table ] {
-  let pattern = if ($pattern | is-empty) { [ '.' ] } else { $pattern }
+  let pattern = if ($pattern | is-empty) { ['.'] } else { $pattern }
   (ls-builtin
     --all=$all
     --long=$long
@@ -68,46 +66,45 @@ def ls [
 def lsa [...rest] { ls --all ...$rest }
 
 # display directory entries in a grid
-def lsg [...rest] { ls ...$rest | sort-by type name --ignore-case | grid --color --icons }
+def "ls grid" [...rest] { ls ...$rest | sort-by type name --ignore-case | grid --color --icons }
 
 # display directory list, long format
-def ll [...rest] { ls --long ...$rest }
+def ll [...rest] { ls --long ...$rest | reject accessed inode num_links readonly }
 
 # display directory list including dot file entries
-def lla [...rest] { ls --all --long ...$rest }
+def lla [...rest] { ls --all --long ...$rest | reject accessed inode num_links readonly }
+
+# find entries with name matching a regular expresion pattern
+def "ll name" [pattern] { ls --all --long | reject accessed inode num_links readonly | where name =~ $pattern }
 
 # list only dotfile entries
 def "ll." [...rest] { lla ...$rest | where { |it| ($it.name | path basename) | str starts-with "." } }
 
-# list only directory entries
-def lsd [...rest] { ls ...$rest | where type == dir }
-def lld [...rest] { ls --long ...$rest | where type == dir }
-
 # list only file entries
-def lsf [...rest] { ls ...$rest | where type == file }
-def llf [...rest] { ls --long ...$rest | where type == file }
+def "ls files" [...rest] { lsa ...$rest | where type == file or type == symlink }
+def "ll files" [...rest] { lla ...$rest | where type == file or type == symlink }
 
+# list only directory entries
+def "ls dirs" [...rest] { ls ...$rest | where type == dir or type == symlink }
+def "ll dirs" [...rest] { ll ...$rest | where type == dir or type == symlink }
 
 # list only symlink entries (which requires using the --all flag)
-def lsl [...rest] { ls --all --long ...$rest | where type == symlink }
+def "ls links" [...rest] { lla ...$rest | where type == symlink | reject created size type }
 
-# list entries by creation date
-def llc [...rest] { ls --long ...$rest | sort-by created }
+# list entries by creation date/time
+def "ll created" [...rest] { ll ...$rest | sort-by created | reject modified }
 
-# list entries by last modified date
-def llm [...rest] { ls --long ...$rest | sort-by modified }
+# list entries by last modified date/time
+def "ll modified" [...rest] { ll ...$rest | sort-by modified | reject created }
 
 # list entries by size, descending
-def lls [...rest] { ls --long ...$rest | sort-by size --reverse }
+def "ll size" [...rest] { ll ...$rest | sort-by size --reverse | reject created modified }
 
 # OpenSSL checksums
 def digest [] { /usr/bin/openssl dgst }
 
 # Display the fingerprint and randomart image generated for a ssh key
 def fingerprint [publicKeyFile] { ssh-keygen -lv -E md5 -f $publicKeyFile }
-
-# search for processes by name
-def psf [pattern] { ps | where name =~ $pattern }
 
 # output random hexidecimal gradoo
 def gradoo [] { ^cat /dev/urandom | hexdump -C | grep "ca fe" }

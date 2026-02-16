@@ -54,6 +54,12 @@ if (which zoxide | is-not-empty) {
 
 $env.config = {
   show_banner: false
+  table: {
+    trim: {
+      methodology: truncating
+      truncating_suffix: "…"
+    }
+  }
 }
 
 # overlays must be after $env.config to be merged rather than being overwritten

@@ -1,8 +1,5 @@
 #!/usr/bin/env sh
 
-# clear the screen and scrollback buffer
-alias cls='printf "\33c\e[3J"'
-
 # use interactive mode as a safeguard
 alias cp='cp -i'
 alias ln='ln -i'
@@ -17,10 +14,10 @@ if command -v eza > /dev/null ; then
   alias ll='ls --long --header --total-size'
 
   # include dot file entries
-  alias lla='ls --long --header --all --all'
+  alias lla='ls --all -all --long --header'
 
   # grep list of entries, ignore-case
-  alias llg='ls --long --header --all | grep -i'
+  alias llg='ls --all --long --header | grep -i'
 
   # display numeric user and group ids
   alias lln='ll --all --numeric'
@@ -36,20 +33,8 @@ if command -v eza > /dev/null ; then
   alias lsf='ls --only-files --show-symlinks'
   alias llf='ll --only-files --show-symlinks'
 
-  # list entries by last creation date
-  alias llc='ll --sort=created'
-
-  # list entries by last modified date
-  alias llm='ll --sort=oldest'
-
   # list entries by last modified date
   alias llr='ll --time-style=relative'
-
-  # list entries by size, decending
-  alias lls='ll --reverse --sort=size'
-
-  # list entries by file type
-  alias llt='ll --sort=type'
 
   alias tree='ls --tree --level=2 --group-directories-first'
 
@@ -140,4 +125,3 @@ case "$OSTYPE" in darwin*)
   alias qlp='qlmanage -p 2>/dev/null'
   alias qlr='qlmanage -r cache'
 ;; esac
-
