@@ -17,6 +17,15 @@
 # Environment variables shared with POSIX shells are kept in sync with ~/.profile
 # To source ~/.profile via bash instead of duplicating, see modules/posix-env.nu
 #
+# XDG Base Directories
+# Nota bene: LaunchAgent (org.freedesktop.xdg-basedir.plist) sets these for
+# processes spawned by launchd. Defaults are repeated here so that nushell
+# sessions that do not inherit LaunchAgent variables also have correct values.
+$env.XDG_CACHE_HOME = ($env.XDG_CACHE_HOME? | default ($env.HOME | path join "Library/Caches"))
+$env.XDG_CONFIG_HOME = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config"))
+$env.XDG_DATA_HOME = ($env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share"))
+$env.XDG_STATE_HOME = ($env.XDG_STATE_HOME? | default ($env.HOME | path join ".local/state"))
+
 $env.LC_ALL = "en_US.UTF-8"
 $env.LANG = "en_US.UTF-8"
 

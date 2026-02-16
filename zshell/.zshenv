@@ -13,7 +13,18 @@
 # to $PATH, reorders it, and then removes duplicates.
 setopt no_global_rcs
 
-# XDG Base Directories set by LaunchAgents/org.freedesktop.xdg-basedir.plist
+# XDG Base Directories
+# Nota bene: LaunchAgent (org.freedesktop.xdg-basedir.plist) sets these for
+# processes spawned by launchd (GUI applications and login shells).
+# Defaults are repeated here so that non-login zsh sessions such as subshells,
+# scripts, and shells spawned outside launchd (e.g. SSH, editor terminals),
+# also have correct values. Setting a :- fallback ensures the LaunchAgent values
+# take precedence when present.
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/Library/Caches}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
 export PATH="$XDG_BIN_HOME:$PATH"
 
-export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
