@@ -21,6 +21,18 @@ alias mv = mv --interactive --progress
 # Move entries to Trash
 alias rm = rm --interactive --trash
 
+# Parse structured data from `id` command output
+def "id parse" [] {
+  ^id
+  | parse "uid={uid}({user}) gid={gid}({group}) groups={groups}"
+  | first
+  | update groups {|r|
+    $r.groups
+    | split row ","
+    | each { parse "{gid}({name})" | first }
+  }
+}
+
 # Use nuopen to access Nushell's built-in open
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 # macOS open command
