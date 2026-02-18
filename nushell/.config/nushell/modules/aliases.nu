@@ -24,7 +24,7 @@ alias ln = ln -i
 alias mv = mv --interactive --progress
 
 # Move entries to Trash
-alias rm = rm --interactive --trash
+alias rm = rm --trash
 
 # Parse structured data from `id` command output
 def "id parse" [] {
