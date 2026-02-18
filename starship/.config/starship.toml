@@ -82,17 +82,17 @@ revert = 'REVERTING'
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
 
 [git_status]
-format = '([$all_status$ahead_behind]($style) )'
-ahead = '↑${count}'
-behind = '↓${count}'
+format = '([$all_status$ahead_behind](white) )'
+ahead = '🢁${count}'
+behind = '🢃${count}'
 conflicted = '≠'
-deleted = '✘'
-diverged = '🡙'
-modified = '❕'
-renamed = '🠖'
+deleted = '❕'
+diverged = '[🢁🢃](white)'
+modified = '🗯️'
+renamed = '[⤳ ](white)'
 staged = '[+$count](green)'
 stashed = ''
-untracked = '?'
+untracked = '❔'
 up_to_date = ''
 
 [hostname]
@@ -133,7 +133,7 @@ style = "white"
 bash_indicator = "\\$"
 fish_indicator = "🐟"
 nu_indicator = "" # use default
-unknown_indicator = "?"
+unknown_indicator = "❓"
 zsh_indicator = "%"
 
 [sudo]
