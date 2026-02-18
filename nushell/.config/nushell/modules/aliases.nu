@@ -11,6 +11,9 @@ alias popd = dirs drop
 
 alias aliases = help aliases
 
+# Clear screen and scroll back buffer
+alias cls = clear
+
 # Copy entries using interactive mode as a safeguard
 alias cp = cp --interactive --progress
 

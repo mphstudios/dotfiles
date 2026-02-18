@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+# Clear screen and scroll back buffer
+alias cls=clear
+
 # use interactive mode as a safeguard
 alias cp='cp -i'
 alias ln='ln -i'
