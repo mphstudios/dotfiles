@@ -31,7 +31,7 @@ $shell\
 $character
 """
 
-right_format = "$cmd_duration $status"
+right_format = '$cmd_duration $status'
 
 continuation_prompt = '[↪](white) '
 
@@ -41,7 +41,7 @@ palette = 'gradoo'
 # TODO
 
 [character]
-error_symbol = '[❯](white)'
+error_symbol = '[](white)' # nf-cod-error
 success_symbol = '[❯](white)'
 vimcmd_symbol = '[❮](bold green)'
 vimcmd_replace_symbol = '[❮](bold purple)'
@@ -67,15 +67,16 @@ disabled = true
 [git_branch]
 style = 'bold magenta'
 symbol = ''
-truncation_symbol = ''
+format = 'on [$symbol $branch(:$remote_branch)]($style) '
+truncation_symbol = '…'
 
 [git_commit]
 format = '[$hash \[$tag\]]($style) '
-tag_symbol = ''
+tag_symbol = '' # nf-oct-tag
 
 [git_state]
 bisect = 'BISECTING'
-cherry_pick = '[🍒](bold red)'
+cherry_pick = '🍒'
 merge = 'MERGING'
 rebase = 'REBASING'
 revert = 'REVERTING'
@@ -83,17 +84,17 @@ format = '[\($state( $progress_current of $progress_total)\)]($style) '
 
 [git_status]
 format = '([$all_status$ahead_behind](white)) '
-ahead = '🢁${count}'
-behind = '🢃${count}'
-conflicted = '≠'
+ahead = '🢁${count}' # nf-cod-git_commit
+behind = '🢃${count}' # nf-cod-git_commit
+conflicted = '' # nf-fa-not_equal
 deleted = '❕'
-diverged = '[🢁🢃](white)'
+diverged = '🢁🢃' # nf-cod-git_commit
 modified = '🗯️'
-renamed = '[⤳ ](white)'
+renamed = '' # nf-oct-diff_renamed
 staged = '[+$count](green)'
-stashed = ' ' # bookmark ribbon
+stashed = ' ' # nf-cod-bookmark
 untracked = '❔'
-up_to_date = '' # checkmark
+up_to_date = '' # nf-cod-pass
 
 [hostname]
 disabled = false
@@ -108,7 +109,7 @@ format = '[$symbol $health]($style) '
 healthy_symbol = '󱐋'
 style = 'bold purple'
 symbol = 'mise'
-unhealthy_symbol = ''
+unhealthy_symbol = '' # nf-oct-alert
 
 [nodejs]
 format = '[$symbol $version]($style) '
@@ -128,19 +129,19 @@ version_format = '${raw}'
 
 [shell]
 disabled = false
-format = "[$indicator]($style)"
-style = "white"
-bash_indicator = "\\$"
+format = '[$indicator]($style)'
+style = 'white'
+bash_indicator = '' # nf-seti-shell
 fish_indicator = "🐟"
-nu_indicator = "" # use default
-unknown_indicator = "❓"
-zsh_indicator = "%"
+nu_indicator = '' # default indicator
+unknown_indicator = '❓'
+zsh_indicator = '%'
 
 [sudo]
 disabled = false
 format = '[as $symbol]($style)'
 style = 'bold green'
-symbol = ''
+symbol = '' # nf-dev-apple
 
 [username]
 disabled = true
