@@ -66,3 +66,7 @@ $env.config = {
 overlay use modules/macOS.nu
 overlay use modules/git.nu
 overlay use modules/keybindings.nu
+overlay use modules/greeting.nu
+
+# Display a random greeting on each new terminal session
+greet --style splash
