@@ -82,7 +82,7 @@ revert = 'REVERTING'
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
 
 [git_status]
-format = '([$all_status$ahead_behind](white) )'
+format = '([$all_status$ahead_behind](white)) '
 ahead = '🢁${count}'
 behind = '🢃${count}'
 conflicted = '≠'
@@ -91,9 +91,9 @@ diverged = '[🢁🢃](white)'
 modified = '🗯️'
 renamed = '[⤳ ](white)'
 staged = '[+$count](green)'
-stashed = ''
+stashed = ' ' # bookmark ribbon
 untracked = '❔'
-up_to_date = ''
+up_to_date = '' # checkmark
 
 [hostname]
 disabled = false
