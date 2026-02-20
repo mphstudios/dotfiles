@@ -24,22 +24,6 @@ show_env = false
 show_prepare_stale = true
 show_tools = false
 
-[tasks.kamal]
-description = '''
-  Run Kamal in a container (Kamal commands are run in the container)
-  See https://kamal-deploy.org/docs/installation/dockerized/
-'''
-dir = "{{ cwd }}"
-run = '''
-#!/usr/bin/env sh
-podman run --interactive --tty --rm
-  --volume $"${PWD}:/workdir"
-  --volume "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock"
-  --volume /var/run/docker.sock:/var/run/docker.sock
-  --env SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"
-  ghcr.io/basecamp/kamal:latest
-'''
-
 [tools]
 usage = "latest" # usage-spec support for tasks
 

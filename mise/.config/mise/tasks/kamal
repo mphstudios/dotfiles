@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+# [MISE] description="Run Kamal in a container"
+# [MISE] dir="{{cwd}}"
+# [MISE] tools={podman="latest"}
+
+# Nota bene: Kamal commands are run inside the container, not on the host;
+# see https://kamal-deploy.org/docs/installation/dockerized/ limitations.
+podman run --interactive --tty --rm
+  --volume $"${PWD}:/workdir"
+  --volume "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock"
+  --volume /var/run/docker.sock:/var/run/docker.sock
+  --env SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"
+  ghcr.io/basecamp/kamal:latest
