@@ -11,13 +11,25 @@ alias popd = dirs drop
 
 alias aliases = help aliases
 
-# Clear screen and scroll back buffer
-alias cls = clear
+# Clear the visible screen without erasing the scrollback buffer
+def cls [] {
+  let h = (term size).rows
+  if $h > 1 { 1..($h - 1) | each {|_| ""} | str join "\n" | print }
+  print --no-newline "\e[H"
+}
 
 # Copy entries using interactive mode as a safeguard
 alias cp = cp --interactive --progress
 
-# Symlink source to target
+# Create a symbolic link
+def symlink [
+    target: path  # Existing file or directory to which the symlink will point
+    link: path    # Path of the symlink to be created
+] {
+    ^ln -si $target $link
+}
+
+# when creating a hard link, prompt before overwriting an existing file
 alias ln = ln -i
 
 # Move entries using interactive mode as a safeguard
@@ -38,13 +50,8 @@ def "id parse" [] {
   }
 }
 
-# Use nuopen to access Nushell's built-in open
-def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
-# macOS open command
-alias open = ^open
-
 # List Nushell plugins
-alias plugins = plugin
+alias plugins = plugin list
 
 # Unmount a volume
 alias unmount = umount
@@ -105,8 +112,9 @@ def "ll files" [...rest] { lla ...$rest | where type == file or type == symlink 
 def "ls dirs" [...rest] { ls ...$rest | where type == dir or type == symlink }
 def "ll dirs" [...rest] { ll ...$rest | where type == dir or type == symlink }
 
-# list only symlink entries (which requires using the --all flag)
-def "ls links" [...rest] { lla ...$rest | where type == symlink | reject created size type }
+# list only symlink entries, which requires using flags --all --long
+def "ls links" [...rest] { lla ...$rest | where type == symlink | reject created modified mode user group size type }
+def "ll links" [...rest] { lla ...$rest | where type == symlink | reject created size type }
 
 # list entries by creation date/time
 def "ll created" [...rest] { ll ...$rest | sort-by created | reject modified }
