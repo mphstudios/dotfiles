@@ -112,6 +112,9 @@ def splash [footer: string = ""] {
     let hint_text = "Press any key…"
     let hint = $"(ansi {attr: d})($hint_text)(ansi reset)"
     print $"(left-pad $size.columns ($hint_text | split chars | length))($hint)"
+    # Nota bene: the card is not redrawn on terminal resize. Reedline does not
+    # emit resize events via `input listen`, so there is no way to detect a
+    # resize and recalculate the layout without polling or an external signal.
     for _ in (input listen --types [key]) { break }
     # Use natural scrolling rather than \e[2J or `clear`. Printing rows - 1
     # newlines pushes each visible row off the top of the viewport into the scrollback
@@ -175,14 +178,7 @@ export def quotes [
         error make { msg: "No matching quotes found" }
     }
 
-    let q = if $author != null {
-        $rows
-            | insert score {|row| $row.ATTRIBUTION | default "" | str distance $author }
-            | sort-by score
-            | first
-    } else {
-        $rows | shuffle | first
-    }
+    let q = $rows | shuffle | first
 
     let footer = attribution-string ($q.ATTRIBUTION | default "") ($q.SOURCE | default "")
     render $q.QUOTE $footer $style
