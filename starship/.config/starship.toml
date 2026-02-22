@@ -13,7 +13,6 @@ $directory\
 $git_branch\
 $git_commit\
 $git_state\
-$git_metrics\
 $git_status\
 $nodejs\
 $python\
@@ -31,7 +30,7 @@ $shell\
 $character
 """
 
-right_format = "$cmd_duration $status"
+right_format = '$cmd_duration $status'
 
 continuation_prompt = '[↪](white) '
 
@@ -41,7 +40,7 @@ palette = 'gradoo'
 # TODO
 
 [character]
-error_symbol = '[❯](white)'
+error_symbol = '[](white)' # nf-cod-error
 success_symbol = '[❯](white)'
 vimcmd_symbol = '[❮](bold green)'
 vimcmd_replace_symbol = '[❮](bold purple)'
@@ -54,11 +53,12 @@ style = 'bold yellow'
 [directory]
 format = '[$path]($style)[$read_only]($read_only_style) '
 style = 'bold cyan'
-read_only = ''
+home_symbol = '♥' # nf-oct-heart
+read_only = ' 󰩏' # nf-md-hand_front_right
 read_only_style = 'bold red'
 repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
 repo_root_style = 'underline white'
-truncation_length = 8
+truncation_length = 7
 truncation_symbol = '…/'
 
 [docker_context]
@@ -66,34 +66,38 @@ disabled = true
 
 [git_branch]
 style = 'bold magenta'
-symbol = ''
-truncation_symbol = ''
+symbol = '' # nf-oct-git_branch
+format = 'on [$branch(:$remote_branch)]($style) '
+truncation_symbol = '…'
 
 [git_commit]
-format = '[$hash \[$tag\]]($style) '
-tag_symbol = ''
+commit_hash_length = 7
+format = '[ $hash$tag]($style) ' #nf-oct-git_commit
+tag_disabled = false
+tag_symbol = '  ' # nf-oct-tag
 
 [git_state]
 bisect = 'BISECTING'
-cherry_pick = '[🍒](bold red)'
-merge = 'MERGING'
-rebase = 'REBASING'
-revert = 'REVERTING'
-format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[🍒 PICKING](bold red)'
+merge = ' MERGING' # nf-oct-git_merge
+rebase = ' REBASING' # nf-oct-git_pull_request
+revert = ' REVERTING' # nf-oct-git_merge_queue
+format = '[\($state( $progress_current of $progress_total)\)]($style)'
 
 [git_status]
-format = '([$all_status$ahead_behind]($style) )'
-ahead = '↑${count}'
-behind = '↓${count}'
-conflicted = '≠'
-deleted = '✘'
-diverged = '🡙'
-modified = '❕'
-renamed = '🠖'
+format = '([$all_status( $ahead_behind)]($style)) '
+ahead = '🢁${count}' # nf-cod-git_commit
+behind = '🢃${count}' # nf-cod-git_commit
+conflicted = '' # nf-fa-not_equal
+deleted = '❕'
+diverged = '🢁🢃' # nf-cod-git_commit
+modified = '🗯️'
+renamed = '' # nf-oct-diff_renamed
 staged = '[+$count](green)'
-stashed = ''
-untracked = '?'
-up_to_date = ''
+stashed = ' ' # nf-cod-bookmark
+style = 'white'
+untracked = '❔'
+up_to_date = '' # nf-cod-pass
 
 [hostname]
 disabled = false
@@ -105,10 +109,10 @@ style = 'yellow'
 [mise]
 disabled = false
 format = '[$symbol $health]($style) '
-healthy_symbol = '󱐋'
+healthy_symbol = '󱐋' # nf-md-lightning_bolt
 style = 'bold purple'
 symbol = 'mise'
-unhealthy_symbol = ''
+unhealthy_symbol = '' # nf-oct-alert
 
 [nodejs]
 format = '[$symbol $version]($style) '
@@ -128,19 +132,19 @@ version_format = '${raw}'
 
 [shell]
 disabled = false
-format = "[$indicator]($style)"
-style = "white"
-bash_indicator = "\\$"
-fish_indicator = "🐟"
-nu_indicator = "" # use default
-unknown_indicator = "?"
-zsh_indicator = "%"
+format = '[$indicator]($style)'
+style = 'white'
+bash_indicator = '' # nf-seti-shell
+fish_indicator = '🐟'
+nu_indicator = '' # default indicator
+unknown_indicator = '' # nf-fa-question
+zsh_indicator = '' # nf-fa-percent
 
 [sudo]
 disabled = false
 format = '[as $symbol]($style)'
 style = 'bold green'
-symbol = ''
+symbol = '' # nf-dev-apple
 
 [username]
 disabled = true
