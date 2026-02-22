@@ -9,6 +9,7 @@ command_timeout = 3000
 format = """
 $username\
 $hostname\
+${custom.dirs}\
 $directory\
 $git_branch\
 $git_commit\
@@ -49,6 +50,23 @@ vimcmd_visual_symbol = '[❮](bold yellow)'
 [cmd_duration]
 format = '[$duration]($style)'
 style = 'bold yellow'
+
+[custom.dirs]
+# Show current position in the dirs stack when there is more than one entry.
+# Nushell std/dirs module exports DIRS_LIST (a colon-separated list of paths)
+# and DIRS_POSITION (zero-based) directly; explicitly use `sh` to expand these
+# variables. Adds 1 to convert zero-based dirs index to display "index(depth)"
+command = '''
+colons=$(printf '%s' "$DIRS_LIST" | tr -cd ':' | wc -c | tr -d ' ')
+depth=$((colons + 1))
+printf "%d(%d)" "$((DIRS_POSITION + 1))" "$depth"
+'''
+when = 'printf "%s" "$DIRS_LIST" | grep -q ":"'
+shell = ['sh', '-c'] # Nushell does not expand "$VAR" (explicitly use shell)
+use_stdin = false
+format = '[$symbol $output]($style) '
+style = 'cyan'
+symbol = '' # nf-oct-stack
 
 [directory]
 format = '[$path]($style)[$read_only]($read_only_style) '
