@@ -1,6 +1,7 @@
 ## Nushell user autoload directory
 
 The user autoload directories contains additional configuration files which will be auto-loaded during startup.
+Nota bene that user autoload modules load *after* config.nu completes.
 
 `$nu.user-autoload-dirs`
 

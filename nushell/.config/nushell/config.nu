@@ -30,7 +30,9 @@ path add ($env.CARGO_HOME? | default ($env.HOME | path join ".cargo") | path joi
 path add ($env.HOME | path join ".local/bin")
 path add ($env.HOME | path join ".bin")
 
-# Nota bene: to control load order aliases are *not* autoloaded
+# Sourced explicitly rather than autoloaded: vendor/autoload runs after config.nu
+# completes, which would place aliases after the overlays. Sourcing here ensures
+# aliases are defined first and cannot be silently shadowed by an overlay.
 source modules/aliases.nu
 
 let vendor = ($nu.data-dir | path join "vendor/autoload")
@@ -57,7 +59,7 @@ $env.config = {
   table: {
     trim: {
       methodology: truncating
-      truncating_suffix: "…"
+      truncating_suffix: '…'
     }
   }
 }
@@ -68,5 +70,5 @@ overlay use modules/git.nu
 overlay use modules/keybindings.nu
 overlay use modules/greeting.nu
 
-# Display a random greeting on each new terminal session
+# Display a greeting on each new terminal session
 greet --style splash

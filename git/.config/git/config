@@ -33,8 +33,6 @@
     ignored = ls-files . --ignored --exclude-standard --others
     untracked = ls-files . --exclude-standard --others
 
-    wdiff = diff --color-words #GNU-like word diff
-
 [apply]
     whitespace = fix #detect whitespace errors when applying a patch
 
