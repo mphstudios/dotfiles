@@ -6,6 +6,8 @@
 use std/dirs
 # Jump to an entry in dirs stack
 def --env goto [n: int] { dirs goto $n }
+def --env "dirs pop" [] { dirs drop }
+def --env "dirs push" [path: path] { dirs add $path }
 alias pushd = dirs add
 alias popd = dirs drop
 
