@@ -57,6 +57,9 @@ if (which zoxide | is-not-empty) {
 $env.config = {
   show_banner: false
   table: {
+    header_on_separator: true
+    # alternative null value symbols: '' # nf-cod-blank, '󰟢' # nf-md-null
+    missing_value_symbol: '' # nf-oct-x
     trim: {
       methodology: truncating
       truncating_suffix: '…'
@@ -66,6 +69,7 @@ $env.config = {
 
 # overlays must be after $env.config to be merged rather than being overwritten
 overlay use modules/macOS.nu
+overlay use modules/exif.nu
 overlay use modules/git.nu
 overlay use modules/keybindings.nu
 overlay use modules/greeting.nu
