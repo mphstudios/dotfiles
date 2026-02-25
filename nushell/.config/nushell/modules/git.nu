@@ -5,7 +5,7 @@
 # Git config aliases are resolved by git itself and work in any shell or client
 # (e.g. `git save "msg"` → `git stash push --message "msg"`). These functions
 # are resolved by nushell and allow dropping the `git` prefix entirely when
-# inside a repository (e.g. `save "msg"`). Where both layers define the same
+# inside a repository (e.g. `stash -m "msg"`). Where both layers define the same
 # command they do the same thing via different resolution paths. Commands
 # present only in git config (assume, presume, skip, noskip, fixup) have no
 # nushell equivalent: fixup requires an interactive rebase and cannot be
@@ -69,9 +69,16 @@ export def --wrapped unstage [...args] {
 
 # --- Stashing ---
 
-# Stash changes in a dirty working directory
-export def --wrapped stash [...args] {
-  ^git stash ...$args
+# Stash changes in a dirty working directory; -m / --message creates a named stash
+export def --wrapped stash [
+  --message (-m): string  # Description for the stash entry
+  ...args                 # Additional arguments passed to git stash
+] {
+  if ($message | is-not-empty) {
+    ^git stash push --message $message ...$args
+  } else {
+    ^git stash ...$args
+  }
 }
 
 # List stashes as a structured table with ref and description columns (alias for stash list)
@@ -90,11 +97,6 @@ export def 'stash list' [] {
       let subject_fields = $subject | parse --regex '^(?:WIP )?[Oo]n (?P<branch>[^:]+): (?P<description>.+)$' | first
       { index: $index, ref: $stash_ref, branch: $subject_fields.branch, date: $date, description: $subject_fields.description }
     }
-}
-
-# Stash with a message
-export def --wrapped save [...args] {
-  ^git stash push --message ...$args
 }
 
 # Restore the most recent stash and re-apply its index state
