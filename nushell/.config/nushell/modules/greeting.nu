@@ -1,6 +1,6 @@
 # Word-wrap a string into lines of at most `width` characters.
-# Newlines in the input are treated as paragraph breaks and preserved in output.
 # A single word wider than `width` is emitted as-is on its own line (soft overflow).
+# Newlines in the input are treated as paragraph breaks and preserved in output.
 def word-wrap [width: int]: string -> list<string> {
     $in | split row "\n" | each {|paragraph|
         if ($paragraph | str trim | is-empty) {
@@ -51,7 +51,7 @@ def card-height [text: string, footer: string, reflow: bool = true]: nothing -> 
         $text | split row "\n" | length
     }
     let footer_lines = if ($footer | is-not-empty) { 2 } else { 0 }
-    6 + $content_lines + $footer_lines  # leading blank + ╭─╮ + blank interior + content + [footer] + blank interior + ╰─╯ + trailing blank
+    6 + $content_lines + $footer_lines  # 6 structural rows: outer margins (2) + borders (2) + interior padding (2)
 }
 
 # Render piped text in a centered card with an optional footer line
@@ -144,12 +144,11 @@ def plain [footer: string = ""] {
     if ($footer | is-not-empty) { print $footer }
 }
 
-# Clear the screen, render a vertically centred card, and wait for a keypress;
+# Clear the screen, render a vertically centered card, and wait for a keypress;
 # the greeting remains in the terminal scrollback buffer after being dismissed.
 def splash [footer: string = "", reflow: bool = true] {
     let text = $in
     let size = term size
-
     clear
     if $reflow {
         let margin_top = ([0, (($size.rows - (card-height $text $footer true)) / 2 | into int)] | math max)
@@ -277,19 +276,11 @@ export def quotes [
     if not ($quotes_file | path exists) {
         error make { msg: $"Quotes file not found: ($quotes_file)" }
     }
-    mut rows = open $quotes_file
-
-    if $author != null {
-        $rows = $rows | where {|row|
-            $row.ATTRIBUTION | default "" | str contains --ignore-case $author
+    let rows = open $quotes_file
+        | where {|row|
+            (($author == null or ($row.ATTRIBUTION | default "" | str contains --ignore-case $author)) and
+            ($tag == null or ($row.TAGS | default "" | str contains --ignore-case $tag)))
         }
-    }
-
-    if $tag != null {
-        $rows = $rows | where {|row|
-            $row.TAGS | default "" | str contains --ignore-case $tag
-        }
-    }
 
     if ($rows | is-empty) {
         error make { msg: "No matching quotes found" }
@@ -321,16 +312,13 @@ export def poems [
     }
 
     let poem = if $author != null or $title != null or $tag != null {
-        mut candidates = $files | each {|f| parse-poem $f }
-        if $author != null {
-            $candidates = $candidates | where {|p| $p.author | str contains --ignore-case $author }
-        }
-        if $title != null {
-            $candidates = $candidates | where {|p| $p.title | default "" | str contains --ignore-case $title }
-        }
-        if $tag != null {
-            $candidates = $candidates | where {|p| $p.tags | default "" | str contains --ignore-case $tag }
-        }
+        let candidates = $files
+            | each {|f| parse-poem $f }
+            | where {|p|
+                (($author == null or ($p.author | str contains --ignore-case $author)) and
+                ($title == null or ($p.title | default "" | str contains --ignore-case $title)) and
+                ($tag == null or ($p.tags | default "" | str contains --ignore-case $tag)))
+            }
         if ($candidates | is-empty) {
             error make { msg: "No matching poems found" }
         }
