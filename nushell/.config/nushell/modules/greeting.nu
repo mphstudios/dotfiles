@@ -26,6 +26,29 @@ def visible-length []: string -> int {
     $in | ansi strip | split chars | length
 }
 
+# Open a file in the configured editor ($EDITOR or $VISUAL) and wait for it to close.
+# An optional line number positions the cursor on open (path:line syntax; supported by
+# Sublime Text, VS Code, and Zed). --wait is injected automatically for those GUI editors.
+def edit-file [path: string, line: int = 1]: nothing -> nothing {
+    let configured = $env.EDITOR? | default ($env.VISUAL? | default "")
+    if ($configured | is-empty) {
+        error make { msg: "No editor configured — set the EDITOR or VISUAL environment variable" }
+    }
+    let parts = $configured | split row ' '
+    let cmd = $parts | first
+    let base = $cmd | path basename
+    mut args = $parts | skip 1
+    if (["subl", "code", "zed"] | any {|e| $base == $e}) {
+        $args = $args | prepend "--wait"
+    }
+    ^$cmd ...$args $"($path):($line)"
+}
+
+# Resolve the XDG data directory, falling back to ~/.local/share
+def data-dir []: nothing -> string {
+    $env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share")
+}
+
 # Return spaces to left-pad `content_width` chars to the centre of `total_width`
 def left-pad [total_width: int, content_width: int]: nothing -> string {
     let w = ($total_width - $content_width) / 2 | into int
@@ -267,12 +290,11 @@ def parse-poem [path: string]: nothing -> record {
 #   SOURCE       source work shown in italic in the footer
 #   TAGS         space- or comma-separated values; matched by `quotes --tag`
 export def quotes [
-    --author (-a): string      # Filter by attribution (partial, case-insensitive)
-    --tag (-t): string         # Filter by tag (partial, case-insensitive)
-    --style (-s): string = "plain"  # Output style: plain, center, card, or splash (splash clears screen and waits for a keypress)
+    --author: string           # Filter by attribution (partial, case-insensitive)
+    --tag: string              # Filter by tag (partial, case-insensitive)
+    --style: string = "plain"  # Output style: plain, center, card, or splash (splash clears screen and waits for a keypress)
 ] {
-    let data_dir = $env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share")
-    let quotes_file = $data_dir | path join "quotes.csv"
+    let quotes_file = data-dir | path join "quotes.csv"
     if not ($quotes_file | path exists) {
         error make { msg: $"Quotes file not found: ($quotes_file)" }
     }
@@ -292,6 +314,49 @@ export def quotes [
     render $q.QUOTE $footer $style
 }
 
+# Append a new entry to the quotes file
+export def "quotes add" [
+    quote: string              # The quote text
+    --attribution: string      # Person attributed (ATTRIBUTION column)
+    --author: string           # Synonym for --attribution
+    --source: string           # Source work shown in italic in the footer
+    --tag: string              # Tags (space-separated)
+    --open                     # Open the quotes file in $EDITOR at the inserted line
+] {
+    if ($quote | str trim | is-empty) {
+        error make { msg: "Quote text cannot be empty" }
+    }
+    if ($attribution != null) and ($author != null) {
+        error make { msg: "Use either --attribution or --author, not both" }
+    }
+    let file = data-dir | path join "quotes.csv"
+    if not ($file | path exists) {
+        error make { msg: $"Quotes file not found: ($file)" }
+    }
+    let data = {
+        QUOTE: $quote,
+        ATTRIBUTION: ($attribution | default $author | default ""),
+        SOURCE: ($source | default ""),
+        TAGS: ($tag | default "")
+    }
+    open $file | append $data | to csv | collect | save --force $file
+    print $"Quote saved to ($file)"
+
+    if $open {
+        let line = open --raw $file | str trim | split row "\n" | length
+        edit-file $file $line
+    }
+}
+
+# Open the quotes file in $EDITOR
+export def "quotes edit" [] {
+    let file = data-dir | path join "quotes.csv"
+    if not ($file | path exists) {
+        error make { msg: $"Quotes file not found: ($file)" }
+    }
+    edit-file $file
+}
+
 # Display a random poem or passage from the local poems directory,
 # optionally filtered by author or tag
 export def poems [
@@ -300,8 +365,7 @@ export def poems [
     --tag: string              # Filter by tag (partial, case-insensitive)
     --style: string = "plain"  # Output style: plain, center, card, or splash
 ] {
-    let data_dir = $env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share")
-    let poems_dir = $data_dir | path join "poems"
+    let poems_dir = data-dir | path join "poems"
     if not ($poems_dir | path exists) {
         error make { msg: $"Poems directory not found: ($poems_dir)" }
     }
@@ -335,12 +399,101 @@ export def poems [
     render $display_text $poem.footer $style $poem.reflow
 }
 
+# Derive a filename from a poem's title and author following the "Title by Author.md" convention
+def poem-filename [title: string, author: string]: nothing -> string {
+    let sanitize = {|s| $s | str replace --all --regex '[/:*?"<>|]' '' | str trim }
+    let safe_title = do $sanitize $title
+    let safe_author = do $sanitize $author
+    if ($safe_title | is-empty) {
+        error make { msg: "Poem must have a title in the frontmatter" }
+    }
+    if ($safe_author | is-not-empty) { $"($safe_title) by ($safe_author).md" } else { $"($safe_title).md" }
+}
+
+# Add a new poem or passage to the poems directory.
+#
+# Opens a pre-filled YAML frontmatter template in $EDITOR. Fill in the
+# frontmatter fields and write the poem body after the closing ---.
+# Any flags provided are pre-filled into the template.
+#
+# The file is saved as "Title by Author.md" in the poems directory.
+# Closing the editor without changes discards the draft.
+export def "poems add" [
+    --title: string   # Title displayed above the body in italic
+    --author: string  # Attribution shown in the footer
+    --source: string  # Source work shown in italic after the author in the footer
+    --tag: string     # Tags (space-separated) for filtering with --tag
+    --reflow          # Word-wrap to terminal width (default: preserve line breaks)
+] {
+    let poems_dir = data-dir | path join "poems"
+    if not ($poems_dir | path exists) {
+        error make { msg: $"Poems directory not found: ($poems_dir)" }
+    }
+    let temp_file = $"/tmp/poem-($nu.pid).md"
+    let template = [
+        "---"
+        $"title: ($title | default "")"
+        $"author: ($author | default "")"
+        $"source: ($source | default "")"
+        $"tags: ($tag | default "")"
+        $"reflow: ($reflow)"
+        "---"
+        ""  # 🡄 editor cursor is placed here at length - 1
+        ""
+    ] | str join "\n"
+    $template | save --force $temp_file
+
+    let body_line = ($template | split row "\n" | length) - 1
+    edit-file $temp_file $body_line
+
+    # If the template is unchanged the user aborted; safe to discard the draft
+    let content = open --raw $temp_file | decode utf-8
+    if $content == $template {
+        rm $temp_file
+        error make { msg: "No changes made — poem not saved" }
+    }
+
+    # All subsequent errors keep the draft so the user does not lose their work
+    let poem = try {
+        parse-poem $temp_file
+    } catch {|err|
+        error make {
+            msg: "Could not parse the poem file"
+            help: $"($err.msg)\nDraft kept at ($temp_file)"
+        }
+    }
+
+    if ($poem.text | is-empty) {
+        error make {
+            msg: "Poem body is empty — poem not saved"
+            help: $"Draft kept at ($temp_file)"
+        }
+    }
+
+    let filename = try {
+        poem-filename $poem.title $poem.author
+    } catch {|err|
+        error make { msg: $err.msg, help: $"Draft kept at ($temp_file)" }
+    }
+
+    let destination = $poems_dir | path join $filename
+    if ($destination | path exists) {
+        error make {
+            msg: $"A poem file already exists at ($destination)"
+            help: $"Edit the title or author in the frontmatter to disambiguate. Draft kept at ($temp_file)"
+        }
+    }
+
+    cp $temp_file $destination
+    rm $temp_file
+    print $"Poem saved to ($destination)"
+}
+
 # Display a random greeting drawn from quotes and poems
 export def greet [
     --style (-s): string = "plain"  # Output style: plain, center, card, or splash (splash clears screen and waits for a keypress)
 ] {
-    let data_dir = $env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share")
-    let poems_dir = $data_dir | path join "poems"
+    let poems_dir = data-dir | path join "poems"
     let has_poems = ($poems_dir | path exists) and (glob (($poems_dir | path join "*.md") | into glob) | is-not-empty)
 
     if $has_poems and ((random int 0..1) == 0) {
