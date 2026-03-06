@@ -54,6 +54,26 @@ export def ignored [] {
   ^git ls-files . --ignored --exclude-standard --others | lines
 }
 
+# Transform the git reflog for display as structured data.
+# Nota bene: `git reflog` (default subcommand `show`) is an alias for
+# command `git log --abbrev-commit --walk-reflogs --pretty=oneline`
+# See format placeholders https://git-scm.com/docs/pretty-formats
+export def reflog [ref?: string] {
+  let args = if $ref != null { [$ref] } else { [] }
+  ^git reflog --format='%h%x09%gd%x09%gs%x09%ar' ...$args
+  | lines
+  | each {|line|
+      let fields = $line | split row "\t"
+      let hash = $fields.0
+      let selector = $fields.1
+      let subject = $fields.2
+      let date = $fields.3
+      let index = $selector | parse --regex '\{(?P<index>\d+)\}' | first | get index | into int
+      let parsed_subject = $subject | parse --regex '^(?P<action>[^:]+): (?P<description>.+)$' | first
+      { index: $index, ref: $selector, hash: $hash, action: $parsed_subject.action, date: $date, description: $parsed_subject.description }
+    }
+}
+
 # --- Staging ---
 
 # Stage changes for the next commit
