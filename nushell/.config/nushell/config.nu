@@ -57,7 +57,7 @@ if (which zoxide | is-not-empty) {
 $env.config = {
   show_banner: false
   table: {
-    header_on_separator: true
+    header_on_separator: false
     # alternative null value symbols: '' # nf-cod-blank, '󰟢' # nf-md-null
     missing_value_symbol: '' # nf-oct-x
     trim: {

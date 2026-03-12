@@ -58,6 +58,12 @@ alias plugins = plugin list
 # Unmount a volume
 alias unmount = umount
 
+# TODO: Use `table --icons` to display Nerd Font icons for all ls aliases.
+# Pipe each command through `table --icons` at the end. Because `table --icons`
+# renders to a string, every command must call ls-builtin directly rather than
+# delegating to another wrapper (lsa, ll, lla) so that any filtering steps
+# (`where`, reject`) still operate on a raw table before the final render.
+
 # Alias for the built-in ls command (so that we can define other aliases for ls)
 alias ls-builtin = ls
 
