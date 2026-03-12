@@ -2,6 +2,8 @@
 .AppleDouble
 .DS_Store
 .LSOverride
+.localized
+__MACOSX/
 
 # files that might appear on external disk
 .fseventsd
@@ -13,12 +15,15 @@
 *(Autosaved).rtfd/
 
 # build products
-build/*
+build/
 
 # database and log files
+*.db-shm
+*.db-wal
 *.log
 *.sql
-*.sqlite*
+*.sqlite
+*.sqlite3
 
 ## packages
 # unpack these files and commit the raw source
@@ -39,14 +44,13 @@ build/*
 
 # temporary files
 *~
-*~.nib
+*.orig
 *.swp
 
 # thumbnails
 ._*
 
 ## version control
-.cvs
 .hg
 .svn
 CVS
@@ -56,16 +60,12 @@ CVS
 *.un~
 Session.vim
 
-## Xcode user-specific files
-*.mode*
-*.pbxuser
-*.perspective*
-*.user
-*.xcuserstate
-xcuserdata
+# environment and secrets
+.env
+.env.local
 
 # Claude Code
-**/.claude/settings.local.json
+.claude/settings.local.json
 
 ## Mac OS X custom folder icon files
 # Since the "Icon\r\r" file name contains two ASCII CRLF characters
