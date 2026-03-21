@@ -134,6 +134,12 @@ if command -v try 1>/dev/null 2>&1; then
     eval "$(/usr/local/bin/try init)"
 fi
 
+## Television general-purpose fuzzy finder
+# https://alexpasmantier.github.io/television/
+if command -v tv 1>/dev/null 2>&1; then
+    eval "$(tv init bash)"
+fi
+
 ## Zellij terminal multiplexer
 # https://zellij.dev/documentation/integration.html
 if command -v zellij 1>/dev/null 2>&1; then

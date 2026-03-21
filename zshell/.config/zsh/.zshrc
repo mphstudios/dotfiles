@@ -162,6 +162,12 @@ if (( $+commands[starship] )) then
   eval "$(starship init zsh)"
 fi
 
+## Television general-purpose fuzzy finder
+# https://alexpasmantier.github.io/television/
+if (( $+commands[tv] )) then
+  eval "$(tv init zsh)"
+fi
+
 ## Carapace multi-shell multi-command argument completer
 # https://carapace-sh.github.io/carapace-bin/setup.html#zsh
 if (( $+commands[carapace] )) then

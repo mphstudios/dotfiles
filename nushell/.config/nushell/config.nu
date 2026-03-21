@@ -50,6 +50,9 @@ if (which mise | is-not-empty) {
 if (which starship | is-not-empty) {
     starship init nu | save --force ($vendor | path join "starship.nu")
 }
+if (which tv | is-not-empty) {
+    tv init nu | save --force ($vendor | path join "tv.nu")
+}
 if (which zoxide | is-not-empty) {
     zoxide init nushell | save --force ($vendor | path join "zoxide.nu")
 }
