@@ -201,6 +201,24 @@ export def --wrapped pick [...args] {
   ^git cherry-pick ...$args
 }
 
+# --- Tagged commits ---
+
+# List all tags as a structured table with name, short hash, relative date, subject annotation
+export def --wrapped 'tag list' [...args] {
+  ^git tag --list --format='{"name":"%(refname:short)","hash":"%(objectname:short)","type":"%(objecttype)","date":"%(creatordate:relative)","subject":"%(contents:subject)"}' ...$args
+  | lines
+  | enumerate
+  | each {|entry|
+      let tag = $entry.item | from json
+      # display nerd-font symbol nf-oct-git_commit or nf-oct-tag based on object type
+      let icon = if ($tag.type | str starts-with 'commit') { '  ' } else { '  ' }
+      { index: $entry.index, tag: $"($icon) ($tag.name)", hash: $tag.hash, date: $tag.date, subject: $tag.subject }
+    }
+}
+
+# List all tags (alias for tag list)
+export def tags [] { tag list }
+
 # --- Remotes ---
 
 # List remote connections as a structured table with name, url, and operation columns
