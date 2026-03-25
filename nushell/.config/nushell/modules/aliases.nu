@@ -106,9 +106,6 @@ def ll [...rest] { ls --long ...$rest | reject accessed inode num_links readonly
 # display directory list including dot file entries
 def lla [...rest] { ls --all --long ...$rest | reject accessed inode num_links readonly }
 
-# find entries with name matching a regular expresion pattern
-def "ll name" [pattern] { ls --all --long | reject accessed inode num_links readonly | where name =~ $pattern }
-
 # list only dotfile entries
 def "ll." [...rest] { lla ...$rest | where { |it| ($it.name | path basename) | str starts-with "." } }
 
