@@ -58,6 +58,9 @@ alias plugins = plugin list
 # Unmount a volume
 alias unmount = umount
 
+# Unlink a dotfiles package
+alias unstow = stow --delete
+
 # TODO: Use `table --icons` to display Nerd Font icons for all ls aliases.
 # Pipe each command through `table --icons` at the end. Because `table --icons`
 # renders to a string, every command must call ls-builtin directly rather than
