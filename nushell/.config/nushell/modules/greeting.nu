@@ -1,3 +1,5 @@
+use std/log
+
 # Word-wrap a string into lines of at most `width` characters.
 # A single word wider than `width` is emitted as-is on its own line (soft overflow).
 # Newlines in the input are treated as paragraph breaks and preserved in output.
@@ -296,7 +298,8 @@ export def quotes [
 ] {
     let quotes_file = data-dir | path join "quotes.csv"
     if not ($quotes_file | path exists) {
-        error make { msg: $"Quotes file not found: ($quotes_file)" }
+        log warning $"Quotes file not found: ($quotes_file)"
+        return
     }
     let rows = open $quotes_file
         | where {|row|

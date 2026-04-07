@@ -77,8 +77,7 @@ overlay use modules/git.nu
 overlay use modules/keybindings.nu
 overlay use modules/greeting.nu
 
-# Display a greeting on each new terminal session
-# do not show a greeting in IDE terminal sessions
-if ([Apple_Terminal ghostty] | where $it == $env.TERM_PROGRAM) {
+# Display a greeting when the following terminal emulators start a session
+if ([Apple_Terminal ghostty] | where $it == $env.TERM_PROGRAM | is-not-empty) {
     greet --style splash
 }
