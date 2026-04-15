@@ -15,18 +15,17 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+$golang\
 $nodejs\
 $python\
 $ruby\
-$direnv\
-$env_var\
+$rust\
 $mise\
-$custom\
 $sudo\
-$line_break\
 $jobs\
-$os\
+$line_break\
 $container\
+$kubernetes\
 $shell\
 $character
 """
@@ -117,12 +116,29 @@ style = 'white'
 untracked = '❔'
 up_to_date = '' # nf-cod-pass
 
+[golang]
+format = '[$symbol($version )]($style) '
+symbol = 'Go'
+version_format = '${raw}'
+
 [hostname]
 disabled = false
 format = '[$ssh_symbol](bold blue)[$hostname]($style) '
 ssh_only = false
 ssh_symbol = 'SSH:'
 style = 'yellow'
+
+# The job module always shows one job if the command is not empty,
+# caused by running atuin, which calls job spawn for each command;
+# resulting in $number always being off by one when running atuin.
+# See starship#7098 starship#7102 ...
+[jobs]
+format = '[$symbol$number]($style) '
+style = 'underline blue'
+symbol = ''
+
+[kubernetes]
+disabled = true
 
 [mise]
 disabled = false
@@ -148,6 +164,11 @@ format = '[$symbol $version]($style) '
 symbol = 'Ruby'
 version_format = '${raw}'
 
+[rust]
+format = '[$symbol $version]($style) '
+symbol = 'Rust'
+version_format = '${raw}'
+
 [shell]
 disabled = false
 format = '[$indicator]($style)'
@@ -160,7 +181,7 @@ zsh_indicator = '' # nf-fa-percent
 
 [sudo]
 disabled = false
-format = '[as $symbol]($style)'
+format = '[as $symbol]($style) '
 style = 'bold green'
 symbol = '' # nf-dev-apple
 
