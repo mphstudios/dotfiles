@@ -1,4 +1,5 @@
-# sheldon configuration file
+# Zsh specific Sheldon plugins configuration file
+# see https://github.com/rossmacarthur/sheldon/issues/166
 #
 # Modify this file directly or use one of the following `sheldon` commands
 # which are provided to assist in editing the config file:
@@ -8,7 +9,6 @@
 # `sheldon remove` to remove a plugin from the config file
 #
 # See https://github.com/rossmacarthur/sheldon#readme
-
 shell = "zsh"
 
 [templates]
