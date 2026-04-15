@@ -142,7 +142,7 @@ fi
 
 ## Zellij terminal multiplexer
 # https://zellij.dev/documentation/integration.html
-if command -v zellij 1>/dev/null 2>&1; then
+if command -v zellij 1>/dev/null 2>&1 && [ "$TERM_PROGRAM" != "vscode" ]; then
     eval "$(zellij setup --generate-auto-start bash)"
 fi
 

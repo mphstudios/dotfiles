@@ -174,7 +174,7 @@ fi
 
 ## Zellij terminal multiplexer
 # https://zellij.dev/documentation/integration.html
-if (( $+commands[zellij] )) then
+if (( $+commands[zellij] )) && [[ "$TERM_PROGRAM" != "vscode" ]]; then
   eval "$(zellij setup --generate-auto-start zsh)"
 fi
 
