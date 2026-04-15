@@ -58,9 +58,12 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 # pasting with tabs does not perform completion
 zstyle ':completion:*' insert-tab pending
 
+# Configure location of completion cache file per HOST and Zsh version
+export ZSH_COMPCACHE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+# Ensure compinit cache directory has been created
+[[ -d $ZSH_COMPCACHE ]] || mkdir -p $ZSH_COMPCACHE
 autoload -Uz compinit
-[[ -d ${XDG_CACHE_HOME:-$HOME/.cache}/zsh ]] || mkdir -p ${XDG_CACHE_HOME:-$HOME/.cache}/zsh
-compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+compinit -d "${ZSH_COMPCACHE}/zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
 
 # -----------------------------------------------
 # ------------->>> EXPANSION <<<-----------------
@@ -128,27 +131,14 @@ setopt no_bg_nice     # do not nice background tasks
 # -----------------------------------------------
 
 ## Sheldon command-line tool to manage and load shell plugins
-# set a shell specific configuration file and data directory for installed plugins
+# Zsh specific plugins file and data directory for installed plugins
 # see https://github.com/rossmacarthur/sheldon/issues/166
-export SHELDON_CONFIG_FILE="$ZSH_DIR/plugins.toml"
-export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/zsh"
-
 # https://sheldon.cli.rs/Getting-started.html#loading-plugins
 if (( $+commands[sheldon] )) then
+  export SHELDON_CONFIG_FILE="$ZSH_DIR/plugins.toml"
+  export SHELDON_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sheldon/zsh"
   eval "$(sheldon source)"
 fi
-
-# Load configuration for zsh-autosuggestions plugin
-[ -f $ZSH_DIR/autosuggestions.zsh ] && source $ZSH_DIR/autosuggestions.zsh
-
-
-# -----------------------------------------------
-# -------->>> ADDITIONAL CONFIG FILES <<<--------
-# -----------------------------------------------
-
-[ -f $ZSH_DIR/bindings.zsh ] && source $ZSH_DIR/bindings.zsh
-
-[ -f $ZSH_DIR/smartdots.zsh ] && source $ZSH_DIR/smartdots.zsh
 
 ## Atuin improved shell history for zsh, bash, fish and nushell
 # https://docs.atuin.sh/cli/guide/installation/
@@ -193,3 +183,15 @@ fi
 if (( $+commands[zoxide] )) then
   eval "$(zoxide init zsh --cmd cd)"
 fi
+
+## Zsh-Autosuggestions plugin is managed by Sheldon
+# https://github.com/zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+
+# -----------------------------------------------
+# -------->>> ADDITIONAL CONFIG FILES <<<--------
+# -----------------------------------------------
+
+[ -f $ZSH_DIR/bindings.zsh ] && source $ZSH_DIR/bindings.zsh
+

@@ -13,6 +13,9 @@
 # to $PATH, reorders it, and then removes duplicates.
 setopt no_global_rcs
 
+# Skip compinit called by /etc/zsh/zshrc
+# skip_global_compinit=1
+
 # XDG Base Directories
 # Nota bene: LaunchAgent (org.freedesktop.xdg-basedir.plist) sets these for
 # processes spawned by launchd (GUI applications and login shells).
