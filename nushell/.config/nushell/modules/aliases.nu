@@ -52,6 +52,12 @@ def "id parse" [] {
   }
 }
 
+# List background jobs
+alias jobs = job list
+
+# Unfreeze a frozen process
+alias thaw = job unfreeze
+
 # List Nushell plugins
 alias plugins = plugin list
 
