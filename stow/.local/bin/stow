@@ -19,7 +19,7 @@ done
 IFS="$saved_ifs"
 
 if [ -z "$STOW" ]; then
-  echo "error: GNU Stow not found on PATH" >&2
+  echo "error: GNU Stow not found in PATH" >&2
   exit 1
 fi
 
@@ -29,21 +29,57 @@ usage() {
   cat <<EOF
 Stow wrapper for managing dotfile packages.
 
-Usage: stow add <name>              adopt ~/.<name>
-       stow add .config <name>      adopt ~/.config/<name>
+Usage: stow add <path>              adopt a file or directory into a package
        stow scan                    scan ~/.config for unmanaged packages
-       stow remove [-f] <package>   unlink stowed packages
+       stow remove [--force|-f] <package>   unlink stowed packages
        stow [flags] <packages>      forwarded to GNU Stow
+
+The add path is resolved relative to the current directory.
+The package name is derived from the basename of the path.
 
 EOF
 }
 
 add_package() {
-  package="$1"
-  origin="$2"
+  if [ -z "${1:-}" ]; then
+    echo "usage: stow add <path>" >&2
+    return 1
+  fi
 
-  if [ ! -e "$origin" ]; then
-    echo "error: $origin does not exist" >&2
+  # Strip trailing slashes
+  path="${1%/}"
+
+  # Resolve to absolute path
+  case "$path" in
+    /*) absolute="$path" ;;
+    *)
+      parent="$(cd "$(dirname "$path")" && pwd)" || {
+        echo "error: cannot resolve $path" >&2
+        return 1
+      }
+      absolute="$parent/$(basename "$path")"
+      ;;
+  esac
+
+  # Verify the path is under $HOME
+  case "$absolute" in
+    "$HOME"/*) ;;
+    *)
+      echo "error: $absolute is not under \$HOME" >&2
+      return 1
+      ;;
+  esac
+
+  if [ ! -e "$absolute" ]; then
+    echo "error: $absolute does not exist" >&2
+    return 1
+  fi
+
+  relative="${absolute#$HOME/}"
+  package="$(basename "$absolute" | sed 's/^\.//')"
+
+  if [ -z "$package" ]; then
+    echo "error: could not derive package name from $path" >&2
     return 1
   fi
 
@@ -52,11 +88,10 @@ add_package() {
     return 1
   fi
 
-  relative="${origin#$HOME/}"
   dest="$STOW_DIR/$package/$relative"
 
   mkdir -p "$(dirname "$dest")"
-  mv "$origin" "$dest"
+  mv "$absolute" "$dest"
   "$STOW" "$package"
   echo "added $package: ~/$relative"
 }
@@ -72,18 +107,58 @@ is_managed() {
   return 1
 }
 
+remove_package() {
+  force=false
+  if [ "${1:-}" = "-f" ] || [ "${1:-}" = "--force" ]; then
+    force=true
+    shift
+  fi
+
+  if [ -z "${1:-}" ]; then
+    echo "usage: stow remove [--force|-f] <package>..." >&2
+    echo "for stow flags, use: stow --delete [flags] <package>" >&2
+    return 1
+  fi
+
+  case "${1:-}" in
+    -*)
+      echo "error: unknown flag $1" >&2
+      echo "for stow flags, use: stow --delete [flags] <package>" >&2
+      echo "run stow --help for available flags" >&2
+      return 1
+      ;;
+  esac
+
+  if [ "$force" = false ]; then
+    printf 'Unlink dotfiles package `%s` from $HOME directory? [y/N] ' "$*"
+    read -r answer
+    case "$answer" in
+      [yY]*) ;;
+      *) return 0 ;;
+    esac
+  fi
+
+  exec "$STOW" --delete "$@"
+}
+
 scan_dotconfig() {
+  echo "Scanning \$HOME/.config directory for unmanaged packages..."
+  found=false
   for dir in "$HOME"/.config/*/; do
     [ -L "$dir" ] && continue
     name="$(basename "$dir")"
     is_managed "$name" && continue
 
+    found=true
     printf "Add %s? [y/N] " "$name"
     read -r answer
     case "$answer" in
-      [yY]*) "$0" add .config "$name" ;;
+      [yY]*) "$0" add "$dir" ;;
     esac
   done
+  if [ "$found" = false ]; then
+    echo "no unmanaged packages found"
+  fi
 }
 
 case "${1:-}" in
@@ -91,59 +166,8 @@ case "${1:-}" in
     usage
     exec "$STOW" --help
     ;;
-  add)
-    case "${2:-}" in
-      .config)
-        if [ -n "${3:-}" ]; then
-          add_package "$3" "$HOME/.config/$3"
-        else
-          echo "usage: stow add .config <name>    adopt ~/.config/<name>" >&2
-          exit 1
-        fi
-        ;;
-      .config/*)
-        name="${2#.config/}"
-        add_package "$name" "$HOME/.config/$name"
-        ;;
-      "")
-        echo "usage: stow add <name>            adopt ~/.<name>" >&2
-        echo "       stow add .config <name>    adopt ~/.config/<name>" >&2
-        exit 1
-        ;;
-      .*)
-        echo "error: package name must not start with '.'" >&2
-        exit 1
-        ;;
-      *)
-        add_package "$2" "$HOME/.$2"
-        ;;
-    esac
-    ;;
-  remove)
-    shift
-    force=false
-    if [ "${1:-}" = "-f" ] || [ "${1:-}" = "--force" ]; then
-      force=true
-      shift
-    fi
-    if [ -z "${1:-}" ]; then
-      echo "usage: stow remove [-f] <package>..." >&2
-      exit 1
-    fi
-    if [ "$force" = false ]; then
-      printf 'Unlink dotfiles package `%s` from $HOME directory? [y/N] ' "$*"
-      read -r answer
-      case "$answer" in
-        [yY]*) ;;
-        *) exit 0 ;;
-      esac
-    fi
-    exec "$STOW" --delete "$@"
-    ;;
-  scan)
-    scan_dotconfig
-    ;;
-  *)
-    exec "$STOW" "$@"
-    ;;
+  add)     shift; add_package "$@" ;;
+  remove)  shift; remove_package "$@" ;;
+  scan)    scan_dotconfig ;;
+  *)       exec "$STOW" "$@" ;;
 esac

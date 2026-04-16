@@ -59,7 +59,7 @@ Each top-level directory is a stow _package_. Contents mirror the _target_ direc
 |---------|-------------|-------------|
 | `cmux` | tmux/Zellij session manager | `~/.config/cmux/` |
 | `home` | Misc dotfiles in `$HOME` | `~/.*` |
-| `stow` | Stow wrapper | `~/.local/bin/stow` |
+| `stow` | Stow wrapper and unstow | `~/.local/bin/{stow,unstow}` |
 
 ## Workflows
 
@@ -76,15 +76,13 @@ Stow creates symlinks from `$HOME` into the dotfile repository _package_ directo
 
 ### Add a new package from existing config
 
-```sh
-stow add .config superfile
-stow add .config/superfile   # equivalent
-```
-
-For dotfiles in `$HOME` (e.g. `~/.foo`):
+The path is resolved relative to the current directory. The package name is derived from the basename.
 
 ```sh
-stow add foo
+stow add ~/.config/superfile           # from anywhere
+stow add .config/superfile             # from $HOME
+cd ~/.config && stow add superfile     # from ~/.config
+stow add ~/.foo                        # dotfile in $HOME (package: foo)
 ```
 
 ### Scan for unmanaged config
