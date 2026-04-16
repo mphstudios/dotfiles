@@ -9,12 +9,11 @@ Personal configuration files managed with [GNU Stow](https://www.gnu.org/softwar
 ## Installation
 
 ```sh
-git clone <repo-url> ~/Code/dotfiles
-cd ~/Code/dotfiles
-./setup
+git clone <repository-url> ~/Code/dotfiles
+cd ~/Code/dotfiles && ./setup
 ```
 
-This stows all packages and symlinks `.stowrc` to `$HOME` so that `stow` can be run from any directory. After installation, a wrapper at `~/.local/bin/stow` extends GNU Stow with subcommands for managing dotfile packages. Run `stow --help` to see both wrapper and GNU Stow documentation.
+This stows all packages and symlinks `.stowrc` to `$HOME` so that `stow` can be run from any directory. After installation, a wrapper at `~/.local/bin/stow` extends GNU Stow with subcommands for managing dotfile packages, and `unstow` provides a shorthand for removing them. Run `stow --help` to see both wrapper and GNU Stow documentation.
 
 ## Packages
 
@@ -42,6 +41,7 @@ Each top-level directory is a stow _package_. Contents mirror the _target_ direc
 
 | Package | Description | Config path |
 |---------|-------------|-------------|
+| `cmux` | tmux/Zellij session manager | `~/.config/cmux/` |
 | `curl` | curl | `~/.config/curl/` |
 | `eza` | eza ls replacement | `~/.config/eza/` |
 | `ghostty` | Ghostty terminal | `~/.config/ghostty/` |
@@ -53,17 +53,16 @@ Each top-level directory is a stow _package_. Contents mirror the _target_ direc
 | `yazi` | Yazi file manager | `~/.config/yazi/` |
 | `zellij` | Zellij terminal multiplexer | `~/.config/zellij/` |
 
-### Other
+### Infrastructure
 
 | Package | Description | Config path |
 |---------|-------------|-------------|
-| `cmux` | tmux/Zellij session manager | `~/.config/cmux/` |
-| `home` | Misc dotfiles in `$HOME` | `~/.*` |
+| `home` | Shell profile, aliases, and dotfiles in `$HOME` | `~/.*` |
 | `stow` | Stow wrapper and unstow | `~/.local/bin/{stow,unstow}` |
 
 ## Workflows
 
-Use `--simulate` (dry-run) to preview what stow will do before making changes.
+Use `stow --simulate` (dry-run) to preview what stow will do before making changes. The `--simulate` flag applies to stow commands passed through to GNU Stow, not to wrapper subcommands.
 
 ### Install a package
 
@@ -76,13 +75,13 @@ Stow creates symlinks from `$HOME` into the dotfile repository _package_ directo
 
 ### Add a new package from existing config
 
-The path is resolved relative to the current directory. The package name is derived from the basename.
+The path is resolved relative to the current directory. The package name is derived from the basename, stripping a leading dot if present.
 
 ```sh
-stow add ~/.config/superfile           # from anywhere
-stow add .config/superfile             # from $HOME
-cd ~/.config && stow add superfile     # from ~/.config
-stow add ~/.foo                        # dotfile in $HOME (package: foo)
+stow add ~/.config/gradoo           # from anywhere
+stow add .config/gradoo             # from $HOME
+cd ~/.config && stow add gradoo     # from ~/.config
+stow add ~/.foo                     # dotfile in $HOME (package: foo)
 ```
 
 ### Scan for unmanaged config
@@ -93,7 +92,7 @@ List directories in `~/.config` not managed by any stow package:
 stow scan
 ```
 
-Then adopt any listed package with `stow add`.
+Then adopt any listed package with `stow add ~/.config/<name>`.
 
 ### Adopt existing files on a new machine
 
@@ -107,7 +106,8 @@ stow --adopt git              # apply
 ### Remove a package
 
 ```sh
-unstow git
+unstow git                    # prompts for confirmation
+unstow --force git            # skip confirmation
 ```
 
 ## Configuration
