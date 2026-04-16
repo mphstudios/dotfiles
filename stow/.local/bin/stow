@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 #
-# Stow wrapper that adds an `add` subcommand for creating
-# new dotfile packages from existing config files.
+# Stow wrapper that adds subcommands for managing dotfile packages:
+#   add     adopt existing config files into a new package
+#   remove  unlink a stowed package
 #
 # All other arguments are forwarded to GNU Stow.
 #
@@ -101,6 +102,14 @@ case "${1:-}" in
         add_package "$2" "$HOME/.$2"
         ;;
     esac
+    ;;
+  remove)
+    shift
+    if [ -z "${1:-}" ]; then
+      echo "usage: stow remove <package>..." >&2
+      exit 1
+    fi
+    exec "$STOW" --delete "$@"
     ;;
   *)
     exec "$STOW" "$@"

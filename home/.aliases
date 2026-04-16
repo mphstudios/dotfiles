@@ -82,9 +82,7 @@ alias psg='ps aux | grep -i'
 
 # fix unintuitive unix command names
 alias unmount='umount'
-
-# unlink a dotfiles package
-alias unstow='stow --delete'
+alias unstow='stow remove'
 
 # output random hexidecimal gradoo
 alias gradoo='cat /dev/urandom | hexdump -C | grep "ca fe"'

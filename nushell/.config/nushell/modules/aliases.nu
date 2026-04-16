@@ -65,7 +65,7 @@ alias plugins = plugin list
 alias unmount = umount
 
 # Unlink a dotfiles package
-alias unstow = stow --delete
+alias unstow = stow remove
 
 # TODO: Use `table --icons` to display Nerd Font icons for all ls aliases.
 # Pipe each command through `table --icons` at the end. Because `table --icons`
