@@ -53,6 +53,9 @@ if ("/opt/homebrew/bin" | path exists) {
     $env.PATH = ([/opt/homebrew/bin /opt/homebrew/sbin] | append $env.PATH)
 }
 
+# User local binaries
+$env.PATH = ($env.PATH | prepend ($env.HOME | path join ".local/bin"))
+
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash'
 $env.CLICOLOR = "true"
 
