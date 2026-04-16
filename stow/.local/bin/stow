@@ -83,7 +83,6 @@ case "${1:-}" in
           add_package "$3" "$HOME/.config/$3"
         else
           echo "usage: stow add .config <name>    adopt ~/.config/<name>" >&2
-          echo "       stow scan                  scan ~/.config for unmanaged dirs" >&2
           exit 1
         fi
         ;;
