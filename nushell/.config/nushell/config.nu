@@ -77,7 +77,7 @@ overlay use modules/git.nu
 overlay use modules/keybindings.nu
 overlay use modules/greeting.nu
 
-# Display a greeting when the following terminal emulators start a session
-if ([Apple_Terminal ghostty] | where $it == $env.TERM_PROGRAM | is-not-empty) {
+# Display a greeting when these terminal emulators start a session
+if (($env.TERM_PROGRAM? | default "") in [Apple_Terminal ghostty]) {
     greet --style splash
 }
