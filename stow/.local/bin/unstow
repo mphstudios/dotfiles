@@ -1,9 +1,10 @@
 #!/usr/bin/env sh
 #
-# Unlink stowed packages.
-# Shorthand for stow remove (stow --delete).
+# Unlink packages managed using GNU Stow,
+# shorthand for stow remove (stow --delete).
 #
-# Usage: unstow <package>...        prompt before removing
-#        unstow -f <package>...     remove without confirmation
+# Usage:
+#   unstow <package>...             confirmation before removal
+#   unstow -f|--force <package>...  remove without confirmation
 #
 exec stow remove "$@"

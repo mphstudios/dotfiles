@@ -59,7 +59,7 @@ Each top-level directory is a stow _package_. Contents mirror the _target_ direc
 |---------|-------------|-------------|
 | `cmux` | tmux/Zellij session manager | `~/.config/cmux/` |
 | `home` | Misc dotfiles in `$HOME` | `~/.*` |
-| `stow` | Stow wrapper | `~/.local/bin/stow` |
+| `stow` | Stow wrapper and unstow | `~/.local/bin/{stow,unstow}` |
 
 ## Workflows
 

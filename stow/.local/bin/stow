@@ -31,7 +31,7 @@ Stow wrapper for managing dotfile packages.
 
 Usage: stow add <path>              adopt a file or directory into a package
        stow scan                    scan ~/.config for unmanaged packages
-       stow remove [-f] <package>   unlink stowed packages
+       stow remove [-f|--force] <package>   unlink stowed packages
        stow [flags] <packages>      forwarded to GNU Stow
 
 The add path is resolved relative to the current directory.
