@@ -3,4 +3,7 @@
 # Unlink stowed packages.
 # Shorthand for stow remove (stow --delete).
 #
+# Usage: unstow <package>...        prompt before removing
+#        unstow -f <package>...     remove without confirmation
+#
 exec stow remove "$@"
