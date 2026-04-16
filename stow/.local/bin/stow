@@ -3,6 +3,7 @@
 # Stow wrapper that adds subcommands for managing dotfile packages:
 #   add     adopt existing config files into a new package
 #   remove  unlink a stowed package
+#   scan    find unmanaged directories in ~/.config
 #
 # All other arguments are forwarded to GNU Stow.
 #
@@ -81,7 +82,9 @@ case "${1:-}" in
         if [ -n "${3:-}" ]; then
           add_package "$3" "$HOME/.config/$3"
         else
-          scan_dotconfig
+          echo "usage: stow add .config <name>    adopt ~/.config/<name>" >&2
+          echo "       stow scan                  scan ~/.config for unmanaged dirs" >&2
+          exit 1
         fi
         ;;
       .config/*)
@@ -91,7 +94,6 @@ case "${1:-}" in
       "")
         echo "usage: stow add <name>            adopt ~/.<name>" >&2
         echo "       stow add .config <name>    adopt ~/.config/<name>" >&2
-        echo "       stow add .config           scan ~/.config for unmanaged dirs" >&2
         exit 1
         ;;
       .*)
@@ -102,6 +104,9 @@ case "${1:-}" in
         add_package "$2" "$HOME/.$2"
         ;;
     esac
+    ;;
+  scan)
+    scan_dotconfig
     ;;
   remove)
     shift
