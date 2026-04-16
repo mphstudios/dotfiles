@@ -70,7 +70,7 @@ scan_dotconfig() {
     printf "Add %s? [y/N] " "$name"
     read -r answer
     case "$answer" in
-      [yY]*) add_package "$name" "$dir" ;;
+      [yY]*) "$0" add .config "$name" ;;
     esac
   done
 }
