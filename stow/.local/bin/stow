@@ -29,21 +29,45 @@ usage() {
   cat <<EOF
 Stow wrapper for managing dotfile packages.
 
-Usage: stow add <name>              adopt ~/.<name>
-       stow add .config <name>      adopt ~/.config/<name>
+Usage: stow add <path>              adopt a file or directory into a package
        stow scan                    scan ~/.config for unmanaged packages
        stow remove [-f] <package>   unlink stowed packages
        stow [flags] <packages>      forwarded to GNU Stow
+
+The add path is resolved relative to the current directory.
+The package name is derived from the basename of the path.
 
 EOF
 }
 
 add_package() {
-  package="$1"
-  origin="$2"
+  path="$1"
 
-  if [ ! -e "$origin" ]; then
-    echo "error: $origin does not exist" >&2
+  # Resolve to absolute path
+  case "$path" in
+    /*) absolute="$path" ;;
+    *)  absolute="$(cd "$(dirname "$path")" 2>/dev/null && pwd)/$(basename "$path")" ;;
+  esac
+
+  # Verify the path is under $HOME
+  case "$absolute" in
+    "$HOME"/*) ;;
+    *)
+      echo "error: $absolute is not under \$HOME" >&2
+      return 1
+      ;;
+  esac
+
+  if [ ! -e "$absolute" ]; then
+    echo "error: $absolute does not exist" >&2
+    return 1
+  fi
+
+  relative="${absolute#$HOME/}"
+  package="$(basename "$absolute" | sed 's/^\.//')"
+
+  if [ -z "$package" ]; then
+    echo "error: could not derive package name from $path" >&2
     return 1
   fi
 
@@ -52,11 +76,10 @@ add_package() {
     return 1
   fi
 
-  relative="${origin#$HOME/}"
   dest="$STOW_DIR/$package/$relative"
 
   mkdir -p "$(dirname "$dest")"
-  mv "$origin" "$dest"
+  mv "$absolute" "$dest"
   "$STOW" "$package"
   echo "added $package: ~/$relative"
 }
@@ -81,7 +104,7 @@ scan_dotconfig() {
     printf "Add %s? [y/N] " "$name"
     read -r answer
     case "$answer" in
-      [yY]*) "$0" add .config "$name" ;;
+      [yY]*) "$0" add "$dir" ;;
     esac
   done
 }
@@ -92,32 +115,11 @@ case "${1:-}" in
     exec "$STOW" --help
     ;;
   add)
-    case "${2:-}" in
-      .config)
-        if [ -n "${3:-}" ]; then
-          add_package "$3" "$HOME/.config/$3"
-        else
-          echo "usage: stow add .config <name>    adopt ~/.config/<name>" >&2
-          exit 1
-        fi
-        ;;
-      .config/*)
-        name="${2#.config/}"
-        add_package "$name" "$HOME/.config/$name"
-        ;;
-      "")
-        echo "usage: stow add <name>            adopt ~/.<name>" >&2
-        echo "       stow add .config <name>    adopt ~/.config/<name>" >&2
-        exit 1
-        ;;
-      .*)
-        echo "error: package name must not start with '.'" >&2
-        exit 1
-        ;;
-      *)
-        add_package "$2" "$HOME/.$2"
-        ;;
-    esac
+    if [ -z "${2:-}" ]; then
+      echo "usage: stow add <path>" >&2
+      exit 1
+    fi
+    add_package "$2"
     ;;
   remove)
     shift
