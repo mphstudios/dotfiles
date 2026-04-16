@@ -7,6 +7,27 @@ set -e
 
 export STOW_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+case "${1:-}" in
+  --help|-h)
+    cat <<EOF
+Install dotfiles by stowing all packages and symlinking .stowrc
+so that stow can be run directly from \$HOME.
+
+Usage: ./setup
+
+After installation, use stow to manage individual packages.
+Run stow --help for available commands.
+EOF
+    exit 0
+    ;;
+  "")
+    ;;
+  *)
+    echo "unknown option: $1" >&2
+    exit 1
+    ;;
+esac
+
 # Symlink .stowrc so stow can be run from $HOME
 ln -sf "$STOW_DIR/.stowrc" "$HOME/.stowrc"
 
