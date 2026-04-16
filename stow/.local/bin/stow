@@ -1,0 +1,108 @@
+#!/usr/bin/env sh
+#
+# Stow wrapper that adds an `add` subcommand for creating
+# new dotfile packages from existing config files.
+#
+# All other arguments are forwarded to GNU Stow.
+#
+set -e
+
+# Find the real stow, skipping this wrapper
+wrapper_dir="$(cd "$(dirname "$0")" && pwd)"
+STOW=""
+saved_ifs="$IFS"
+IFS=:
+for dir in $PATH; do
+  [ "$dir" = "$wrapper_dir" ] && continue
+  [ -x "$dir/stow" ] && STOW="$dir/stow" && break
+done
+IFS="$saved_ifs"
+
+if [ -z "$STOW" ]; then
+  echo "error: GNU Stow not found on PATH" >&2
+  exit 1
+fi
+
+export STOW_DIR="${STOW_DIR:-$HOME/Code/dotfiles}"
+
+add_package() {
+  package="$1"
+  source="$2"
+
+  if [ ! -e "$source" ]; then
+    echo "error: $source does not exist" >&2
+    return 1
+  fi
+
+  if [ -d "$STOW_DIR/$package" ]; then
+    echo "skip: $package already managed" >&2
+    return 1
+  fi
+
+  relative="${source#$HOME/}"
+  dest="$STOW_DIR/$package/$relative"
+
+  mkdir -p "$(dirname "$dest")"
+  mv "$source" "$dest"
+  "$STOW" "$package"
+  echo "added $package: ~/$relative"
+}
+
+# Check if a name is already managed by any stow package:
+# either as a top-level package or as .config/<name> inside
+# a differently-named package, for example ruby/.config/gem
+is_managed() {
+  [ -d "$STOW_DIR/$1" ] && return 0
+  for package_dir in "$STOW_DIR"/[!.]*/; do
+    [ -d "${package_dir}.config/$1" ] && return 0
+  done
+  return 1
+}
+
+scan_dotconfig() {
+  for dir in "$HOME"/.config/*/; do
+    [ -L "$dir" ] && continue
+    name="$(basename "$dir")"
+    is_managed "$name" && continue
+
+    printf "Add %s? [y/N] " "$name"
+    read -r answer
+    case "$answer" in
+      [yY]*) add_package "$name" "$dir" ;;
+    esac
+  done
+}
+
+case "${1:-}" in
+  add)
+    case "${2:-}" in
+      .config)
+        if [ -n "${3:-}" ]; then
+          add_package "$3" "$HOME/.config/$3"
+        else
+          scan_dotconfig
+        fi
+        ;;
+      .config/*)
+        name="${2#.config/}"
+        add_package "$name" "$HOME/.config/$name"
+        ;;
+      "")
+        echo "usage: stow add <name>            adopt ~/.<name>" >&2
+        echo "       stow add .config <name>    adopt ~/.config/<name>" >&2
+        echo "       stow add .config           scan ~/.config for unmanaged dirs" >&2
+        exit 1
+        ;;
+      .*)
+        echo "error: package name must not start with '.'" >&2
+        exit 1
+        ;;
+      *)
+        add_package "$2" "$HOME/.$2"
+        ;;
+    esac
+    ;;
+  *)
+    exec "$STOW" "$@"
+    ;;
+esac
