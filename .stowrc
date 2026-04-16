@@ -1,3 +1,4 @@
+--dir=$HOME/Code/dotfiles
 --target=$HOME
 --ignore=\.stowrc$
 --ignore=\.md$
