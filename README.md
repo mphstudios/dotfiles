@@ -11,15 +11,10 @@ Personal configuration files managed with [GNU Stow](https://www.gnu.org/softwar
 ```sh
 git clone <repo-url> ~/Code/dotfiles
 cd ~/Code/dotfiles
-
-# Install all packages
 ./setup
-
-# Or install selectively
-stow bash git
 ```
 
-Stow reads `.stowrc` for default options including `--target=$HOME`.
+This stows all packages and symlinks `.stowrc` to `$HOME` so that `stow` can be run from any directory. After installation, a wrapper at `~/.local/bin/stow` extends GNU Stow with subcommands for managing dotfile packages. Run `stow --help` to see both wrapper and GNU Stow documentation.
 
 ## Packages
 
@@ -47,21 +42,32 @@ Each top-level directory is a stow _package_. Contents mirror the _target_ direc
 
 | Package | Description | Config path |
 |---------|-------------|-------------|
-| `ghostty` | Ghostty terminal | `~/.config/ghostty/` |
-| `starship` | Starship prompt | `~/.config/starship.toml` |
-| `mise` | mise version manager | `~/.config/mise/` |
+| `curl` | curl | `~/.config/curl/` |
 | `eza` | eza ls replacement | `~/.config/eza/` |
+| `ghostty` | Ghostty terminal | `~/.config/ghostty/` |
+| `mise` | mise version manager | `~/.config/mise/` |
+| `readline` | GNU Readline | `~/.config/readline/` |
+| `ripgrep` | ripgrep | `~/.config/ignore` |
+| `starship` | Starship prompt | `~/.config/starship.toml` |
+| `wget` | wget | `~/.config/wget/` |
 | `yazi` | Yazi file manager | `~/.config/yazi/` |
+| `zellij` | Zellij terminal multiplexer | `~/.config/zellij/` |
+
+### Other
+
+| Package | Description | Config path |
+|---------|-------------|-------------|
+| `cmux` | tmux/Zellij session manager | `~/.config/cmux/` |
 | `home` | Misc dotfiles in `$HOME` | `~/.*` |
+| `stow` | Stow wrapper | `~/.local/bin/stow` |
 
 ## Workflows
 
-All `stow` commands are run from the dotfiles directory. Use `--simulate` (dry-run) to preview what stow will do before making changes. Run `./setup --help` to see available commands.
+Use `--simulate` (dry-run) to preview what stow will do before making changes.
 
 ### Install a package
 
 ```sh
-cd ~/Code/dotfiles
 stow --simulate git    # preview
 stow git               # apply
 ```
@@ -71,20 +77,22 @@ Stow creates symlinks from `$HOME` into the dotfile repository _package_ directo
 ### Add a new package from existing config
 
 ```sh
-./setup add .config superfile
-./setup add .config/superfile   # equivalent
-```
-
-Or scan `~/.config` for unmanaged directories:
-
-```sh
-./setup add .config
+stow add .config superfile
+stow add .config/superfile   # equivalent
 ```
 
 For dotfiles in `$HOME` (e.g. `~/.foo`):
 
 ```sh
-./setup add foo
+stow add foo
+```
+
+### Scan for unmanaged config
+
+Scan `~/.config` for directories not managed by any stow package:
+
+```sh
+stow scan
 ```
 
 ### Adopt existing files on a new machine
@@ -92,7 +100,6 @@ For dotfiles in `$HOME` (e.g. `~/.foo`):
 When setting up a machine that already has config files where stow wants to create symlinks, `--adopt` moves those existing _target_ files into the _package_ and replaces them with symlinks. Review with `git diff` afterward — adopted files overwrite the repo versions.
 
 ```sh
-cd ~/Code/dotfiles
 stow --adopt --simulate git   # preview
 stow --adopt git              # apply
 ```
@@ -100,9 +107,12 @@ stow --adopt git              # apply
 ### Remove a package
 
 ```sh
-cd ~/Code/dotfiles
-stow -D git
+unstow git
 ```
+
+## Configuration
+
+Stow reads `.stowrc` for default options including `--dir` (the dotfiles repository location) and `--target=$HOME`. The `setup` script symlinks `.stowrc` to `$HOME` so these options apply when running `stow` from any directory.
 
 ## XDG Base Directories
 

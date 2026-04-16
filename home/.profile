@@ -56,6 +56,9 @@ elif [ -d /usr/local/bin ]; then
     PATH=/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
+# User local binaries
+PATH="$HOME/.local/bin:$PATH"
+
 # Cargo (Rust) package manager binaries
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 PATH="$CARGO_HOME/bin:$PATH"
