@@ -8,9 +8,7 @@ set -e
 export STOW_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Symlink .stowrc so stow can be run from $HOME
-if [ ! -e "$HOME/.stowrc" ]; then
-  ln -s "$STOW_DIR/.stowrc" "$HOME/.stowrc"
-fi
+ln -sf "$STOW_DIR/.stowrc" "$HOME/.stowrc"
 
 # [!.]*/ excludes hidden directories (.git, .claude, et cetera)
 # because when bash dotglob is set */ matches dotfiles as well
