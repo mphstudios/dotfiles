@@ -87,11 +87,13 @@ stow add ~/.foo                        # dotfile in $HOME (package: foo)
 
 ### Scan for unmanaged config
 
-Scan `~/.config` for directories not managed by any stow package:
+List directories in `~/.config` not managed by any stow package:
 
 ```sh
 stow scan
 ```
+
+Then adopt any listed package with `stow add`.
 
 ### Adopt existing files on a new machine
 

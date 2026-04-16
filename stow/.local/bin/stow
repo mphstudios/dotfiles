@@ -30,7 +30,7 @@ usage() {
 Stow wrapper for managing dotfile packages.
 
 Usage: stow add <path>              adopt a file or directory into a package
-       stow scan                    scan ~/.config for unmanaged packages
+       stow scan                    list unmanaged packages in ~/.config
        stow remove [--force|-f] <package>   unlink stowed packages
        stow [flags] <packages>      forwarded to GNU Stow
 
@@ -142,23 +142,28 @@ remove_package() {
 }
 
 scan_dotconfig() {
-  echo "Scanning \$HOME/.config directory for unmanaged packages..."
-  found=false
+  packages=""
   for dir in "$HOME"/.config/*/; do
     [ -L "$dir" ] && continue
     name="$(basename "$dir")"
     is_managed "$name" && continue
-
-    found=true
-    printf "Add %s? [y/N] " "$name"
-    read -r answer
-    case "$answer" in
-      [yY]*) "$0" add "$dir" ;;
-    esac
+    packages="$packages $name"
   done
-  if [ "$found" = false ]; then
-    echo "no unmanaged packages found"
+
+  if [ -z "$packages" ]; then
+    echo "No unmanaged packages found in \$HOME/.config"
+    return
   fi
+
+  # shellcheck disable=SC2086
+  set -- $packages
+  echo "Found $# unmanaged \$HOME/.config packages:"
+  for name in "$@"; do
+    echo "  $name"
+  done
+  echo ""
+  echo "To adopt a package run:"
+  echo " stow add ~/.config/<name>"
 }
 
 case "${1:-}" in
