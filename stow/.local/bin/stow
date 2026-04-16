@@ -1,9 +1,7 @@
 #!/usr/bin/env sh
 #
-# Stow wrapper that adds subcommands for managing dotfile packages:
-#   add     adopt existing config files into a new package
-#   remove  unlink a stowed package
-#   scan    find unmanaged directories in ~/.config
+# Stow wrapper that adds subcommands for managing dotfile packages.
+# Run `stow --help` for wrapper and GNU Stow documentation.
 #
 # All other arguments are forwarded to GNU Stow.
 #
@@ -26,6 +24,18 @@ if [ -z "$STOW" ]; then
 fi
 
 export STOW_DIR="${STOW_DIR:-$HOME/Code/dotfiles}"
+
+usage() {
+  cat <<EOF
+Stow wrapper for managing dotfile packages.
+
+Usage: stow add <name>              adopt ~/.<name>
+       stow add .config <name>      adopt ~/.config/<name>
+       stow scan                    scan ~/.config for unmanaged dirs
+       stow remove <package>...     unlink stowed packages
+       stow [flags] [packages]      forwarded to GNU Stow
+EOF
+}
 
 add_package() {
   package="$1"
@@ -76,6 +86,11 @@ scan_dotconfig() {
 }
 
 case "${1:-}" in
+  --help|-h)
+    usage
+    echo ""
+    exec "$STOW" --help
+    ;;
   add)
     case "${2:-}" in
       .config)
