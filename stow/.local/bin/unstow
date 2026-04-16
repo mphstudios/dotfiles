@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+#
+# Unlink stowed packages.
+# Shorthand for stow remove (stow --delete).
+#
+exec stow remove "$@"
