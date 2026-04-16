@@ -34,6 +34,7 @@ Usage: stow add <name>              adopt ~/.<name>
        stow scan                    scan ~/.config for unmanaged packages
        stow remove [-f] <package>   unlink stowed packages
        stow [flags] <packages>      forwarded to GNU Stow
+
 EOF
 }
 
@@ -88,7 +89,6 @@ scan_dotconfig() {
 case "${1:-}" in
   --help|-h)
     usage
-    echo ""
     exec "$STOW" --help
     ;;
   add)
@@ -119,9 +119,6 @@ case "${1:-}" in
         ;;
     esac
     ;;
-  scan)
-    scan_dotconfig
-    ;;
   remove)
     shift
     force=false
@@ -142,6 +139,9 @@ case "${1:-}" in
       esac
     fi
     exec "$STOW" --delete "$@"
+    ;;
+  scan)
+    scan_dotconfig
     ;;
   *)
     exec "$STOW" "$@"
