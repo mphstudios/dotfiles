@@ -86,6 +86,10 @@ $env.WGETRC = ($env.XDG_CONFIG_HOME | path join "wget/wgetrc")
 # Starship ignores XDG_CACHE_HOME (starship/starship#6672)
 $env.STARSHIP_CACHE = ($env.XDG_CACHE_HOME | path join "starship")
 
+## try-rs workspace manager for temporary experiments
+$env.TRY_CONFIG_DIR = ($env.XDG_CONFIG_HOME | path join "try-rs")
+$env.TRY_PATH = ($env.HOME | path join "Code/playground")
+
 # Homebrew
 $env.HOMEBREW_CASK_OPTS = "--appdir=/Applications"
 $env.HOMEBREW_NO_ANALYTICS = "true"

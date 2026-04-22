@@ -172,6 +172,12 @@ if (( $+commands[mise] )) then
   eval "$(mise activate zsh)"
 fi
 
+## try-rs workspace manager for temporary experiments
+# https://try-rs.org/
+if (( $+commands[try-rs] )) then
+  eval "$(try-rs --setup-stdout zsh)"
+fi
+
 ## Zellij terminal multiplexer
 # https://zellij.dev/documentation/integration.html
 if (( $+commands[zellij] )) && [[ "$TERM_PROGRAM" != "vscode" ]]; then

@@ -50,6 +50,25 @@ if (which mise | is-not-empty) {
 if (which starship | is-not-empty) {
     starship init nu | save --force ($vendor | path join "starship.nu")
 }
+# Nushell integration module for try-rs is generate once by manually running
+# try-rs --setup-stdout nu-shell | save --force ($nu.data-dir | path join "vendor/autoload/try-rs.nu")
+#
+# two issues block automated integration (try-rs 1.7.8 / nushell 0.112.2)
+#
+#   `--setup nu-shell` writes to the try-rs config directory
+#   instead of the nushell vendor/autoload directory, and although we could
+#   source ($nu.home-dir | path join ".config/try-rs/try-rs.nu")
+#   the try-rs command to generated the module must still be run manually.
+#
+#   `--setup-stdout nu-shell` emits `^try-rs ...$all_args` immediately
+#   followed by `return`, which nushell rejects at runtime with the error
+#   "can't convert nothing to string".
+#   Plausible fix: capture and return the external's output,
+#   something like `return (^try-rs ...$all_args)`.
+#
+# if (which try-rs | is-not-empty) {
+#     try-rs --setup-stdout nu-shell | save --force ($vendor | path join "try-rs.nu")
+# }
 if (which tv | is-not-empty) {
     tv init nu | save --force ($vendor | path join "tv.nu")
 }

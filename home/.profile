@@ -112,6 +112,10 @@ export NPM_TOKEN # Set this var in ~/.private
 export PGDATA=/usr/local/var/postgres
 export PSQLRC="${XDG_CONFIG_HOME:-$HOME/.config}/postgres/psqlrc"
 
+## try-rs workspace manager for temporary experiments
+TRY_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/try-rs"
+TRY_PATH=$HOME/Code/playground
+
 # Since CDPATH is considered first it should begin with the current directory
 # so that we can easily change to a subdirectory that also matches one of the
 # subsequently listed frequented directories.

@@ -115,7 +115,7 @@ if command -v carapace 1>/dev/null 2>&1; then
 fi
 
 ## mise-en-place dev tools, environment, and tasks manager
-# https://mise.jdx.dev/about.html
+# https://mise.jdx.dev/installing-mise.html#bash
 if command -v mise 1>/dev/null 2>&1; then
     eval "$(mise activate bash)"
 fi
@@ -126,18 +126,22 @@ if command -v starship 1>/dev/null 2>&1; then
     eval "$(starship init bash)"
 fi
 
-## try manager for code experiments
-# https://github.com/tobi/try
-if command -v try 1>/dev/null 2>&1; then
-    export TRY_PATH="$HOME/Code/sketches/"
-    mkdir -p $TRY_PATH # ensure tries directory has been created
-    eval "$(/usr/local/bin/try init)"
+## try-rs workspace manager for temporary experiments
+# https://try-rs.org/
+if command -v try-rs 1>/dev/null 2>&1; then
+    eval "$(try-rs --setup-stdout bash)"
 fi
 
 ## Television general-purpose fuzzy finder
 # https://alexpasmantier.github.io/television/
 if command -v tv 1>/dev/null 2>&1; then
     eval "$(tv init bash)"
+fi
+
+## Worktrunk git worktree management for parallel AI agent workflows
+# https://worktrunk.dev/worktrunk/#install
+if command -v wt >/dev/null 2>&1; then
+    eval "$(command wt config shell init bash)";
 fi
 
 ## Zellij terminal multiplexer
