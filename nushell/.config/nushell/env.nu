@@ -17,15 +17,6 @@
 # Environment variables shared with POSIX shells are kept in sync with ~/.profile
 # To source ~/.profile via bash instead of duplicating, see modules/posix-env.nu
 #
-# XDG Base Directories
-# Nota bene: LaunchAgent (org.freedesktop.xdg-basedir.plist) sets these for
-# processes spawned by launchd. Defaults are repeated here so that nushell
-# sessions that do not inherit LaunchAgent variables also have correct values.
-$env.XDG_CACHE_HOME = ($env.XDG_CACHE_HOME? | default ($env.HOME | path join "Library/Caches"))
-$env.XDG_CONFIG_HOME = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config"))
-$env.XDG_DATA_HOME = ($env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share"))
-$env.XDG_STATE_HOME = ($env.XDG_STATE_HOME? | default ($env.HOME | path join ".local/state"))
-
 $env.LC_ALL = "en_US.UTF-8"
 $env.LANG = "en_US.UTF-8"
 
@@ -66,22 +57,31 @@ $env.VISUAL = (if ("/usr/local/bin/subl" | path exists) {
     $env.EDITOR
 })
 
+# XDG Base Directories
+# Nota bene: LaunchAgent (org.freedesktop.xdg-basedir.plist) sets these for
+# processes spawned by launchd. Defaults are repeated here so that nushell
+# sessions that do not inherit LaunchAgent variables also have correct values.
+$env.XDG_CACHE_HOME = ($env.XDG_CACHE_HOME? | default ($env.HOME | path join "Library/Caches"))
+$env.XDG_CONFIG_HOME = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config"))
+$env.XDG_DATA_HOME = ($env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share"))
+$env.XDG_STATE_HOME = ($env.XDG_STATE_HOME? | default ($env.HOME | path join ".local/state"))
+
 # Use XDG Base Directory for configuration files
 $env.CLAUDE_CONFIG_DIR = ($env.XDG_CONFIG_HOME | path join "claude")
-$env.CARGO_HOME = ($env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share") | path join "cargo")
-$env.CURL_HOME = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "curl")
-$env.DOCKER_CONFIG = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "docker")
-$env.EZA_CONFIG_DIR = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "eza")
-$env.GNUPGHOME = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "gnupg")
-$env.INPUTRC = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "readline/inputrc")
-$env.LESSHISTFILE = ($env.XDG_STATE_HOME? | default ($env.HOME | path join ".local/state") | path join "less/history")
-$env.NODE_REPL_HISTORY = ($env.XDG_STATE_HOME? | default ($env.HOME | path join ".local/state") | path join "node/repl_history")
-$env.NPM_CONFIG_CACHE = ($env.XDG_CACHE_HOME? | default ($env.HOME | path join ".cache") | path join "npm")
-$env.NPM_CONFIG_USERCONFIG = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "npm/npmrc")
-$env.PYTHON_HISTORY = ($env.XDG_STATE_HOME? | default ($env.HOME | path join ".local/state") | path join "python/history")
-$env.PYTHONSTARTUP = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "python/pythonrc.py")
-$env.RUSTUP_HOME = ($env.XDG_DATA_HOME? | default ($env.HOME | path join ".local/share") | path join "rustup")
-$env.WGETRC = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "wget/wgetrc")
+$env.CARGO_HOME = ($env.XDG_DATA_HOME | path join "cargo")
+$env.CURL_HOME = ($env.XDG_CONFIG_HOME | path join "curl")
+$env.DOCKER_CONFIG = ($env.XDG_CONFIG_HOME | path join "docker")
+$env.EZA_CONFIG_DIR = ($env.XDG_CONFIG_HOME | path join "eza")
+$env.GNUPGHOME = ($env.XDG_CONFIG_HOME | path join "gnupg")
+$env.INPUTRC = ($env.XDG_CONFIG_HOME | path join "readline/inputrc")
+$env.LESSHISTFILE = ($env.XDG_STATE_HOME | path join "less/history")
+$env.NODE_REPL_HISTORY = ($env.XDG_STATE_HOME | path join "node/repl_history")
+$env.NPM_CONFIG_CACHE = ($env.XDG_CACHE_HOME | path join "npm")
+$env.NPM_CONFIG_USERCONFIG = ($env.XDG_CONFIG_HOME | path join "npm/npmrc")
+$env.PYTHON_HISTORY = ($env.XDG_STATE_HOME | path join "python/history")
+$env.PYTHONSTARTUP = ($env.XDG_CONFIG_HOME | path join "python/pythonrc.py")
+$env.RUSTUP_HOME = ($env.XDG_DATA_HOME | path join "rustup")
+$env.WGETRC = ($env.XDG_CONFIG_HOME | path join "wget/wgetrc")
 
 # Starship ignores XDG_CACHE_HOME (starship/starship#6672)
 $env.STARSHIP_CACHE = ($env.XDG_CACHE_HOME | path join "starship")
@@ -97,4 +97,4 @@ $env.HOMEBREW_NO_INSECURE_REDIRECT = "true"
 
 # PostgreSQL
 $env.PGDATA = "/usr/local/var/postgres"
-$env.PSQLRC = ($env.XDG_CONFIG_HOME? | default ($env.HOME | path join ".config") | path join "postgres/psqlrc")
+$env.PSQLRC = ($env.XDG_CONFIG_HOME | path join "postgres/psqlrc")
