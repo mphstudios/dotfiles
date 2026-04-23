@@ -87,8 +87,8 @@ def card [footer: string = "", reflow: bool = true] {
     let inner_width = $card_width - 4
     let margin  = left-pad $term_width $card_width
 
-    let h_rule = "" | fill -c '─' -w ([$card_width - 2, 1] | math max)
-    let blank   = "" | fill -c ' ' -w ([$card_width - 2, 1] | math max)
+    let h_rule = "" | fill -c '─' -w ([($card_width - 2), 1] | math max)
+    let blank   = "" | fill -c ' ' -w ([($card_width - 2), 1] | math max)
 
     let content_rows = if $reflow {
         $content | word-wrap $inner_width | each {|line|
