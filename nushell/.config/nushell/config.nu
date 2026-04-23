@@ -53,7 +53,13 @@ if (which starship | is-not-empty) {
 # Nushell integration module for try-rs is generate once by manually running
 # try-rs --setup-stdout nu-shell | save --force ($nu.data-dir | path join "vendor/autoload/try-rs.nu")
 #
-# two issues block automated integration (try-rs 1.7.8 / nushell 0.112.2)
+# several issues block automated integration (try-rs 1.7.8 / nushell 0.112.2)
+#
+#   try-rs does not detect the .local/share/nushell/vendor/autoload/try-rs.nu
+#   instead the user is prompted to setup shell integration, writing the module
+#   to ~/.config/try-rs/ and instructing the user to source this file,
+#   and incorrectly assuming that config.nu is at the default location
+#   ~/Library/Application Support/nushell/config.nu
 #
 #   `--setup nu-shell` writes to the try-rs config directory
 #   instead of the nushell vendor/autoload directory, and although we could
@@ -66,9 +72,10 @@ if (which starship | is-not-empty) {
 #   Plausible fix: capture and return the external's output,
 #   something like `return (^try-rs ...$all_args)`.
 #
-# if (which try-rs | is-not-empty) {
-#     try-rs --setup-stdout nu-shell | save --force ($vendor | path join "try-rs.nu")
-# }
+if (which try-rs | is-not-empty) {
+    # try-rs --setup-stdout nu-shell | save --force ($vendor | path join "try-rs.nu")
+    source ($nu.home-dir | path join ".config/try-rs/try-rs.nu")
+}
 if (which tv | is-not-empty) {
     tv init nu | save --force ($vendor | path join "tv.nu")
 }
