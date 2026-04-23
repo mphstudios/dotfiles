@@ -89,6 +89,11 @@ if (which try-rs | is-not-empty) {
 if (which tv | is-not-empty) {
     tv init nu | save --force ($vendor | path join "tv.nu")
 }
+## Worktrunk git worktree management for parallel AI agent workflows
+# https://worktrunk.dev/worktrunk/#install
+if (which wt | is-not-empty) {
+    wt config shell init nu | save --force ($vendor | path join "wt.nu")
+}
 ## replace default cd command with zoxide
 # https://github.com/ajeetdsouza/zoxide
 if (which zoxide | is-not-empty) {
