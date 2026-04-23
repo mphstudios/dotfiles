@@ -38,15 +38,23 @@ source modules/aliases.nu
 let vendor = ($nu.data-dir | path join "vendor/autoload")
 mkdir $vendor
 
+## Atuin improved shell history for zsh, bash, fish and nushell
+# https://docs.atuin.sh/cli/guide/installation/
 if (which atuin | is-not-empty) {
     atuin init nu | save --force ($vendor | path join "atuin.nu")
 }
+## Carapace multi-shell multi-command argument completer
+# https://carapace-sh.github.io/carapace-bin/setup.html
 if (which carapace | is-not-empty) {
     carapace _carapace nushell | save --force ($vendor | path join "carapace.nu")
 }
+## mise-en-place dev tools, environment, and tasks manager
+# https://mise.jdx.dev/installing-mise.html#nushell
 if (which mise | is-not-empty) {
     mise activate nu | save --force ($vendor | path join "mise.nu")
 }
+## Starship cross-shell prompt
+# https://starship.rs
 if (which starship | is-not-empty) {
     starship init nu | save --force ($vendor | path join "starship.nu")
 }
@@ -76,9 +84,13 @@ if (which try-rs | is-not-empty) {
     # try-rs --setup-stdout nu-shell | save --force ($vendor | path join "try-rs.nu")
     source ($nu.home-dir | path join ".config/try-rs/try-rs.nu")
 }
+## Television general-purpose fuzzy finder
+# https://alexpasmantier.github.io/television/
 if (which tv | is-not-empty) {
     tv init nu | save --force ($vendor | path join "tv.nu")
 }
+## replace default cd command with zoxide
+# https://github.com/ajeetdsouza/zoxide
 if (which zoxide | is-not-empty) {
     zoxide init nushell | save --force ($vendor | path join "zoxide.nu")
 }
