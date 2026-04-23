@@ -146,18 +146,6 @@ if (( $+commands[atuin] )) then
   eval "$(atuin init zsh)"
 fi
 
-## Starship cross-shell prompt
-# https://starship.rs/config/
-if (( $+commands[starship] )) then
-  eval "$(starship init zsh)"
-fi
-
-## Television general-purpose fuzzy finder
-# https://alexpasmantier.github.io/television/
-if (( $+commands[tv] )) then
-  eval "$(tv init zsh)"
-fi
-
 ## Carapace multi-shell multi-command argument completer
 # https://carapace-sh.github.io/carapace-bin/setup.html#zsh
 if (( $+commands[carapace] )) then
@@ -167,15 +155,33 @@ if (( $+commands[carapace] )) then
 fi
 
 ## mise-en-place dev tools, environment, and tasks manager
-# https://mise.jdx.dev/about.html
+# https://mise.jdx.dev/installing-mise.html#zsh
 if (( $+commands[mise] )) then
   eval "$(mise activate zsh)"
+fi
+
+## Starship cross-shell prompt
+# https://starship.rs/config/
+if (( $+commands[starship] )) then
+  eval "$(starship init zsh)"
 fi
 
 ## try-rs workspace manager for temporary experiments
 # https://try-rs.org/
 if (( $+commands[try-rs] )) then
-  eval "$(try-rs --setup-stdout zsh)"
+  source "$XDG_CONFIG_HOME/try-rs/try-rs.zsh"
+fi
+
+## Television general-purpose fuzzy finder
+# https://alexpasmantier.github.io/television/
+if (( $+commands[tv] )) then
+  eval "$(tv init zsh)"
+fi
+
+## Worktrunk git worktree management for parallel AI agent workflows
+# https://worktrunk.dev/worktrunk/#install
+if (( $+commands[wt])) then
+  eval "$(wt config shell init zsh)";
 fi
 
 ## Zellij terminal multiplexer
