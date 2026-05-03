@@ -35,5 +35,8 @@ ruby = "latest"
 rust = "latest"
 node = "latest"
 
+# Python tools
+"pipx:sqlit-tui" = "latest"
+
 # Rust tools
 "cargo:hygg" = "latest"
