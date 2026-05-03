@@ -100,17 +100,29 @@ if (which zoxide | is-not-empty) {
     zoxide init nushell | save --force ($vendor | path join "zoxide.nu")
 }
 
+# Disable Nushell prompt indicators, which duplicate the Starship prompt,
+# instead use $env.config.cursor_shape to differentiate prompt modes
+$env.PROMPT_INDICATOR_VI_NORMAL = ''
+$env.PROMPT_INDICATOR_VI_INSERT = ''
+
 $env.config = {
-  show_banner: false
-  table: {
-    header_on_separator: false
-    # alternative null value symbols: '' # nf-cod-blank, '󰟢' # nf-md-null
-    missing_value_symbol: '' # nf-oct-x
-    trim: {
-      methodology: truncating
-      truncating_suffix: '…'
+    cursor_shape: {
+        # use cursor_shape to differentiate between prompt modes, options:
+        # block, line, underscore, blink_block, blink_line, blink_underscore
+        vi_insert: blink_line
+        vi_normal: blink_block
     }
-  }
+    edit_mode: 'vi'
+    show_banner: false
+    table: {
+        header_on_separator: false
+        # alternative null value symbols: '' # nf-cod-blank, '󰟢' # nf-md-null
+        missing_value_symbol: '' # nf-oct-x
+        trim: {
+            methodology: truncating
+            truncating_suffix: '…'
+        }
+    }
 }
 
 # overlays must be after $env.config to be merged rather than being overwritten
