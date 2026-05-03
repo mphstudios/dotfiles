@@ -132,6 +132,7 @@ $env.config = {
 overlay use modules/macOS.nu
 overlay use modules/exif.nu
 overlay use modules/git.nu
+overlay use modules/pdf.nu
 overlay use modules/keybindings.nu
 overlay use modules/greeting.nu
 
