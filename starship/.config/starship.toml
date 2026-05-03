@@ -69,7 +69,7 @@ symbol = '' # nf-oct-stack
 
 [directory]
 format = '[$path]($style)[$read_only]($read_only_style) '
-style = 'bold cyan'
+style = 'cyan'
 home_symbol = '♥' # nf-oct-heart
 read_only = ' 󰩏' # nf-md-hand_front_right
 read_only_style = 'bold red'
@@ -118,6 +118,7 @@ up_to_date = '' # nf-cod-pass
 
 [golang]
 format = '[$symbol($version )]($style) '
+style = 'cyan'
 symbol = 'Go'
 version_format = '${raw}'
 
@@ -150,22 +151,26 @@ unhealthy_symbol = '' # nf-oct-alert
 
 [nodejs]
 format = '[$symbol $version]($style) '
+style = 'green'
 symbol = 'Node'
 version_format = '${raw}'
 
 [python]
 format = '[$symbol $version]($style) '
 pyenv_version_name = true
+style = 'yellow'
 symbol = 'Python'
 version_format = '${raw}'
 
 [ruby]
 format = '[$symbol $version]($style) '
+style = 'red'
 symbol = 'Ruby'
 version_format = '${raw}'
 
 [rust]
 format = '[$symbol $version]($style) '
+style = 'brown'
 symbol = 'Rust'
 version_format = '${raw}'
 
@@ -182,7 +187,7 @@ zsh_indicator = '' # nf-fa-percent
 [sudo]
 disabled = false
 format = '[as $symbol]($style) '
-style = 'bold green'
+style = 'green'
 symbol = '' # nf-dev-apple
 
 [username]
