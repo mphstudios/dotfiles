@@ -113,6 +113,9 @@ $env.config = {
         vi_normal: blink_block
     }
     edit_mode: 'vi'
+    history: {
+        path: ($env.XDG_STATE_HOME | path join "nushell")
+    }
     show_banner: false
     table: {
         header_on_separator: false
