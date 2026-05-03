@@ -10,9 +10,12 @@ experimental = true
 paranoid = false
 idiomatic_version_file_enable_tools = ["node", "python", "ruby"]
 
+[settings.pipx]
+uvx = true # mise will use uvx instead of pipx if uv is in PATH
+
 [settings.python]
 default_packages_file = "$XDG_CONFIG_HOME/python/default-packages"
-uv_venv_auto = true
+uv_venv_auto = true  # automatically manage virtual environments with uv
 
 [settings.ruby]
 default_packages_file = "$XDG_CONFIG_HOME/ruby/default-gems"
@@ -21,7 +24,6 @@ verbose_install = true
 [settings.status]
 missing_tools = "always"
 show_env = false
-show_prepare_stale = true
 show_tools = false
 
 [tools]
@@ -33,4 +35,5 @@ ruby = "latest"
 rust = "latest"
 node = "latest"
 
+# Rust tools
 "cargo:hygg" = "latest"
