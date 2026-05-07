@@ -57,7 +57,7 @@ $env.VISUAL = (if ("/usr/local/bin/subl" | path exists) {
     $env.EDITOR
 })
 
-# XDG Base Directories
+## XDG Base Directories
 # Nota bene: LaunchAgent (org.freedesktop.xdg-basedir.plist) sets these for
 # processes spawned by launchd. Defaults are repeated here so that nushell
 # sessions that do not inherit LaunchAgent variables also have correct values.
@@ -67,13 +67,14 @@ $env.XDG_DATA_HOME = ($env.XDG_DATA_HOME? | default ($env.HOME | path join ".loc
 $env.XDG_STATE_HOME = ($env.XDG_STATE_HOME? | default ($env.HOME | path join ".local/state"))
 
 # Use XDG Base Directory for configuration files
-$env.CLAUDE_CONFIG_DIR = ($env.XDG_CONFIG_HOME | path join "claude")
 $env.CARGO_HOME = ($env.XDG_DATA_HOME | path join "cargo")
+$env.CLAUDE_CONFIG_DIR = ($env.XDG_CONFIG_HOME | path join "claude")
+$env.CODEX_HOME = ($env.XDG_CONFIG_HOME | path join "codex")
 $env.CURL_HOME = ($env.XDG_CONFIG_HOME | path join "curl")
-$env.DOCKER_CONFIG = ($env.XDG_CONFIG_HOME | path join "docker")
 $env.EZA_CONFIG_DIR = ($env.XDG_CONFIG_HOME | path join "eza")
 $env.GNUPGHOME = ($env.XDG_CONFIG_HOME | path join "gnupg")
 $env.INPUTRC = ($env.XDG_CONFIG_HOME | path join "readline/inputrc")
+$env.JUNIE_CONFIG_LOCATION = ($env.XDG_CONFIG_HOME | path join "junie")
 $env.LESSHISTFILE = ($env.XDG_STATE_HOME | path join "less/history")
 $env.NODE_REPL_HISTORY = ($env.XDG_STATE_HOME | path join "node/repl_history")
 $env.NPM_CONFIG_CACHE = ($env.XDG_CACHE_HOME | path join "npm")
@@ -83,14 +84,23 @@ $env.PYTHONSTARTUP = ($env.XDG_CONFIG_HOME | path join "python/pythonrc.py")
 $env.RUSTUP_HOME = ($env.XDG_DATA_HOME | path join "rustup")
 $env.WGETRC = ($env.XDG_CONFIG_HOME | path join "wget/wgetrc")
 
+# Containers and Kubernetes
+$env.DOCKER_CONFIG = ($env.XDG_CONFIG_HOME | path join "docker")
+$env.KUBECONFIG = ($env.XDG_CONFIG_HOME | path join "kube")
+$env.MINIKUBE_HOME = ($env.XDG_CONFIG_HOME | path join "kube")
+
+# PostgreSQL
+$env.PGDATA = "/usr/local/var/postgres"
+$env.PSQLRC = ($env.XDG_CONFIG_HOME | path join "postgres/psqlrc")
+
 # Starship ignores XDG_CACHE_HOME (starship/starship#6672)
 $env.STARSHIP_CACHE = ($env.XDG_CACHE_HOME | path join "starship")
 
-## try-rs workspace manager for temporary experiments
+# try-rs workspace manager for temporary experiments
 $env.TRY_CONFIG_DIR = ($env.XDG_CONFIG_HOME | path join "try-rs")
 $env.TRY_PATH = ($env.HOME | path join "Code/playground")
 
-# Homebrew
+## Homebrew
 $env.HOMEBREW_CASK_OPTS = "--appdir=/Applications"
 $env.HOMEBREW_NO_ANALYTICS = "true"
 $env.HOMEBREW_NO_AUTO_UPDATE = "true"
@@ -98,7 +108,3 @@ $env.HOMEBREW_NO_EMOJI = "true"
 $env.HOMEBREW_NO_ENV_HINTS = "true"
 $env.HOMEBREW_NO_GITHUB_API = "true"
 $env.HOMEBREW_NO_INSECURE_REDIRECT = "true"
-
-# PostgreSQL
-$env.PGDATA = "/usr/local/var/postgres"
-$env.PSQLRC = ($env.XDG_CONFIG_HOME | path join "postgres/psqlrc")

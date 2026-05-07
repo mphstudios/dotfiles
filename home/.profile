@@ -75,14 +75,13 @@ export PATH
 
 # Use XDG Base Directory for configuration files
 export CLAUDE_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/claude"
+export CODEX_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/codex"
 export CURL_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/curl"
-export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/docker"
 export EZA_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/eza"
 export GNUPGHOME="${XDG_CONFIG_HOME:-$HOME/.config}/gnupg"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/readline/inputrc"
+export JUNIE_CONFIG_LOCATION="${XDG_CONFIG_HOME:-$HOME/.config}/junie"
 export LESSHISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/less/history"
-export PYTHON_HISTORY="${XDG_STATE_HOME:-$HOME/.local/state}/python/history"
-export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/python/pythonrc.py"
 export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 
@@ -93,6 +92,7 @@ export STARSHIP_CACHE="${XDG_CACHE_HOME:-$HOME/Library/Caches}/starship"
 # https://github.com/phinze/homebrew-cask/blob/master/USAGE.md
 export HOMEBREW_CASK_OPTS='--appdir=/Applications'
 
+## Homebrew
 export HOMEBREW_NO_ANALYTICS=true
 export HOMEBREW_NO_AUTO_UPDATE=true
 export HOMEBREW_NO_EMOJI=true
@@ -100,10 +100,14 @@ export HOMEBREW_NO_ENV_HINTS=true
 export HOMEBREW_NO_GITHUB_API=true
 export HOMEBREW_NO_INSECURE_REDIRECT=true
 
+## Containers and Kubernetes clusters
+export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/docker"
+export KUBECONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/kube"
+export MINIKUBE_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/kube"
+
+# Node and npm
 export NODE_PATH=/usr/local/lib/node_modules
 export NODE_REPL_HISTORY="${XDG_STATE_HOME:-$HOME/.local/state}/node/repl_history"
-
-# Use XDG config directory for npm
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/npm"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/npm/npmrc"
 export NPM_TOKEN # Set this var in ~/.private
@@ -111,6 +115,10 @@ export NPM_TOKEN # Set this var in ~/.private
 # Set the PostgreSQL database directory
 export PGDATA=/usr/local/var/postgres
 export PSQLRC="${XDG_CONFIG_HOME:-$HOME/.config}/postgres/psqlrc"
+
+## Python
+export PYTHON_HISTORY="${XDG_STATE_HOME:-$HOME/.local/state}/python/history"
+export PYTHONSTARTUP="${XDG_CONFIG_HOME:-$HOME/.config}/python/pythonrc.py"
 
 ## try-rs workspace manager for temporary experiments
 TRY_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/try-rs"
