@@ -5,10 +5,10 @@
 # https://github.com/imrajyavardhan12/spectre-ghostty-config
 
 # Use Nushell as the default shell
-shell-integration = "nu"
+shell-integration = "nushell"
 
 # Colors
-theme = "catppuccin-macchiato"
+theme = Catppuccin Macchiato
 
 # Fonts
 font-family = "Liga SFMono Nerd Font"

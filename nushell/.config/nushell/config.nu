@@ -30,6 +30,9 @@ path add ($env.CARGO_HOME? | default ($env.HOME | path join ".cargo") | path joi
 path add ($env.HOME | path join ".local/bin")
 path add ($env.HOME | path join ".bin")
 
+# Ensure ghostty command is available in PATH
+path add ($env.GHOSTTY_BIN_DIR)
+
 # Sourced explicitly rather than autoloaded: vendor/autoload runs after config.nu
 # completes, which would place aliases after the overlays. Sourcing here ensures
 # aliases are defined first and cannot be silently shadowed by an overlay.
