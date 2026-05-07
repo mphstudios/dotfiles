@@ -319,18 +319,14 @@ export def quotes [
 
 # Append a new entry to the quotes file
 export def "quotes add" [
-    quote: string              # The quote text
-    --attribution: string      # Person attributed (ATTRIBUTION column)
-    --author: string           # Synonym for --attribution
-    --source: string           # Source work shown in italic in the footer
-    --tag: string              # Tags (space-separated)
-    --open                     # Open the quotes file in $EDITOR at the inserted line
+    quote: string          # The quote text
+    --attr: string         # To whom quote is attributed (ATTRIBUTION column)
+    --source: string       # Source work shown in italic in the footer
+    --tag: string          # Tags (space-separated)
+    --open                 # Open quotes file in $EDITOR at the inserted line
 ] {
     if ($quote | str trim | is-empty) {
         error make { msg: "Quote text cannot be empty" }
-    }
-    if ($attribution != null) and ($author != null) {
-        error make { msg: "Use either --attribution or --author, not both" }
     }
     let file = data-dir | path join "quotes.csv"
     if not ($file | path exists) {
@@ -338,7 +334,7 @@ export def "quotes add" [
     }
     let data = {
         QUOTE: $quote,
-        ATTRIBUTION: ($attribution | default $author | default ""),
+        ATTRIBUTION: ($attr | default ""),
         SOURCE: ($source | default ""),
         TAGS: ($tag | default "")
     }
