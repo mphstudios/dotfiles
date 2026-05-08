@@ -219,12 +219,12 @@ def render [text: string, footer: string, style: string, reflow: bool = true] {
     }
 }
 
-# Format attribution and source into a display string
-def attribution-string [attribution: string, source: string]: nothing -> string {
-    if ($attribution | is-not-empty) and ($source | is-not-empty) {
-        $"— ($attribution), (ansi {attr: i})($source)(ansi reset)"
-    } else if ($attribution | is-not-empty) {
-        $"— ($attribution)"
+# Format a display string that identifies the author and source of the quote
+def attribution [author: string, source: string]: nothing -> string {
+    if ($author | is-not-empty) and ($source | is-not-empty) {
+        $"— ($author), (ansi {attr: i})($source)(ansi reset)"
+    } else if ($author | is-not-empty) {
+        $"— ($author)"
     } else if ($source | is-not-empty) {
         $"— (ansi {attr: i})($source)(ansi reset)"
     } else { "" }
@@ -236,7 +236,7 @@ def attribution-string [attribution: string, source: string]: nothing -> string 
 #
 # Frontmatter schema:
 #   title   string        title of the poem or passage; displayed above the body in italic
-#   author  string        attribution shown in the footer
+#   author  string        author shown in the footer
 #   source  string        source work shown in italic after the author in the footer
 #   tags    string        space- or comma-separated values; matched by `poems --tag`
 #   reflow  bool = false  false → preserve original line breaks (verse)
@@ -271,7 +271,7 @@ def parse-poem [path: string]: nothing -> record {
         let raw_tags = $meta.tags? | default ""
         if ($raw_tags | describe | str starts-with "list") { $raw_tags | str join " " } else { $raw_tags | into string }
     }
-    let footer = attribution-string ($meta.author? | default "") ($meta.source? | default "")
+    let footer = attribution ($meta.author? | default "") ($meta.source? | default "")
     {
         title: ($meta.title? | default "")
         text: $body
@@ -282,17 +282,18 @@ def parse-poem [path: string]: nothing -> record {
     }
 }
 
-# Display a random quote, optionally filtered by author or tag
+# Display a random quote, optionally filtered by attribution, author, or tag
 #
 # File location: $XDG_DATA_HOME/quotes.csv  (default ~/.local/share/quotes.csv)
 #
 # CSV columns (header row required):
-#   QUOTE        text of the quote
-#   ATTRIBUTION  person attributed; matched by `quotes --author`
-#   SOURCE       source work shown in italic in the footer
-#   TAGS         space- or comma-separated values; matched by `quotes --tag`
+#   QUOTE     text of the quote
+#   AUTHOR    person to whom the quote is attributed
+#   SOURCE    source work shown in italic in the footer
+#   TAGS      space- or comma-separated values; matched by `quotes --tag`
 export def quotes [
-    --author: string           # Filter by attribution (partial, case-insensitive)
+    --attr: string             # Filter by attribution — matches AUTHOR or SOURCE (partial, case-insensitive)
+    --author: string           # Filter by AUTHOR (partial, case-insensitive)
     --tag: string              # Filter by tag (partial, case-insensitive)
     --style: string = "plain"  # Output style: plain, center, card, or splash (splash clears screen and waits for a keypress)
 ] {
@@ -303,7 +304,10 @@ export def quotes [
     }
     let rows = open $quotes_file
         | where {|row|
-            (($author == null or ($row.ATTRIBUTION | default "" | str contains --ignore-case $author)) and
+            (($attr == null or
+                ($row.AUTHOR | default "" | str contains --ignore-case $attr) or
+                ($row.SOURCE | default "" | str contains --ignore-case $attr)) and
+            ($author == null or ($row.AUTHOR | default "" | str contains --ignore-case $author)) and
             ($tag == null or ($row.TAGS | default "" | str contains --ignore-case $tag)))
         }
 
@@ -313,30 +317,39 @@ export def quotes [
 
     let q = $rows | shuffle | first
 
-    let footer = attribution-string ($q.ATTRIBUTION | default "") ($q.SOURCE | default "")
+    let footer = attribution ($q.AUTHOR | default "") ($q.SOURCE | default "")
     render $q.QUOTE $footer $style
 }
 
 # Append a new entry to the quotes file
 export def "quotes add" [
     quote: string          # The quote text
-    --attr: string         # To whom quote is attributed (ATTRIBUTION column)
-    --source: string       # Source work shown in italic in the footer
-    --tag: string          # Tags (space-separated)
+    --attr: string         # Attribution as a combined "author, source" string
+    --author (-a): string  # Author of the quote
+    --source (-s): string  # Source work shown in italic in the footer
+    --tag (-t): string     # Tags (space-separated)
     --open                 # Open quotes file in $EDITOR at the inserted line
 ] {
     if ($quote | str trim | is-empty) {
         error make { msg: "Quote text cannot be empty" }
     }
-    let file = data-dir | path join "quotes.csv"
-    if not ($file | path exists) {
-        error make { msg: $"Quotes file not found: ($file)" }
+    if $attr != null and ($author != null or $source != null) {
+        error make { msg: "--attr is mutually exclusive with --author and --source" }
+    }
+    let attribution = if $attr != null {
+        let attr = $attr | split row --number 2 "," | each {|p| $p | str trim}
+        { AUTHOR: $attr.0, SOURCE: ($attr.1? | default "") }
+    } else {
+        { AUTHOR: ($author | default ""), SOURCE: ($source | default "") }
     }
     let data = {
         QUOTE: $quote,
-        ATTRIBUTION: ($attr | default ""),
-        SOURCE: ($source | default ""),
+        ...$attribution,
         TAGS: ($tag | default "")
+    }
+    let file = data-dir | path join "quotes.csv"
+    if not ($file | path exists) {
+        error make { msg: $"Quotes file not found: ($file)" }
     }
     open $file | append $data | to csv | collect | save --force $file
     print $"Quote saved to ($file)"
@@ -419,7 +432,7 @@ def poem-filename [title: string, author: string]: nothing -> string {
 # Closing the editor without changes discards the draft.
 export def "poems add" [
     --title: string   # Title displayed above the body in italic
-    --author: string  # Attribution shown in the footer
+    --author: string  # Author shown in the footer
     --source: string  # Source work shown in italic after the author in the footer
     --tag: string     # Tags (space-separated) for filtering with --tag
     --reflow          # Word-wrap to terminal width (default: preserve line breaks)
