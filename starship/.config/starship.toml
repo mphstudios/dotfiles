@@ -17,6 +17,7 @@ $git_state\
 $git_status\
 $golang\
 $nodejs\
+$bun\
 $python\
 $ruby\
 $rust\
@@ -37,7 +38,7 @@ continuation_prompt = '[↪](white) '
 palette = 'gradoo'
 
 [palettes.gradoo]
-# TODO
+pale-yellow = "#ffffc5"
 
 [character]
 error_symbol = '[](white)' # nf-cod-error
@@ -66,6 +67,12 @@ use_stdin = false
 format = '[$symbol $output]($style) '
 style = 'cyan'
 symbol = '' # nf-oct-stack
+
+[bun]
+format = '[$symbol $version]($style) '
+style = 'pale-yellow'
+symbol = 'Bun' # nf-dev-bun
+version_format = '${raw}'
 
 [directory]
 format = '[$path]($style)[$read_only]($read_only_style) '
