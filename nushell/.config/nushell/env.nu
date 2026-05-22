@@ -84,6 +84,10 @@ $env.PYTHONSTARTUP = ($env.XDG_CONFIG_HOME | path join "python/pythonrc.py")
 $env.RUSTUP_HOME = ($env.XDG_DATA_HOME | path join "rustup")
 $env.WGETRC = ($env.XDG_CONFIG_HOME | path join "wget/wgetrc")
 
+# Crush terminal-based AI assistant
+$env.CRUSH_GLOBAL_CONFIG = ($env.XDG_CONFIG_HOME | path join "crush")
+$env.CRUSH_GLOBAL_DATA = ($env.XDG_DATA_HOME | path join "crush")
+
 # Containers and Kubernetes
 $env.DOCKER_CONFIG = ($env.XDG_CONFIG_HOME | path join "docker")
 $env.KUBECONFIG = ($env.XDG_CONFIG_HOME | path join "kube")

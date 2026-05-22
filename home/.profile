@@ -85,6 +85,10 @@ export LESSHISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/less/history"
 export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 
+# Crush terminal-based AI assistant
+export CRUSH_GLOBAL_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/crush"
+export CRUSH_GLOBAL_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/crush"
+
 # Starship ignores XDG_CACHE_HOME (starship/starship#6672)
 export STARSHIP_CACHE="${XDG_CACHE_HOME:-$HOME/Library/Caches}/starship"
 
