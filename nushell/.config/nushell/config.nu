@@ -53,6 +53,11 @@ if (which atuin | is-not-empty) {
 if (which carapace | is-not-empty) {
     carapace _carapace nushell | save --force ($vendor | path join "carapace.nu")
 }
+## fnox secrets management tool
+# https://fnox.jdx.dev/guide/shell-integration.html#shell-integration
+if (which fnox | is-not-empty) {
+    fnox activate nu | save --force ($vendor | path join "fnox.nu")
+}
 ## mise-en-place dev tools, environment, and tasks manager
 # https://mise.jdx.dev/installing-mise.html#nushell
 if (which mise | is-not-empty) {

@@ -114,6 +114,12 @@ if command -v carapace 1>/dev/null 2>&1; then
     source <(carapace _carapace)
 fi
 
+## fnox secrets management tool
+# https://fnox.jdx.dev/guide/shell-integration.html#shell-integration
+if command -v fnox 1>/dev/null 2>&1; then
+    eval "$(fnox activate bash)"
+fi
+
 ## mise-en-place dev tools, environment, and tasks manager
 # https://mise.jdx.dev/installing-mise.html#bash
 if command -v mise 1>/dev/null 2>&1; then

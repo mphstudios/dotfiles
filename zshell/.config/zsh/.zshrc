@@ -154,6 +154,12 @@ if (( $+commands[carapace] )) then
   source <(carapace _carapace)
 fi
 
+## fnox secrets management tool
+# https://fnox.jdx.dev/guide/shell-integration.html#shell-integration
+if (( $+commands[fnox] )) then
+  eval "$(fnox activate zsh)"
+fi
+
 ## mise-en-place dev tools, environment, and tasks manager
 # https://mise.jdx.dev/installing-mise.html#zsh
 if (( $+commands[mise] )) then
