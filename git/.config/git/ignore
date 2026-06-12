@@ -1,23 +1,23 @@
-### OSX ###
+### Apple macOS ###
 .AppleDouble
 .DS_Store
 .LSOverride
 .localized
 __MACOSX/
 
-# files that might appear on external disk
+## files that might appear on external disk
 .fseventsd
 .Spotlight-V100
 .Trashes
 .VolumeIcon.icns
 
-# automatic backup files
+## automatic backup files
 *(Autosaved).rtfd/
 
-# build products
+## build products
 build/
 
-# database and log files
+## database and log files
 *.db-shm
 *.db-wal
 *.log
@@ -47,7 +47,7 @@ build/
 *.orig
 *.swp
 
-# thumbnails
+## thumbnails
 ._*
 
 ## version control
@@ -55,19 +55,19 @@ build/
 .svn
 CVS
 
-# vim swap files
+## vim swap files
 .*.sw[a-z]
 *.un~
 Session.vim
 
-# environment and secrets
+## environment and secrets
 .env
 .env.local
 
-# Claude Code
+## Claude Code
 .claude/settings.local.json
 
-## Mac OS X custom folder icon files
+## macOS custom folder icon files
 # Since the "Icon\r\r" file name contains two ASCII CRLF characters
 # this statement must come at the end of the .gitignore file with the double \r
 Icon
